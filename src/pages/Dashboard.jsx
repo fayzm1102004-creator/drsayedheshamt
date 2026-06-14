@@ -4,7 +4,7 @@ import { useWorkflow } from '../context/WorkflowContext';
 import { 
   UploadCloud, CheckCircle2, XCircle, 
   Send, BadgeCheck, Users, Activity,
-  FileText, ShieldCheck, Download, BookText, Clock
+  FileText, ShieldCheck, Download, BookText, Clock, ExternalLink
 } from 'lucide-react';
 
 export default function Dashboard() {
@@ -93,30 +93,87 @@ const ParallelBadge = ({ status }) => {
   return null;
 };
 
+const FileLink = ({ file }) => {
+  const handleDownload = () => {
+    if (file.fileData) {
+      const a = document.createElement('a');
+      a.href = file.fileData;
+      a.download = file.name;
+      a.click();
+    } else {
+      const blob = new Blob(["هذا ملف تجريبي للعرض فقط نظراً لأنه من البيانات الافتراضية الأولية للمنصة."], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = file.name;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+  };
+
+  const handleOpen = () => {
+    if (file.fileData) {
+      const w = window.open();
+      if (w) {
+        w.document.write(`<iframe src="${file.fileData}" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%; position:absolute;" allowfullscreen></iframe>`);
+        w.document.title = file.name;
+      }
+    } else {
+      alert("هذا الملف من البيانات الافتراضية. يمكنك فتح الملفات التي تقوم برفعها بنفسك لمعاينتها.");
+    }
+  };
+
+  return (
+    <div className="flex flex-col gap-1">
+      <div className="flex items-center gap-2">
+        <span className="text-emerald-950">{file.name}</span>
+        <div className="flex gap-0.5">
+          <button onClick={handleOpen} title="فتح ومعاينة الملف" className="p-1.5 text-emerald-700 hover:text-emerald-900 bg-emerald-50 hover:bg-emerald-100 rounded border border-emerald-100 transition-colors">
+            <ExternalLink className="w-3.5 h-3.5" />
+          </button>
+          <button onClick={handleDownload} title="تحميل الملف" className="p-1.5 text-amber-600 hover:text-amber-700 bg-amber-50 hover:bg-amber-100 rounded border border-amber-100 transition-colors">
+            <Download className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      </div>
+      <RejectReason history={file.history} />
+    </div>
+  );
+};
+
 // ----------------------------------------------------
 // OBSERVER
 // ----------------------------------------------------
 function ObserverView() {
   const { files, uploadFile } = useWorkflow();
   const { user } = useAuth();
-  const [fileType, setFileType] = useState('review');
   const fileInputRef = useRef(null);
   const myFiles = files.filter(f => f.uploadedBy === user?.name || f.currentStage === 'observer');
 
   const handleFileUpload = (e) => {
     const file = e.target.files?.[0];
     if (file) {
-      uploadFile({
-        id: Math.random().toString(36).substr(2, 9),
-        name: file.name,
-        type: fileType,
-        date: new Date().toISOString().split('T')[0],
-        status: 'تم الرفع للمنسق',
-        color: 'bg-amber-100 text-amber-800 border-amber-200',
-        currentStage: 'coordinator',
-        history: [],
-        uploadedBy: user.name
-      });
+      if (file.size > 5 * 1024 * 1024) {
+        alert("حجم الملف كبير جداً، يرجى رفع ملف أقل من 5 ميجابايت للنسخة التجريبية.");
+        e.target.value = null;
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        uploadFile({
+          id: Math.random().toString(36).substr(2, 9),
+          name: file.name,
+          type: 'review', // Defaulting to review as requested by removing the dropdown
+          date: new Date().toISOString().split('T')[0],
+          status: 'تم الرفع للمنسق',
+          color: 'bg-amber-100 text-amber-800 border-amber-200',
+          currentStage: 'coordinator',
+          history: [],
+          uploadedBy: user.name,
+          fileData: reader.result // Save base64 data for viewing and downloading
+        });
+      };
+      reader.readAsDataURL(file);
       e.target.value = null;
     }
   };
@@ -126,9 +183,10 @@ function ObserverView() {
       <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8 flex flex-col items-center">
         <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-6 w-full text-right">رفع ملف جديد</h3>
         <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileUpload} />
-        <div onClick={() => fileInputRef.current.click()} className="w-full bg-stone-50/50 rounded-2xl p-12 border-2 border-dashed border-emerald-800/30 hover:border-amber-500 cursor-pointer flex flex-col items-center">
+        <div onClick={() => fileInputRef.current.click()} className="w-full bg-stone-50/50 rounded-2xl p-12 border-2 border-dashed border-emerald-800/30 hover:border-amber-500 cursor-pointer flex flex-col items-center transition-colors">
           <UploadCloud className="w-14 h-14 text-emerald-800/40 mb-6" />
           <p className="text-xl font-['Amiri'] font-bold text-emerald-950">اسحب وأفلت الملف هنا لرفعه للمنسق</p>
+          <p className="text-sm text-stone-400 mt-2">الحد الأقصى للتجربة: 5 ميجابايت</p>
         </div>
       </div>
       
@@ -140,8 +198,7 @@ function ObserverView() {
             {myFiles.map(file => (
               <tr key={file.id}>
                 <td className="px-6 py-5 font-bold">
-                  {file.name}
-                  {file.currentStage === 'observer' && <RejectReason history={file.history} />}
+                  <FileLink file={file} />
                 </td>
                 <td className="px-6 py-5 text-center"><span className={`px-3 py-1.5 rounded-lg text-xs font-bold border ${file.color}`}>{file.status}</span></td>
               </tr>
@@ -201,14 +258,13 @@ function CoordinatorView() {
         </div>
 
         <table className="w-full text-sm text-right">
-          <thead className="bg-stone-100/80"><tr><th className="px-6 py-4 rounded-r-xl">الراصد</th><th className="px-6 py-4">اسم الملف</th><th className="px-6 py-4 text-center w-64 rounded-l-xl">الإجراءات</th></tr></thead>
+          <thead className="bg-stone-100/80"><tr><th className="px-6 py-4 rounded-r-xl w-32">الراصد</th><th className="px-6 py-4">اسم الملف</th><th className="px-6 py-4 text-center w-64 rounded-l-xl">الإجراءات</th></tr></thead>
           <tbody className="divide-y">
             {coordinatorFiles.map(item => (
               <tr key={item.id} className="hover:bg-stone-50 transition-colors">
-                <td className="px-6 py-5 text-emerald-950 font-bold">{item.uploadedBy}</td>
+                <td className="px-6 py-5 text-emerald-950 font-bold whitespace-nowrap">{item.uploadedBy}</td>
                 <td className="px-6 py-5 font-bold">
-                  {item.name}
-                  <RejectReason history={item.history} />
+                  <FileLink file={item} />
                 </td>
                 <td className="px-6 py-5 text-center">
                   {item.level2_status === 'pending' ? (
@@ -258,8 +314,7 @@ function ReviewCommitteeView() {
             {committeeFiles.map(item => (
               <tr key={item.id}>
                 <td className="px-6 py-5 font-bold">
-                  {item.name}
-                  {item.currentStage === 'l3' && <RejectReason history={item.history} />}
+                  <FileLink file={item} />
                 </td>
                 <td className="px-6 py-5 text-center">
                   {item.level3_review_status === 'pending' ? (
@@ -304,8 +359,7 @@ function CorrectionCommitteeView() {
             {l3Files.map(item => (
               <tr key={item.id}>
                 <td className="px-6 py-5 font-bold">
-                  {item.name}
-                  {item.currentStage === 'l3' && <RejectReason history={item.history} />}
+                  <FileLink file={item} />
                 </td>
                 <td className="px-6 py-5 text-center">
                   {item.level3_correction_status === 'pending' ? (
@@ -360,8 +414,7 @@ function MainCoordinatorView() {
             {l3Files.map(item => (
               <tr key={item.id}>
                 <td className="px-6 py-5 font-bold">
-                  {item.name}
-                  {item.currentStage === 'l3' && <RejectReason history={item.history} />}
+                  <FileLink file={item} />
                 </td>
                 <td className="px-6 py-5 text-center">
                   {item[currentStatusProp] === 'pending' ? (
@@ -406,8 +459,7 @@ function AuditorView() {
               {tasks.map(task => (
                 <tr key={task.id}>
                   <td className="px-6 py-5 font-bold">
-                    {task.name}
-                    <RejectReason history={task.history} />
+                    <FileLink file={task} />
                   </td>
                   <td className="px-6 py-5 text-center">
                     {task.level4_status === 'pending' ? (
@@ -452,8 +504,7 @@ function ScientificCommitteeView() {
             {data.map(item => (
               <tr key={item.id}>
                 <td className="px-6 py-5 font-bold">
-                  {item.name}
-                  {item.currentStage === 'l5' && <RejectReason history={item.history} />}
+                  <FileLink file={item} />
                 </td>
                 <td className="px-6 py-5 text-center">
                   {item.level5_scientific_status === 'pending' ? (
@@ -498,8 +549,7 @@ function ApprovalCommitteeView() {
             {data.map(item => (
               <tr key={item.id}>
                 <td className="px-6 py-5 font-bold">
-                  {item.name}
-                  {item.currentStage === 'l5' && <RejectReason history={item.history} />}
+                  <FileLink file={item} />
                 </td>
                 <td className="px-6 py-5 text-center">
                   {item.level5_final_status === 'pending' ? (
@@ -554,8 +604,7 @@ function AssistantSupervisorView() {
             {l5Files.map(item => (
               <tr key={item.id}>
                 <td className="px-6 py-5 font-bold">
-                  {item.name}
-                  {item.currentStage === 'l5' && <RejectReason history={item.history} />}
+                  <FileLink file={item} />
                 </td>
                 <td className="px-6 py-5 text-center">
                   {item[currentStatusProp] === 'pending' ? (
@@ -597,9 +646,26 @@ function GeneralSupervisorView() {
           <tbody className="divide-y">
             {finalFiles.map(file => (
               <tr key={file.id}>
-                <td className="px-6 py-6 font-bold">{file.name}</td>
+                <td className="px-6 py-6 font-bold">
+                  <FileLink file={file} />
+                </td>
                 <td className="px-6 py-6 text-center">
-                  <button className="text-amber-500 hover:text-amber-600 bg-stone-50 px-6 py-3 rounded-xl font-bold border border-stone-200">
+                  <button onClick={() => {
+                    if(file.fileData) {
+                      const a = document.createElement('a');
+                      a.href = file.fileData;
+                      a.download = file.name;
+                      a.click();
+                    } else {
+                      const blob = new Blob(["هذا ملف تجريبي للعرض فقط نظراً لأنه من البيانات الافتراضية الأولية للمنصة."], { type: "text/plain" });
+                      const url = URL.createObjectURL(blob);
+                      const a = document.createElement('a');
+                      a.href = url;
+                      a.download = file.name;
+                      a.click();
+                      URL.revokeObjectURL(url);
+                    }
+                  }} className="text-amber-500 hover:text-amber-600 bg-stone-50 px-6 py-3 rounded-xl font-bold border border-stone-200">
                     تحميل للنشر <Download className="w-4 h-4 inline" />
                   </button>
                 </td>
