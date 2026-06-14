@@ -88,9 +88,9 @@ const RejectReason = ({ history }) => {
 };
 
 const ParallelBadge = ({ status }) => {
-  if (status === 'approved') return <span className="px-3 py-1.5 rounded-lg text-xs font-bold border bg-emerald-100 text-emerald-800 border-emerald-200 flex items-center justify-center gap-1 w-full"><CheckCircle2 className="w-3.5 h-3.5"/> تم القبول</span>;
-  if (status === 'rejected') return <span className="px-3 py-1.5 rounded-lg text-xs font-bold border bg-rose-100 text-rose-800 border-rose-200 flex items-center justify-center gap-1 w-full"><XCircle className="w-3.5 h-3.5"/> مرفوض</span>;
-  return <span className="px-3 py-1.5 rounded-lg text-xs font-bold border bg-stone-100 text-stone-600 border-stone-200 flex items-center justify-center gap-1 w-full"><Clock className="w-3.5 h-3.5"/> قيد المراجعة</span>;
+  if (status === 'approved') return <span className="px-3 py-1.5 rounded-lg text-xs font-bold border bg-emerald-50 text-emerald-600 border-emerald-200 flex items-center justify-center gap-1 w-full opacity-80"><CheckCircle2 className="w-3.5 h-3.5"/> تم القبول</span>;
+  if (status === 'rejected') return <span className="px-3 py-1.5 rounded-lg text-xs font-bold border bg-rose-50 text-rose-600 border-rose-200 flex items-center justify-center gap-1 w-full opacity-80"><XCircle className="w-3.5 h-3.5"/> محتاج تعديل</span>;
+  return null;
 };
 
 // ----------------------------------------------------
@@ -166,11 +166,11 @@ function ObserverView() {
 // ----------------------------------------------------
 function CoordinatorView() {
   const { files, passFile, returnFile } = useWorkflow();
-  const coordinatorFiles = files.filter(f => f.currentStage === 'coordinator');
+  const coordinatorFiles = files.filter(f => f.currentStage === 'coordinator' || f.level2_status !== 'pending');
   const [rejectModal, setRejectModal] = useState({ isOpen: false, payload: null });
 
   const confirmReject = (reason) => {
-    returnFile(rejectModal.payload.id, 'observer', reason);
+    returnFile(rejectModal.payload.id, 'observer', reason, 'coordinator');
     setRejectModal({ isOpen: false, payload: null });
   };
 
@@ -179,7 +179,7 @@ function CoordinatorView() {
       <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8">
         <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-6 border-b pb-4">مراجعة ملفات الرصاد</h3>
         <table className="w-full text-sm text-right">
-          <thead className="bg-stone-100/80"><tr><th className="px-6 py-4">اسم الملف</th><th className="px-6 py-4 text-center">الإجراءات</th></tr></thead>
+          <thead className="bg-stone-100/80"><tr><th className="px-6 py-4">اسم الملف</th><th className="px-6 py-4 text-center w-64">الإجراءات</th></tr></thead>
           <tbody className="divide-y">
             {coordinatorFiles.map(item => (
               <tr key={item.id}>
@@ -188,10 +188,14 @@ function CoordinatorView() {
                   <RejectReason history={item.history} />
                 </td>
                 <td className="px-6 py-5 text-center">
-                  <div className="flex justify-center gap-2">
-                    <button onClick={() => passFile(item.id, 'l3')} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 flex items-center gap-1.5"><CheckCircle2 className="w-3.5 h-3.5"/> قبول وتمرير للجان</button>
-                    <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 flex items-center gap-1.5"><XCircle className="w-3.5 h-3.5"/> رفض وإرجاع</button>
-                  </div>
+                  {item.level2_status === 'pending' ? (
+                    <div className="flex justify-center gap-2">
+                      <button onClick={() => passFile(item.id, 'l3')} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 w-full"><CheckCircle2 className="w-3.5 h-3.5 inline"/> قبول وتمرير للجان</button>
+                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 w-full"><XCircle className="w-3.5 h-3.5 inline"/> رفض وإرجاع</button>
+                    </div>
+                  ) : (
+                    <ParallelBadge status={item.level2_status} />
+                  )}
                 </td>
               </tr>
             ))}
@@ -208,7 +212,7 @@ function CoordinatorView() {
 // ----------------------------------------------------
 function ReviewCommitteeView() {
   const { files, passParallelFile, rejectParallelFile } = useWorkflow();
-  const committeeFiles = files.filter(f => f.currentStage === 'l3');
+  const committeeFiles = files.filter(f => f.currentStage === 'l3' || f.level3_review_status !== 'pending');
   const [rejectModal, setRejectModal] = useState({ isOpen: false, payload: null });
 
   const confirmReject = (reason) => {
@@ -225,12 +229,15 @@ function ReviewCommitteeView() {
           <tbody className="divide-y">
             {committeeFiles.map(item => (
               <tr key={item.id}>
-                <td className="px-6 py-5 font-bold">{item.name}</td>
+                <td className="px-6 py-5 font-bold">
+                  {item.name}
+                  {item.currentStage === 'l3' && <RejectReason history={item.history} />}
+                </td>
                 <td className="px-6 py-5 text-center">
                   {item.level3_review_status === 'pending' ? (
                     <div className="flex justify-center gap-2">
-                      <button onClick={() => passParallelFile(item.id, 'l3', 'review')} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 w-full"><CheckCircle2 className="w-3.5 h-3.5 inline"/> قبول</button>
-                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 w-full"><XCircle className="w-3.5 h-3.5 inline"/> رفض</button>
+                      <button onClick={() => passParallelFile(item.id, 'l3', 'review')} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 w-full"><CheckCircle2 className="w-3.5 h-3.5 inline"/> قبول</button>
+                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 w-full"><XCircle className="w-3.5 h-3.5 inline"/> رفض</button>
                     </div>
                   ) : (
                     <ParallelBadge status={item.level3_review_status} />
@@ -251,8 +258,7 @@ function ReviewCommitteeView() {
 // ----------------------------------------------------
 function CorrectionCommitteeView() {
   const { files, passParallelFile, rejectParallelFile } = useWorkflow();
-  const l3Files = files.filter(f => f.currentStage === 'l3');
-  const evidenceData = l3Files.filter(f => f.type === 'evidence' || f.type === 'review'); // Usually sees all types? Let's just show all for correction
+  const l3Files = files.filter(f => f.currentStage === 'l3' || f.level3_correction_status !== 'pending');
   const [rejectModal, setRejectModal] = useState({ isOpen: false, payload: null });
 
   const confirmReject = (reason) => {
@@ -269,12 +275,15 @@ function CorrectionCommitteeView() {
           <tbody className="divide-y">
             {l3Files.map(item => (
               <tr key={item.id}>
-                <td className="px-6 py-5 font-bold">{item.name}</td>
+                <td className="px-6 py-5 font-bold">
+                  {item.name}
+                  {item.currentStage === 'l3' && <RejectReason history={item.history} />}
+                </td>
                 <td className="px-6 py-5 text-center">
                   {item.level3_correction_status === 'pending' ? (
                     <div className="flex justify-center gap-2">
-                      <button onClick={() => passParallelFile(item.id, 'l3', 'correction')} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 w-full"><CheckCircle2 className="w-3.5 h-3.5 inline"/> قبول</button>
-                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 w-full"><XCircle className="w-3.5 h-3.5 inline"/> رفض</button>
+                      <button onClick={() => passParallelFile(item.id, 'l3', 'correction')} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 w-full"><CheckCircle2 className="w-3.5 h-3.5 inline"/> قبول</button>
+                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 w-full"><XCircle className="w-3.5 h-3.5 inline"/> رفض</button>
                     </div>
                   ) : (
                     <ParallelBadge status={item.level3_correction_status} />
@@ -296,7 +305,7 @@ function CorrectionCommitteeView() {
 function MainCoordinatorView() {
   const { files, passParallelFile, rejectParallelFile } = useWorkflow();
   const [activeTab, setActiveTab] = useState('review');
-  const l3Files = files.filter(f => f.currentStage === 'l3');
+  const l3Files = files.filter(f => f.currentStage === 'l3' || f.level3_review_status !== 'pending' || f.level3_correction_status !== 'pending');
   const [rejectModal, setRejectModal] = useState({ isOpen: false, payload: null });
 
   const confirmReject = (reason) => {
@@ -322,12 +331,15 @@ function MainCoordinatorView() {
           <tbody className="divide-y">
             {l3Files.map(item => (
               <tr key={item.id}>
-                <td className="px-6 py-5 font-bold">{item.name}</td>
+                <td className="px-6 py-5 font-bold">
+                  {item.name}
+                  {item.currentStage === 'l3' && <RejectReason history={item.history} />}
+                </td>
                 <td className="px-6 py-5 text-center">
                   {item[currentStatusProp] === 'pending' ? (
                     <div className="flex justify-center gap-2">
-                      <button onClick={() => passParallelFile(item.id, 'l3', currentActionType)} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 w-full">قبول</button>
-                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id, tabType: currentActionType } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 w-full">رفض</button>
+                      <button onClick={() => passParallelFile(item.id, 'l3', currentActionType)} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 w-full"><CheckCircle2 className="w-3.5 h-3.5 inline"/> قبول</button>
+                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id, tabType: currentActionType } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 w-full"><XCircle className="w-3.5 h-3.5 inline"/> رفض</button>
                     </div>
                   ) : (
                     <ParallelBadge status={item[currentStatusProp]} />
@@ -348,18 +360,18 @@ function MainCoordinatorView() {
 // ----------------------------------------------------
 function AuditorView() {
   const { files, passFile, returnFile } = useWorkflow();
-  const tasks = files.filter(f => f.currentStage === 'auditor');
+  const tasks = files.filter(f => f.currentStage === 'auditor' || f.level4_status !== 'pending');
   const [rejectModal, setRejectModal] = useState({ isOpen: false, payload: null });
 
   const confirmReject = (reason) => {
-    returnFile(rejectModal.payload.id, 'coordinator', reason); // Resetting back if needed, or Main Coordinator
+    returnFile(rejectModal.payload.id, 'coordinator', reason, 'auditor'); 
     setRejectModal({ isOpen: false, payload: null });
   };
 
   return (
     <div className="space-y-8">
       <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8">
-         <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-6 border-b pb-4">تدقيق الملفات الواردة (تم الموافقة عليها من اللجان الموازية)</h3>
+         <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-6 border-b pb-4">تدقيق الملفات الواردة (مكتملة الموافقة الموازية)</h3>
          <table className="w-full text-sm text-right">
             <thead className="bg-stone-100/80"><tr><th className="px-6 py-4">بيان الملف</th><th className="px-6 py-4 text-center w-64">الإجراءات</th></tr></thead>
             <tbody className="divide-y">
@@ -370,10 +382,14 @@ function AuditorView() {
                     <RejectReason history={task.history} />
                   </td>
                   <td className="px-6 py-5 text-center">
-                    <div className="flex justify-center gap-2">
-                      <button onClick={() => passFile(task.id, 'l5')} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 w-full">تمرير للجان العليا</button>
-                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: task.id } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 w-full">رفض وإرجاع</button>
-                    </div>
+                    {task.level4_status === 'pending' ? (
+                      <div className="flex justify-center gap-2">
+                        <button onClick={() => passFile(task.id, 'l5')} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 w-full"><CheckCircle2 className="w-3.5 h-3.5 inline"/> تمرير للجان العليا</button>
+                        <button onClick={() => setRejectModal({ isOpen: true, payload: { id: task.id } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 w-full"><XCircle className="w-3.5 h-3.5 inline"/> رفض وإرجاع</button>
+                      </div>
+                    ) : (
+                      <ParallelBadge status={task.level4_status} />
+                    )}
                   </td>
                 </tr>
               ))}
@@ -390,7 +406,7 @@ function AuditorView() {
 // ----------------------------------------------------
 function ScientificCommitteeView() {
   const { files, passParallelFile, rejectParallelFile } = useWorkflow();
-  const data = files.filter(f => f.currentStage === 'l5');
+  const data = files.filter(f => f.currentStage === 'l5' || f.level5_scientific_status !== 'pending');
   const [rejectModal, setRejectModal] = useState({ isOpen: false, payload: null });
 
   const confirmReject = (reason) => {
@@ -407,12 +423,15 @@ function ScientificCommitteeView() {
           <tbody className="divide-y">
             {data.map(item => (
               <tr key={item.id}>
-                <td className="px-6 py-5 font-bold">{item.name}</td>
+                <td className="px-6 py-5 font-bold">
+                  {item.name}
+                  {item.currentStage === 'l5' && <RejectReason history={item.history} />}
+                </td>
                 <td className="px-6 py-5 text-center">
                   {item.level5_scientific_status === 'pending' ? (
                     <div className="flex justify-center gap-2">
-                      <button onClick={() => passParallelFile(item.id, 'l5', 'scientific')} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 w-full">إجازة</button>
-                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 w-full">رفض</button>
+                      <button onClick={() => passParallelFile(item.id, 'l5', 'scientific')} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 w-full"><CheckCircle2 className="w-3.5 h-3.5 inline"/> إجازة</button>
+                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 w-full"><XCircle className="w-3.5 h-3.5 inline"/> رفض</button>
                     </div>
                   ) : (
                     <ParallelBadge status={item.level5_scientific_status} />
@@ -433,7 +452,7 @@ function ScientificCommitteeView() {
 // ----------------------------------------------------
 function ApprovalCommitteeView() {
   const { files, passParallelFile, rejectParallelFile } = useWorkflow();
-  const data = files.filter(f => f.currentStage === 'l5');
+  const data = files.filter(f => f.currentStage === 'l5' || f.level5_final_status !== 'pending');
   const [rejectModal, setRejectModal] = useState({ isOpen: false, payload: null });
 
   const confirmReject = (reason) => {
@@ -450,12 +469,15 @@ function ApprovalCommitteeView() {
           <tbody className="divide-y">
             {data.map(item => (
               <tr key={item.id}>
-                <td className="px-6 py-5 font-bold">{item.name}</td>
+                <td className="px-6 py-5 font-bold">
+                  {item.name}
+                  {item.currentStage === 'l5' && <RejectReason history={item.history} />}
+                </td>
                 <td className="px-6 py-5 text-center">
                   {item.level5_final_status === 'pending' ? (
                     <div className="flex justify-center gap-2">
-                      <button onClick={() => passParallelFile(item.id, 'l5', 'final')} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 w-full">اعتماد</button>
-                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 w-full">رفض</button>
+                      <button onClick={() => passParallelFile(item.id, 'l5', 'final')} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 w-full"><CheckCircle2 className="w-3.5 h-3.5 inline"/> اعتماد</button>
+                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 w-full"><XCircle className="w-3.5 h-3.5 inline"/> رفض</button>
                     </div>
                   ) : (
                     <ParallelBadge status={item.level5_final_status} />
@@ -477,7 +499,7 @@ function ApprovalCommitteeView() {
 function AssistantSupervisorView() {
   const { files, passParallelFile, rejectParallelFile } = useWorkflow();
   const [activeTab, setActiveTab] = useState('scientific');
-  const l5Files = files.filter(f => f.currentStage === 'l5');
+  const l5Files = files.filter(f => f.currentStage === 'l5' || f.level5_scientific_status !== 'pending' || f.level5_final_status !== 'pending');
   const [rejectModal, setRejectModal] = useState({ isOpen: false, payload: null });
 
   const confirmReject = (reason) => {
@@ -503,12 +525,15 @@ function AssistantSupervisorView() {
           <tbody className="divide-y">
             {l5Files.map(item => (
               <tr key={item.id}>
-                <td className="px-6 py-5 font-bold">{item.name}</td>
+                <td className="px-6 py-5 font-bold">
+                  {item.name}
+                  {item.currentStage === 'l5' && <RejectReason history={item.history} />}
+                </td>
                 <td className="px-6 py-5 text-center">
                   {item[currentStatusProp] === 'pending' ? (
                     <div className="flex justify-center gap-2">
-                      <button onClick={() => passParallelFile(item.id, 'l5', currentActionType)} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 w-full">قبول</button>
-                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id, tabType: currentActionType } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 w-full">رفض</button>
+                      <button onClick={() => passParallelFile(item.id, 'l5', currentActionType)} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 w-full"><CheckCircle2 className="w-3.5 h-3.5 inline"/> قبول</button>
+                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id, tabType: currentActionType } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 w-full"><XCircle className="w-3.5 h-3.5 inline"/> رفض</button>
                     </div>
                   ) : (
                     <ParallelBadge status={item[currentStatusProp]} />
@@ -552,7 +577,7 @@ function GeneralSupervisorView() {
                 </td>
               </tr>
             ))}
-            {finalFiles.length === 0 && <tr><td colSpan="2" className="text-center py-8">لا يوجد</td></tr>}
+            {finalFiles.length === 0 && <tr><td colSpan="2" className="text-center py-8 text-stone-400">لا يوجد</td></tr>}
           </tbody>
         </table>
       </div>
