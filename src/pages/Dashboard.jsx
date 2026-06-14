@@ -125,14 +125,6 @@ function ObserverView() {
     <div className="space-y-8">
       <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8 flex flex-col items-center">
         <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-6 w-full text-right">رفع ملف جديد</h3>
-        <div className="w-full max-w-md mb-6">
-          <label className="block text-sm font-bold text-emerald-900 mb-2 text-right">نوع الملف المُرفق (يحدد مسار اللجنة)</label>
-          <select value={fileType} onChange={(e) => setFileType(e.target.value)} className="w-full px-4 py-3 bg-stone-50 border rounded-xl font-bold">
-            <option value="review">مراجعة شواهد</option>
-            <option value="evidence">استدراك شواهد</option>
-            <option value="books">استدراك كتب</option>
-          </select>
-        </div>
         <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileUpload} accept=".xlsx,.xls,.csv" />
         <div onClick={() => fileInputRef.current.click()} className="w-full bg-stone-50/50 rounded-2xl p-12 border-2 border-dashed border-emerald-800/30 hover:border-amber-500 cursor-pointer flex flex-col items-center">
           <UploadCloud className="w-14 h-14 text-emerald-800/40 mb-6" />
