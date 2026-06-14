@@ -259,7 +259,7 @@ function ReviewCommitteeView() {
   return (
     <div className="space-y-8">
       <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8">
-        <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-8 border-b pb-4">مساحة عمل لجنة المراجعة (بالتوازي)</h3>
+        <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-8 border-b pb-4">مساحة عمل لجنة المراجعة</h3>
         <table className="w-full text-sm text-right">
           <thead className="bg-stone-100/80"><tr><th className="px-6 py-4">بيان الشاهد</th><th className="px-6 py-4 text-center w-64">حالة لجنة المراجعة</th></tr></thead>
           <tbody className="divide-y">
@@ -305,7 +305,7 @@ function CorrectionCommitteeView() {
   return (
     <div className="space-y-8">
       <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8">
-        <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-8 border-b pb-4">مساحة عمل لجنة الاستدراك (بالتوازي)</h3>
+        <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-8 border-b pb-4">مساحة عمل لجنة الاستدراك</h3>
         <table className="w-full text-sm text-right">
           <thead className="bg-stone-100/80"><tr><th className="px-6 py-4">بيان الاستدراك</th><th className="px-6 py-4 text-center w-64">حالة لجنة الاستدراك</th></tr></thead>
           <tbody className="divide-y">
@@ -453,7 +453,7 @@ function ScientificCommitteeView() {
   return (
     <div className="space-y-8">
       <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8">
-        <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-8 border-b pb-4">اللجنة العلمية (بالتوازي)</h3>
+        <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-8 border-b pb-4">اللجنة العلمية</h3>
         <table className="w-full text-sm text-right">
           <thead className="bg-stone-100/80"><tr><th className="px-6 py-4">البيان</th><th className="px-6 py-4 text-center w-64">الاعتماد العلمي</th></tr></thead>
           <tbody className="divide-y">
@@ -499,7 +499,7 @@ function ApprovalCommitteeView() {
   return (
     <div className="space-y-8">
       <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8">
-        <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-8 border-b pb-4">لجنة الاعتماد النهائي (بالتوازي)</h3>
+        <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-8 border-b pb-4">لجنة الاعتماد النهائي</h3>
         <table className="w-full text-sm text-right">
           <thead className="bg-stone-100/80"><tr><th className="px-6 py-4">البيان</th><th className="px-6 py-4 text-center w-64">الاعتماد النهائي</th></tr></thead>
           <tbody className="divide-y">
@@ -596,7 +596,7 @@ function GeneralSupervisorView() {
     <div className="space-y-8">
       <div className="bg-gradient-to-br from-emerald-950 to-emerald-800 rounded-2xl shadow-2xl border border-emerald-700 p-12 relative overflow-hidden text-center text-white border-t-4 border-t-amber-500">
          <h2 className="text-4xl font-['Amiri'] font-extrabold mb-4 text-amber-400 drop-shadow-md">لوحة المشرف العام</h2>
-         <p className="text-emerald-100 font-medium text-lg max-w-2xl mx-auto leading-relaxed">النسخ المعتمدة نهائياً من جميع اللجان المختصة بالتوازي.</p>
+         <p className="text-emerald-100 font-medium text-lg max-w-2xl mx-auto leading-relaxed">النسخ المعتمدة نهائياً من جميع اللجان المختصة.</p>
       </div>
       <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8">
         <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-8 border-b pb-4">الملفات المعتمدة الجاهزة للإصدار</h3>

@@ -54,7 +54,7 @@ export function WorkflowProvider({ children }) {
       if (f.id === id) {
         let updates = {
           currentStage: nextStage,
-          status: nextStage === 'l3' || nextStage === 'l5' ? 'موزع للجان بالتوازي' : 'مقبول وتم التمرير',
+          status: nextStage === 'l3' || nextStage === 'l5' ? 'موزع للجان' : 'مقبول وتم التمرير',
           color: nextStage === 'l3' || nextStage === 'l5' ? 'bg-blue-100 text-blue-800 border-blue-200' : 'bg-emerald-100 text-emerald-800 border-emerald-200'
         };
 
