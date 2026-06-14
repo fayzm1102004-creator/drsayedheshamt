@@ -75,18 +75,18 @@ export default function Login() {
           <h3 className="text-[11px] font-bold text-stone-400 uppercase tracking-widest mb-4 text-center">حسابات النظام واللجان (للمعاينة)</h3>
           <div className="grid grid-cols-2 gap-4">
             <ul className="text-xs text-stone-600 space-y-3">
-              <li className="flex flex-col"><span className="font-bold text-emerald-950">Level 1: الراصد</span> <span className="opacity-80 text-amber-600">observer1@sharjah.com</span></li>
-              <li className="flex flex-col"><span className="font-bold text-emerald-950">Level 2: المنسق</span> <span className="opacity-80 text-amber-600">coordinator1@sharjah.com</span></li>
-              <li className="flex flex-col"><span className="font-bold text-emerald-950">لجنة المراجعة (L3 Sub)</span> <span className="opacity-80 text-amber-600">review@sharjah.com</span></li>
-              <li className="flex flex-col"><span className="font-bold text-emerald-950">لجنة الاستدراك (L3 Sub)</span> <span className="opacity-80 text-amber-600">correction@sharjah.com</span></li>
-              <li className="flex flex-col"><span className="font-bold text-emerald-950">Level 3: المنسق الرئيس</span> <span className="opacity-80 text-amber-600">main@sharjah.com</span></li>
+              <li className="flex flex-col"><span className="font-bold text-emerald-950">الراصد</span> <span className="opacity-80 text-amber-600">observer1@sharjah.com</span></li>
+              <li className="flex flex-col"><span className="font-bold text-emerald-950">المنسق</span> <span className="opacity-80 text-amber-600">coordinator1@sharjah.com</span></li>
+              <li className="flex flex-col"><span className="font-bold text-emerald-950">لجنة المراجعة</span> <span className="opacity-80 text-amber-600">review@sharjah.com</span></li>
+              <li className="flex flex-col"><span className="font-bold text-emerald-950">لجنة الاستدراك</span> <span className="opacity-80 text-amber-600">correction@sharjah.com</span></li>
+              <li className="flex flex-col"><span className="font-bold text-emerald-950">المنسق الرئيس</span> <span className="opacity-80 text-amber-600">main@sharjah.com</span></li>
             </ul>
             <ul className="text-xs text-stone-600 space-y-3">
-              <li className="flex flex-col"><span className="font-bold text-emerald-950">Level 4: لجنة التدقيق</span> <span className="opacity-80 text-amber-600">auditor@sharjah.com</span></li>
-              <li className="flex flex-col"><span className="font-bold text-emerald-950">اللجنة العلمية (L5 Sub)</span> <span className="opacity-80 text-amber-600">scientific@sharjah.com</span></li>
-              <li className="flex flex-col"><span className="font-bold text-emerald-950">لجنة الاعتماد (L5 Sub)</span> <span className="opacity-80 text-amber-600">approval@sharjah.com</span></li>
-              <li className="flex flex-col"><span className="font-bold text-emerald-950">Level 5: المشرف المساعد</span> <span className="opacity-80 text-amber-600">assistant@sharjah.com</span></li>
-              <li className="flex flex-col"><span className="font-bold text-emerald-950">Level 6: المشرف العام</span> <span className="opacity-80 text-amber-600">admin@sharjah.com</span></li>
+              <li className="flex flex-col"><span className="font-bold text-emerald-950">لجنة التدقيق والتحرير</span> <span className="opacity-80 text-amber-600">auditor@sharjah.com</span></li>
+              <li className="flex flex-col"><span className="font-bold text-emerald-950">اللجنة العلمية</span> <span className="opacity-80 text-amber-600">scientific@sharjah.com</span></li>
+              <li className="flex flex-col"><span className="font-bold text-emerald-950">لجنة الاعتماد</span> <span className="opacity-80 text-amber-600">approval@sharjah.com</span></li>
+              <li className="flex flex-col"><span className="font-bold text-emerald-950">المشرف المساعد</span> <span className="opacity-80 text-amber-600">assistant@sharjah.com</span></li>
+              <li className="flex flex-col"><span className="font-bold text-emerald-950">المشرف العام</span> <span className="opacity-80 text-amber-600">admin@sharjah.com</span></li>
             </ul>
           </div>
           <p className="text-[10px] text-center text-stone-400 mt-5 font-medium">(كلمة المرور لجميع الحسابات: 123456)</p>

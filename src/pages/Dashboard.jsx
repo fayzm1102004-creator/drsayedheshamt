@@ -111,7 +111,7 @@ function ObserverView() {
         <div className="flex items-center justify-between mb-6 border-b border-stone-100 pb-4">
            <div>
              <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950">جدول الملفات المرفوعة وحالتها</h3>
-             <p className="text-sm text-stone-400 mt-1">تتم المراجعة من قبل المنسق المسؤول (المستوى 2)</p>
+             <p className="text-sm text-stone-400 mt-1">تتم المراجعة من قبل المنسق المسؤول</p>
            </div>
         </div>
         
@@ -189,7 +189,7 @@ function CoordinatorView() {
         <div className="mb-8 flex justify-between items-center border-b border-stone-100 pb-4">
            <div>
              <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950">مراجعة ملفات الرصاد</h3>
-             <p className="text-sm text-stone-400 mt-1">الملفات المستلمة من المستوى 1</p>
+             <p className="text-sm text-stone-400 mt-1">الملفات المستلمة من الرصاد</p>
            </div>
         </div>
         
@@ -296,7 +296,7 @@ function ReviewCommitteeView() {
       <div className="bg-white rounded-2xl shadow-lg border border-stone-200 border-t-4 border-t-emerald-800 p-8">
         <div className="flex items-center justify-between mb-8 border-b border-stone-100 pb-4">
            <div>
-             <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950">مساحة عمل لجنة المراجعة (Level 3)</h3>
+             <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950">مساحة عمل لجنة المراجعة</h3>
              <p className="text-sm text-stone-400 mt-1">مراجعة الشواهد اللغوية الواردة من المنسقين وتجهيزها</p>
            </div>
         </div>
@@ -412,7 +412,7 @@ function CorrectionCommitteeView() {
       <div className="bg-white rounded-2xl shadow-lg border border-stone-200 border-t-4 border-t-emerald-800 p-8">
         <div className="flex items-center justify-between mb-8 border-b border-stone-100 pb-4">
            <div>
-             <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950">مساحة عمل لجنة الاستدراك (Level 3)</h3>
+             <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950">مساحة عمل لجنة الاستدراك</h3>
              <p className="text-sm text-stone-400 mt-1">تصحيح واستدراك النواقص في الشواهد والمصادر</p>
            </div>
         </div>
@@ -642,7 +642,7 @@ function MainCoordinatorView() {
         <div className="mb-8 border-b border-stone-100 pb-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
            <div>
              <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950">الملفات المستلمة من اللجان الفرعية</h3>
-             <p className="text-sm text-stone-400 mt-1">تجهيز الحزم لإرسالها للجنة التدقيق والتحرير (المستوى 4)</p>
+             <p className="text-sm text-stone-400 mt-1">تجهيز الحزم لإرسالها للجنة التدقيق والتحرير</p>
            </div>
            
            <div className="flex bg-[#FDFBF7] p-1.5 rounded-2xl border border-stone-200 shadow-inner overflow-x-auto">
@@ -899,7 +899,7 @@ function AuditorView() {
       </div>
 
       <div className="bg-white rounded-2xl shadow-lg border border-stone-200 border-t-4 border-t-emerald-800 p-8">
-         <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-6">الملفات المدققة (المستلمة من المستوى 3)</h3>
+         <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-6">الملفات المستلمة من اللجان المختصة</h3>
          <div className="overflow-x-auto">
             <table className="w-full text-sm text-right">
               <thead className="text-sm text-emerald-900 font-bold bg-stone-100/80">
@@ -1002,7 +1002,7 @@ function ScientificCommitteeView() {
       <div className="bg-white rounded-2xl shadow-lg border border-stone-200 border-t-4 border-t-emerald-800 p-8">
         <div className="flex items-center justify-between mb-8 border-b border-stone-100 pb-4">
            <div>
-             <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 flex items-center gap-3"><BookText className="text-amber-500 w-8 h-8"/> مساحة عمل اللجنة العلمية (Level 5)</h3>
+             <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 flex items-center gap-3"><BookText className="text-amber-500 w-8 h-8"/> مساحة عمل اللجنة العلمية</h3>
              <p className="text-sm text-stone-400 mt-2 font-medium">التحكيم الأكاديمي والبت في المسائل اللغوية الخلافية</p>
            </div>
         </div>
@@ -1108,7 +1108,7 @@ function ApprovalCommitteeView() {
       <div className="bg-white rounded-2xl shadow-lg border border-stone-200 border-t-4 border-t-emerald-800 p-8">
         <div className="flex items-center justify-between mb-8 border-b border-stone-100 pb-4">
            <div>
-             <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 flex items-center gap-3"><ShieldCheck className="text-amber-500 w-8 h-8"/> مساحة عمل لجنة الاعتماد النهائي (Level 5)</h3>
+             <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 flex items-center gap-3"><ShieldCheck className="text-amber-500 w-8 h-8"/> مساحة عمل لجنة الاعتماد النهائي</h3>
              <p className="text-sm text-stone-400 mt-2 font-medium">التدقيق والمطابقة النهائية قبل العرض على المشرف العام</p>
            </div>
         </div>
@@ -1233,7 +1233,7 @@ function AssistantSupervisorView() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="bg-white rounded-2xl shadow-md border border-stone-200 border-t-2 border-t-amber-500 p-8">
            <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-4 flex items-center gap-3"><ShieldCheck className="text-amber-500"/> لجنة الاعتماد النهائي</h3>
-           <p className="text-sm text-stone-500 mb-6 leading-relaxed font-medium">تضم 4 أعضاء، وظيفتهم المراجعة النهائية لكل البيانات المُدققة من المستوى 4.</p>
+           <p className="text-sm text-stone-500 mb-6 leading-relaxed font-medium">تضم 4 أعضاء، وظيفتهم المراجعة النهائية لكل البيانات المُدققة من لجنة التدقيق والتحرير.</p>
            <div className="p-4 bg-[#FDFBF7] border border-stone-200 rounded-xl">
              <span className="text-emerald-700 font-bold text-sm">الحالة: جاهز للمراجعة</span>
            </div>
@@ -1252,7 +1252,7 @@ function AssistantSupervisorView() {
         <div className="flex items-center justify-between mb-6 border-b border-stone-100 pb-6">
            <div>
              <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950">الملفات المستلمة من اللجان الفرعية</h3>
-             <p className="text-sm text-stone-400 mt-1">النسخ النهائية الجاهزة للإرسال إلى المشرف العام (المستوى 6)</p>
+             <p className="text-sm text-stone-400 mt-1">النسخ النهائية الجاهزة للإرسال إلى المشرف العام</p>
            </div>
            
            <div className="flex bg-[#FDFBF7] p-1.5 rounded-2xl border border-stone-200 shadow-inner">
