@@ -166,23 +166,54 @@ function ObserverView() {
 // ----------------------------------------------------
 function CoordinatorView() {
   const { files, passFile, returnFile } = useWorkflow();
-  const coordinatorFiles = files.filter(f => f.currentStage === 'coordinator' || f.level2_status !== 'pending');
+  const [activeObserver, setActiveObserver] = useState('all');
   const [rejectModal, setRejectModal] = useState({ isOpen: false, payload: null });
+
+  const allCoordinatorFiles = files.filter(f => f.currentStage === 'coordinator' || f.level2_status !== 'pending');
+  const coordinatorFiles = activeObserver === 'all' 
+    ? allCoordinatorFiles 
+    : allCoordinatorFiles.filter(f => f.uploadedBy === activeObserver);
 
   const confirmReject = (reason) => {
     returnFile(rejectModal.payload.id, 'observer', reason, 'coordinator');
     setRejectModal({ isOpen: false, payload: null });
   };
 
+  const observersList = [
+    { id: 'all', label: 'الكل' },
+    { id: 'الراصد 1', label: 'أحمد مصطفى (الراصد 1)' },
+    { id: 'الراصد 2', label: 'محمود علي (الراصد 2)' },
+    { id: 'الراصد 3', label: 'يوسف عمر (الراصد 3)' },
+    { id: 'الراصد 4', label: 'عبد الله حسن (الراصد 4)' }
+  ];
+
   return (
     <div className="space-y-8">
       <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8">
         <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-6 border-b pb-4">مراجعة ملفات الرصاد</h3>
+        
+        <div className="mb-6 flex bg-[#FDFBF7] p-1.5 rounded-2xl border border-stone-200 shadow-inner overflow-x-auto gap-1">
+          {observersList.map(obs => (
+            <button
+              key={obs.id}
+              onClick={() => setActiveObserver(obs.id)}
+              className={`px-5 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap transition-all ${
+                activeObserver === obs.id 
+                  ? 'bg-gradient-to-r from-emerald-900 to-emerald-800 text-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.2)]' 
+                  : 'text-stone-500 hover:text-emerald-900 hover:bg-stone-100'
+              }`}
+            >
+              {obs.label}
+            </button>
+          ))}
+        </div>
+
         <table className="w-full text-sm text-right">
-          <thead className="bg-stone-100/80"><tr><th className="px-6 py-4">اسم الملف</th><th className="px-6 py-4 text-center w-64">الإجراءات</th></tr></thead>
+          <thead className="bg-stone-100/80"><tr><th className="px-6 py-4 rounded-r-xl">الراصد</th><th className="px-6 py-4">اسم الملف</th><th className="px-6 py-4 text-center w-64 rounded-l-xl">الإجراءات</th></tr></thead>
           <tbody className="divide-y">
             {coordinatorFiles.map(item => (
-              <tr key={item.id}>
+              <tr key={item.id} className="hover:bg-stone-50 transition-colors">
+                <td className="px-6 py-5 text-emerald-950 font-bold">{item.uploadedBy}</td>
                 <td className="px-6 py-5 font-bold">
                   {item.name}
                   <RejectReason history={item.history} />
@@ -199,6 +230,11 @@ function CoordinatorView() {
                 </td>
               </tr>
             ))}
+            {coordinatorFiles.length === 0 && (
+              <tr>
+                <td colSpan="3" className="text-center py-8 text-stone-400 font-medium">لا توجد ملفات لهذا الراصد</td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>
