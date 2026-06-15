@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import Landing from './pages/Landing';
 import Login from './pages/Login';
 import MainLayout from './layouts/MainLayout';
 import Dashboard from './pages/Dashboard';
@@ -12,16 +13,16 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
+          <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           
-          <Route path="/" element={<MainLayout />}>
-            <Route index element={<Navigate to="/dashboard" replace />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="library" element={<Library />} />
-            <Route path="suggestions" element={<Suggestions />} />
+          <Route element={<MainLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/library" element={<Library />} />
+            <Route path="/suggestions" element={<Suggestions />} />
           </Route>
           
-          <Route path="*" element={<Navigate to="/login" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>
     </AuthProvider>
