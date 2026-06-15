@@ -29,20 +29,34 @@ export default function Landing() {
       {/* Hero Section */}
       <main className="relative z-10 max-w-7xl mx-auto px-6 py-12 lg:py-20 flex flex-col items-center text-center">
         
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100/50 border border-amber-200/50 text-amber-800 text-sm font-bold mb-8 animate-in slide-in-from-bottom-4 duration-700">
-          <Sparkles className="w-4 h-4" />
-          <span>المنصة الرسمية لإمارة الشارقة</span>
-        </div>
+        {/* Ornate Quranic Page Container */}
+        <div className="relative p-10 md:p-16 bg-[#FDFBF7] rounded-3xl border-[6px] border-double border-amber-600/40 shadow-[inset_0_0_60px_rgba(212,175,55,0.15),0_20px_50px_rgba(0,0,0,0.05)] w-full max-w-5xl mb-12 flex flex-col items-center overflow-hidden animate-in zoom-in-95 duration-1000">
+          
+          {/* Detailed Islamic Pattern Background inside the container */}
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23064e3b\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-80 mix-blend-multiply pointer-events-none z-0"></div>
 
-        <h1 className="text-[3.5rem] md:text-[5rem] leading-[1.2] font-['Aref_Ruqaa'] font-bold mb-8 max-w-4xl">
-          <span className="bg-clip-text text-transparent bg-gradient-to-l from-amber-500 via-amber-600 to-amber-700 drop-shadow-sm">الجامع التاريخى</span>
-          <br />
-          <span className="text-emerald-950 text-[2.5rem] md:text-[3.5rem]">لشواهد البحث فى لغة القرآن الكريم</span>
-        </h1>
-        
-        <p className="text-xl md:text-2xl text-stone-600 mb-12 max-w-3xl leading-relaxed font-medium animate-in slide-in-from-bottom-6 duration-1000 delay-150">
-          المنصة الرقمية المتكاملة المخصصة لجمع وتوثيق وتدقيق الشواهد التاريخية لألفاظ القرآن الكريم، لخدمة الباحثين واللجان العلمية في بيئة عمل مؤسسية ومترابطة.
-        </p>
+          {/* Corner Decorations */}
+          <div className="absolute top-4 left-4 w-12 h-12 border-t-[3px] border-l-[3px] border-amber-500 rounded-tl-2xl opacity-60"></div>
+          <div className="absolute top-4 right-4 w-12 h-12 border-t-[3px] border-r-[3px] border-amber-500 rounded-tr-2xl opacity-60"></div>
+          <div className="absolute bottom-4 left-4 w-12 h-12 border-b-[3px] border-l-[3px] border-amber-500 rounded-bl-2xl opacity-60"></div>
+          <div className="absolute bottom-4 right-4 w-12 h-12 border-b-[3px] border-r-[3px] border-amber-500 rounded-br-2xl opacity-60"></div>
+          
+          {/* Header Ornament */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-8 bg-amber-600/10 rounded-b-[100%] border-b border-amber-600/30"></div>
+
+          <h1 className="text-[3.2rem] md:text-[4.5rem] leading-[1.3] font-['Aref_Ruqaa'] font-bold mb-6 max-w-4xl relative z-10 mt-4 text-center">
+            <span className="bg-clip-text text-transparent bg-gradient-to-l from-amber-500 via-amber-600 to-amber-700 drop-shadow-sm">الجامع التاريخى</span>
+            <br />
+            <span className="text-emerald-950 text-[2.2rem] md:text-[3rem] mt-4 inline-block">لشواهد البحث فى لغة القرآن الكريم</span>
+          </h1>
+          
+          <p className="text-xl md:text-2xl text-emerald-950/80 max-w-3xl leading-relaxed font-semibold relative z-10 text-center px-4">
+            المنصة الرقمية المتكاملة المخصصة لجمع وتوثيق وتدقيق الشواهد التاريخية لألفاظ القرآن الكريم، لخدمة الباحثين واللجان العلمية في بيئة عمل مؤسسية ومترابطة.
+          </p>
+
+          {/* Footer Ornament */}
+          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-40 h-8 bg-amber-600/10 rounded-t-[100%] border-t border-amber-600/30"></div>
+        </div>
 
         <div className="flex flex-col sm:flex-row gap-5 mb-24 animate-in slide-in-from-bottom-8 duration-1000 delay-300">
           <Link to="/login" className="px-10 py-4 bg-emerald-950 hover:bg-emerald-900 text-white rounded-2xl font-bold text-lg transition-all duration-300 hover:shadow-[0_8px_25px_rgba(5,150,105,0.4)] hover:-translate-y-1 flex items-center justify-center gap-3">
