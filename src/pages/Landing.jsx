@@ -38,7 +38,7 @@ export default function Landing() {
 
         {/* Subtitle */}
         <p className="text-base md:text-xl text-teal-50/90 max-w-4xl leading-relaxed font-bold mb-10 drop-shadow-lg animate-in slide-in-from-bottom-6 duration-1000 delay-300">
-          أهلاً بكم في الصرح الجامع للأدلة البحثية في لغة القرآن الكريم، جسر بين التراث والبحث الحديث للطلاب والباحثين.
+          أهلاً بكم في الصرح الجامع للأدلة البحثية في لغة القرآن الكريم.
         </p>
 
         {/* Grand Button */}
