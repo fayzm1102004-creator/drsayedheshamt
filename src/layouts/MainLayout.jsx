@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import { Outlet, Navigate, Link, useLocation } from 'react-router-dom';
-import { BookOpen, LayoutDashboard, MessageSquare, LogOut, User } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
+import { Outlet, Navigate, Link, useLocation, useNavigate } from 'react-router-dom';
+import { BookOpen, LayoutDashboard, MessageSquare, LogOut, UserCircle, Bell, Search, Moon, Sun } from 'lucide-react';
 
 export default function MainLayout() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isAuthenticated, user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
+  const navigate = useNavigate();
 
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }
-
-  const [namePart, titlePart] = user?.name ? user.name.split(' (') : ['', ''];
-  const displayName = namePart;
-  const displayTitle = titlePart ? titlePart.replace(')', '') : 'مستخدم';
 
   const navItems = [
     { name: 'لوحة التحكم', path: '/dashboard', icon: LayoutDashboard },
@@ -22,13 +22,13 @@ export default function MainLayout() {
   ];
 
   return (
-    <div className="flex h-screen bg-[#FDFBF7] font-sans selection:bg-amber-500/30">
+    <div className="flex h-screen bg-[#FDFBF7] dark:bg-[#020617] transition-colors duration-500 font-sans selection:bg-amber-500/30">
       {/* Sidebar - Royal Navy & Emerald Glassmorphism */}
-      <div className="w-[22rem] bg-slate-950/95 backdrop-blur-2xl text-white flex flex-col shadow-[15px_0_50px_rgba(2,6,23,0.5)] z-20 relative overflow-hidden border-l border-white/5">
+      <div className="w-[22rem] bg-slate-950/95 dark:bg-[#020617]/95 backdrop-blur-2xl text-white flex flex-col shadow-[15px_0_50px_rgba(2,6,23,0.5)] dark:shadow-[15px_0_50px_rgba(0,0,0,0.8)] z-20 relative overflow-hidden border-l border-white/5 dark:border-amber-500/10 transition-colors duration-500">
         {/* Subtle geometric overlay for sidebar */}
         <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23d4af37\' fill-opacity=\'0.04\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] pointer-events-none mix-blend-overlay"></div>
         {/* Soft emerald radial gradient behind the text */}
-        <div className="absolute top-0 right-0 w-full h-64 bg-emerald-900/40 blur-[80px] rounded-full pointer-events-none"></div>
+        <div className="absolute top-0 right-0 w-full h-64 bg-emerald-900/40 dark:bg-emerald-900/20 blur-[80px] rounded-full pointer-events-none transition-colors duration-500"></div>
 
         <div className="p-10 flex flex-col items-center justify-center border-b border-amber-900/30 relative z-10 pb-12 pt-14">
           <div className="text-center w-full">
@@ -64,29 +64,48 @@ export default function MainLayout() {
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col overflow-hidden relative bg-[url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%230f172a\' fill-opacity=\'0.015\'%3E%3Cpath d=\'M50 0L0 50l50 50 50-50L50 0zm0 10l40 40-40 40L10 50 50 10z\'/%3E%3C/g%3E%3C/svg%3E')]">
+      <div className="flex-1 flex flex-col overflow-hidden relative dark:bg-[#020617] transition-colors duration-500">
+        {/* Subtle global pattern for main area in dark mode to match landing page vibe */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%230f172a\' fill-opacity=\'0.015\'%3E%3Cpath d=\'M50 0L0 50l50 50 50-50L50 0zm0 10l40 40-40 40L10 50 50 10z\'/%3E%3C/g%3E%3C/svg%3E')] dark:bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23d4af37\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] pointer-events-none z-0"></div>
+        
         {/* Top Navbar - Soft Parchment Glassmorphism */}
-        <header className="h-24 sticky top-0 z-40 backdrop-blur-2xl bg-[#FDFBF7]/80 border-b border-amber-900/10 flex items-center justify-between px-12 shadow-[0_4px_30px_rgba(0,0,0,0.02)] transition-all">
+        <header className="h-24 sticky top-0 z-40 backdrop-blur-2xl bg-[#FDFBF7]/80 dark:bg-[#064e3b]/30 border-b border-amber-900/10 dark:border-amber-500/20 flex items-center justify-between px-12 shadow-[0_4px_30px_rgba(0,0,0,0.02)] transition-colors duration-500">
           <div className="flex items-center">
-            <h2 className="text-2xl font-['Amiri'] font-bold text-emerald-950 capitalize">
+            <h2 className="text-2xl font-['Amiri'] font-bold text-emerald-950 dark:text-amber-400 capitalize drop-shadow-sm transition-colors duration-500">
               {navItems.find(item => location.pathname.startsWith(item.path))?.name || 'مرحباً بك'}
             </h2>
           </div>
+
           <div className="flex items-center space-x-6 space-x-reverse">
-            <div className="flex items-center space-x-3 space-x-reverse text-sm bg-white px-4 py-2 rounded-2xl shadow-sm border border-stone-200">
-              <div className="bg-amber-100 p-2.5 rounded-xl text-amber-600 border border-amber-200/50">
-                <User className="w-5 h-5" />
+            <button 
+              onClick={toggleTheme}
+              className="p-3 text-stone-400 hover:text-amber-500 dark:text-amber-200/60 dark:hover:text-amber-400 hover:bg-white dark:hover:bg-slate-800/50 rounded-full transition-all duration-300 shadow-sm"
+              title={theme === 'light' ? 'تفعيل الوضع الداكن' : 'تفعيل الوضع الفاتح'}
+            >
+              {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+            </button>
+            <button className="p-3 text-stone-400 hover:text-emerald-700 dark:text-amber-200/60 dark:hover:text-emerald-400 hover:bg-white dark:hover:bg-slate-800/50 rounded-full transition-all shadow-sm">
+              <Search className="w-5 h-5" />
+            </button>
+            <button className="p-3 text-stone-400 hover:text-emerald-700 dark:text-amber-200/60 dark:hover:text-emerald-400 hover:bg-white dark:hover:bg-slate-800/50 rounded-full relative transition-all shadow-sm">
+              <Bell className="w-5 h-5" />
+              <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-rose-500 border-2 border-white dark:border-[#064e3b] rounded-full animate-pulse"></span>
+            </button>
+            
+            <div className="h-8 w-px bg-stone-200 dark:bg-slate-700/50 mx-2"></div>
+            
+            <div className="flex items-center space-x-3 space-x-reverse bg-white dark:bg-slate-900/50 px-4 py-2 rounded-full border border-stone-100 dark:border-amber-500/20 shadow-sm transition-colors duration-500">
+              <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center text-emerald-700 dark:text-emerald-400">
+                <UserCircle className="w-6 h-6" />
               </div>
               <div>
-                <p className="font-bold text-emerald-950 text-sm">{displayName}</p>
-                <p className="text-[11px] font-semibold text-emerald-800/70 mt-0.5 max-w-[150px] truncate" title={displayTitle}>
-                  {displayTitle}
-                </p>
+                <p className="text-sm font-bold text-slate-800 dark:text-amber-50">{user?.name}</p>
+                <p className="text-[11px] font-bold text-stone-500 dark:text-amber-200/60">{user?.roleText}</p>
               </div>
             </div>
             <button
               onClick={logout}
-              className="p-2.5 text-stone-400 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-all duration-200 border border-transparent hover:border-rose-200"
+              className="p-3 text-stone-400 hover:text-rose-600 dark:text-rose-400/70 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/50 rounded-xl transition-all duration-200"
               title="تسجيل الخروج"
             >
               <LogOut className="w-5 h-5" />
@@ -94,8 +113,8 @@ export default function MainLayout() {
           </div>
         </header>
 
-        {/* Page Content */}
-        <main className="flex-1 overflow-auto p-8">
+        {/* Main Content Area */}
+        <main className="flex-1 overflow-auto p-12 relative z-10">
           <div className="max-w-7xl mx-auto h-full">
              <Outlet />
           </div>
