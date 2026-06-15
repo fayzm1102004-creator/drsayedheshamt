@@ -22,13 +22,13 @@ export default function MainLayout() {
   ];
 
   return (
-    <div className="flex h-screen bg-[#FDFBF7] dark:bg-[#020617] transition-colors duration-500 font-sans selection:bg-amber-500/30">
-      {/* Sidebar - Royal Navy & Emerald Glassmorphism */}
-      <div className="w-[22rem] bg-slate-950/95 dark:bg-[#020617]/95 backdrop-blur-2xl text-white flex flex-col shadow-[15px_0_50px_rgba(2,6,23,0.5)] dark:shadow-[15px_0_50px_rgba(0,0,0,0.8)] z-20 relative overflow-hidden border-l border-white/5 dark:border-amber-500/10 transition-colors duration-500">
+    <div className="flex h-screen bg-[#f8f5ec] dark:bg-[#020617] transition-colors duration-500 font-sans selection:bg-amber-500/30">
+      {/* Sidebar - Rich Emerald (Light) & Deep Navy (Dark) */}
+      <div className="w-[22rem] bg-gradient-to-b from-[#064e3b] to-[#022c22] dark:from-slate-950/95 dark:to-[#020617]/95 text-white flex flex-col shadow-[15px_0_50px_rgba(6,78,59,0.15)] dark:shadow-[15px_0_50px_rgba(0,0,0,0.8)] z-20 relative overflow-hidden border-l border-white/10 dark:border-amber-500/10 transition-colors duration-500">
         {/* Subtle geometric overlay for sidebar */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23d4af37\' fill-opacity=\'0.04\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] pointer-events-none mix-blend-overlay"></div>
-        {/* Soft emerald radial gradient behind the text */}
-        <div className="absolute top-0 right-0 w-full h-64 bg-emerald-900/40 dark:bg-emerald-900/20 blur-[80px] rounded-full pointer-events-none transition-colors duration-500"></div>
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23d4af37\' fill-opacity=\'0.06\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] pointer-events-none mix-blend-overlay"></div>
+        {/* Soft radial gradient behind the text */}
+        <div className="absolute top-0 right-0 w-full h-64 bg-[#fbbf24]/10 dark:bg-emerald-900/20 blur-[80px] rounded-full pointer-events-none transition-colors duration-500"></div>
 
         <div className="p-10 flex flex-col items-center justify-center border-b border-amber-900/30 relative z-10 pb-12 pt-14">
           <div className="text-center w-full">
@@ -65,11 +65,11 @@ export default function MainLayout() {
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col overflow-hidden relative dark:bg-[#020617] transition-colors duration-500">
-        {/* Subtle global pattern for main area in dark mode to match landing page vibe */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%230f172a\' fill-opacity=\'0.015\'%3E%3Cpath d=\'M50 0L0 50l50 50 50-50L50 0zm0 10l40 40-40 40L10 50 50 10z\'/%3E%3C/g%3E%3C/svg%3E')] dark:bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23d4af37\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] pointer-events-none z-0"></div>
+        {/* Subtle global pattern for main area - Soft gold/emerald pattern in light mode, dark pattern in dark mode */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23064e3b\' fill-opacity=\'0.025\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] dark:bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23d4af37\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] pointer-events-none z-0"></div>
         
         {/* Top Navbar - Soft Parchment Glassmorphism */}
-        <header className="h-24 sticky top-0 z-40 backdrop-blur-2xl bg-[#FDFBF7]/80 dark:bg-[#064e3b]/30 border-b border-amber-900/10 dark:border-amber-500/20 flex items-center justify-between px-12 shadow-[0_4px_30px_rgba(0,0,0,0.02)] transition-colors duration-500">
+        <header className="h-24 sticky top-0 z-40 backdrop-blur-2xl bg-[#f8f5ec]/70 dark:bg-[#064e3b]/30 border-b border-[#064e3b]/10 dark:border-amber-500/20 flex items-center justify-between px-12 shadow-[0_4px_30px_rgba(6,78,59,0.03)] transition-colors duration-500">
           <div className="flex items-center">
             <h2 className="text-2xl font-['Amiri'] font-bold text-emerald-950 dark:text-amber-400 capitalize drop-shadow-sm transition-colors duration-500">
               {navItems.find(item => location.pathname.startsWith(item.path))?.name || 'مرحباً بك'}
@@ -79,15 +79,15 @@ export default function MainLayout() {
           <div className="flex items-center space-x-6 space-x-reverse">
             <button 
               onClick={toggleTheme}
-              className="p-3 text-stone-400 hover:text-amber-500 dark:text-amber-200/60 dark:hover:text-amber-400 hover:bg-white dark:hover:bg-slate-800/50 rounded-full transition-all duration-300 shadow-sm"
+              className="p-3 text-[#064e3b]/60 hover:text-[#d97706] dark:text-amber-200/60 dark:hover:text-amber-400 hover:bg-[#064e3b]/5 dark:hover:bg-slate-800/50 rounded-full transition-all duration-300 shadow-sm border border-transparent hover:border-[#064e3b]/10 dark:hover:border-transparent"
               title={theme === 'light' ? 'تفعيل الوضع الداكن' : 'تفعيل الوضع الفاتح'}
             >
               {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
             </button>
             
-            <div className="h-8 w-px bg-stone-200 dark:bg-slate-700/50 mx-2"></div>
+            <div className="h-8 w-px bg-[#064e3b]/10 dark:bg-slate-700/50 mx-2"></div>
             
-            <div className="flex items-center space-x-3 space-x-reverse bg-white dark:bg-slate-900/50 px-4 py-2 rounded-full border border-stone-100 dark:border-amber-500/20 shadow-sm transition-colors duration-500">
+            <div className="flex items-center space-x-3 space-x-reverse bg-white/60 dark:bg-slate-900/50 px-4 py-2 rounded-full border border-[#064e3b]/10 dark:border-amber-500/20 shadow-sm transition-colors duration-500 backdrop-blur-md">
               <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/50 flex items-center justify-center text-emerald-700 dark:text-emerald-400">
                 <UserCircle className="w-6 h-6" />
               </div>

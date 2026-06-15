@@ -53,16 +53,16 @@ function RejectionModal({ isOpen, onClose, onConfirm }) {
         
         <div className="relative z-10 space-y-6">
           <div>
-            <label className="block text-sm font-bold text-slate-800 dark:text-slate-300 mb-3">سبب طلب التعديل أو الملاحظات</label>
+            <label className="block text-sm font-bold text-[#064e3b] dark:text-slate-300 mb-3">سبب طلب التعديل أو الملاحظات</label>
             <textarea 
               value={reason}
               onChange={(e) => setReason(e.target.value)}
-              className="w-full h-32 px-5 py-4 bg-white dark:bg-slate-950 border border-stone-200/80 dark:border-slate-800 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 dark:focus:ring-amber-500/30 dark:text-slate-200 transition-all text-stone-700 resize-none font-medium shadow-sm"
+              className="w-full h-32 px-5 py-4 bg-white/80 dark:bg-slate-950 border border-[#d4af37]/40 dark:border-slate-800 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#064e3b]/50 focus:border-[#064e3b] dark:focus:ring-amber-500/30 dark:text-slate-200 transition-all text-emerald-950 resize-none font-medium shadow-[inset_0_2px_10px_rgba(6,78,59,0.02)]"
               placeholder="يرجى كتابة الملاحظات بدقة..."
             />
           </div>
           <div className="flex justify-end gap-4 pt-4">
-            <button onClick={onClose} className="px-8 py-3 rounded-2xl text-sm font-bold bg-stone-100 dark:bg-slate-800 hover:bg-stone-200 dark:hover:bg-slate-700 text-stone-600 dark:text-slate-300 transition-colors">إلغاء</button>
+            <button onClick={onClose} className="px-8 py-3 rounded-2xl text-sm font-bold bg-[#064e3b]/5 dark:bg-slate-800 hover:bg-[#064e3b]/10 dark:hover:bg-slate-700 text-[#064e3b] dark:text-slate-300 transition-colors border border-transparent hover:border-[#064e3b]/20">إلغاء</button>
             <button onClick={handleConfirm} disabled={!reason.trim()} className="px-8 py-3 rounded-2xl text-sm font-bold bg-rose-50 dark:bg-rose-950/30 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-900/50 hover:bg-rose-600 hover:text-white hover:border-transparent dark:hover:bg-rose-600 dark:hover:text-white flex items-center gap-2 transition-all duration-300 hover:shadow-[0_0_15px_rgba(225,29,72,0.3)] disabled:opacity-50 disabled:hover:bg-rose-50 disabled:hover:text-rose-700 disabled:hover:border-rose-200 disabled:shadow-none">
               تأكيد وإرجاع <Send className="w-4 h-4 rotate-180" />
             </button>
@@ -135,12 +135,12 @@ const FileLink = ({ file }) => {
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center gap-3">
-        <span className="text-slate-800 dark:text-slate-200 text-[15px]">{file.name}</span>
+        <span className="text-[#064e3b] dark:text-slate-200 text-[15px] font-bold">{file.name}</span>
         <div className="flex gap-1.5 opacity-80 hover:opacity-100 transition-opacity">
-          <button onClick={handleOpen} title="فتح ومعاينة الملف" className="p-2 text-emerald-700 dark:text-emerald-400 hover:text-white bg-emerald-50 dark:bg-emerald-950/50 hover:bg-emerald-600 dark:hover:bg-emerald-600 rounded-lg border border-emerald-100 dark:border-emerald-900/50 transition-all shadow-sm">
+          <button onClick={handleOpen} title="فتح ومعاينة الملف" className="p-2 text-emerald-700 dark:text-emerald-400 hover:text-white bg-emerald-50 dark:bg-emerald-950/50 hover:bg-[#064e3b] dark:hover:bg-emerald-600 rounded-lg border border-[#064e3b]/20 dark:border-emerald-900/50 transition-all shadow-sm">
             <ExternalLink className="w-4 h-4" />
           </button>
-          <button onClick={handleDownload} title="تحميل الملف" className="p-2 text-amber-600 dark:text-amber-400 hover:text-white bg-amber-50 dark:bg-amber-950/50 hover:bg-amber-500 dark:hover:bg-amber-600 rounded-lg border border-amber-100 dark:border-amber-900/50 transition-all shadow-sm">
+          <button onClick={handleDownload} title="تحميل الملف" className="p-2 text-[#d97706] dark:text-amber-400 hover:text-white bg-amber-50 dark:bg-amber-950/50 hover:bg-[#d97706] dark:hover:bg-amber-600 rounded-lg border border-[#d97706]/30 dark:border-amber-900/50 transition-all shadow-sm">
             <Download className="w-4 h-4" />
           </button>
         </div>
@@ -151,9 +151,10 @@ const FileLink = ({ file }) => {
 };
 
 const CardLayout = ({ children, title }) => (
-  <div className="bg-white/95 dark:bg-slate-900/90 backdrop-blur-3xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.4)] border border-stone-100 dark:border-slate-800 border-t-[3px] border-t-amber-500 p-10 relative overflow-hidden transition-colors duration-500">
-    <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 dark:bg-amber-500/10 rounded-full blur-[60px] pointer-events-none"></div>
-    <h3 className="text-3xl font-['Aref_Ruqaa'] font-bold text-slate-900 dark:text-amber-400 mb-8 pb-5 border-b border-stone-100 dark:border-slate-800 relative z-10 transition-colors duration-500">{title}</h3>
+  <div className="bg-gradient-to-br from-white/95 to-[#f8f5ec]/95 dark:bg-slate-900/90 backdrop-blur-3xl rounded-[2rem] shadow-[0_15px_40px_rgba(6,78,59,0.08)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.4)] border border-[#d4af37]/40 dark:border-slate-800 border-t-[4px] border-t-[#064e3b] dark:border-t-amber-500 p-10 relative overflow-hidden transition-colors duration-500">
+    <div className="absolute top-0 right-0 w-64 h-64 bg-[#d4af37]/10 dark:bg-amber-500/10 rounded-full blur-[60px] pointer-events-none"></div>
+    <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#064e3b]/5 dark:bg-emerald-500/5 rounded-full blur-[80px] pointer-events-none"></div>
+    <h3 className="text-3xl font-['Aref_Ruqaa'] font-bold text-[#064e3b] dark:text-amber-400 mb-8 pb-5 border-b border-[#064e3b]/10 dark:border-slate-800 relative z-10 transition-colors duration-500">{title}</h3>
     <div className="relative z-10">
       {children}
     </div>
@@ -202,20 +203,20 @@ function ObserverView() {
       <CardLayout title="رفع ملف جديد">
         <div className="flex flex-col items-center">
           <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileUpload} />
-          <div onClick={() => fileInputRef.current.click()} className="w-full bg-slate-50/50 dark:bg-slate-950/50 rounded-[2rem] p-16 border-2 border-dashed border-amber-500/30 dark:border-amber-500/20 hover:border-amber-500 dark:hover:border-amber-400 hover:bg-amber-50/30 dark:hover:bg-amber-900/10 cursor-pointer flex flex-col items-center transition-all duration-300 group">
-            <UploadCloud className="w-16 h-16 text-amber-500/60 dark:text-amber-500/40 mb-6 group-hover:scale-110 group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-all duration-300 drop-shadow-sm" />
-            <p className="text-[1.35rem] font-['Aref_Ruqaa'] font-bold text-slate-800 dark:text-amber-50">اسحب وأفلت الملف هنا لرفعه للمنسق</p>
-            <p className="text-sm text-stone-400 dark:text-slate-500 mt-3 font-medium">الحد الأقصى للتجربة: 5 ميجابايت</p>
+          <div onClick={() => fileInputRef.current.click()} className="w-full bg-[#f8f5ec]/50 dark:bg-slate-950/50 rounded-[2.5rem] p-16 border-2 border-dashed border-[#d4af37]/60 dark:border-amber-500/20 hover:border-[#d97706] dark:hover:border-amber-400 hover:bg-[#d4af37]/5 dark:hover:bg-amber-900/10 cursor-pointer flex flex-col items-center transition-all duration-300 group shadow-[inset_0_4px_20px_rgba(212,175,55,0.05)]">
+            <UploadCloud className="w-16 h-16 text-[#064e3b]/80 dark:text-amber-500/40 mb-6 group-hover:scale-110 group-hover:text-[#d97706] dark:group-hover:text-amber-400 transition-all duration-300 drop-shadow-sm" />
+            <p className="text-[1.35rem] font-['Aref_Ruqaa'] font-bold text-[#064e3b] dark:text-amber-50">اسحب وأفلت الملف هنا لرفعه للمنسق</p>
+            <p className="text-sm text-[#064e3b]/60 dark:text-slate-500 mt-3 font-medium">الحد الأقصى للتجربة: 5 ميجابايت</p>
           </div>
         </div>
       </CardLayout>
       
       <CardLayout title="جدول الملفات المرفوعة وحالتها">
         <table className="w-full text-[15px] text-right">
-          <thead className="bg-stone-50/80 dark:bg-slate-950/50 border-b border-stone-100 dark:border-slate-800 transition-colors duration-500"><tr><th className="px-8 py-5 text-slate-500 dark:text-slate-400 font-bold rounded-r-2xl">اسم الملف</th><th className="px-8 py-5 text-center text-slate-500 dark:text-slate-400 font-bold rounded-l-2xl">الحالة الحالية</th></tr></thead>
-          <tbody className="divide-y divide-stone-100/80 dark:divide-slate-800/80">
+          <thead className="bg-[#064e3b]/5 dark:bg-slate-950/50 border-b border-[#064e3b]/10 dark:border-slate-800 transition-colors duration-500"><tr><th className="px-8 py-5 text-[#064e3b] dark:text-slate-400 font-bold rounded-r-2xl">اسم الملف</th><th className="px-8 py-5 text-center text-[#064e3b] dark:text-slate-400 font-bold rounded-l-2xl">الحالة الحالية</th></tr></thead>
+          <tbody className="divide-y divide-[#064e3b]/5 dark:divide-slate-800/80">
             {myFiles.map(file => (
-              <tr key={file.id} className="hover:bg-amber-50/40 dark:hover:bg-slate-800/50 transition-colors duration-200">
+              <tr key={file.id} className="hover:bg-[#d4af37]/10 dark:hover:bg-slate-800/50 transition-colors duration-200">
                 <td className="px-8 py-6 font-bold">
                   <FileLink file={file} />
                 </td>
@@ -258,15 +259,15 @@ function CoordinatorView() {
   return (
     <div className="space-y-12">
       <CardLayout title="مراجعة ملفات الرصاد">
-        <div className="mb-8 flex bg-slate-50/80 dark:bg-slate-950/50 p-2 rounded-2xl border border-stone-100 dark:border-slate-800 shadow-inner overflow-x-auto gap-2 transition-colors duration-500">
+        <div className="mb-8 flex bg-[#f8f5ec] dark:bg-slate-950/50 p-2 rounded-2xl border border-[#d4af37]/30 dark:border-slate-800 shadow-inner overflow-x-auto gap-2 transition-colors duration-500">
           {observersList.map(obs => (
             <button
               key={obs.id}
               onClick={() => setActiveObserver(obs.id)}
               className={`px-6 py-3 rounded-xl text-sm font-bold whitespace-nowrap transition-all duration-300 ${
                 activeObserver === obs.id 
-                  ? 'bg-slate-900 dark:bg-amber-500/20 text-amber-400 shadow-[0_4px_15px_rgba(245,158,11,0.2)] scale-[1.02] border border-transparent dark:border-amber-500/30' 
-                  : 'text-stone-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-amber-50 hover:bg-white dark:hover:bg-slate-800 hover:shadow-sm'
+                  ? 'bg-gradient-to-b from-[#064e3b] to-[#022c22] dark:bg-amber-500/20 text-white dark:text-amber-400 shadow-[0_4px_15px_rgba(6,78,59,0.3)] scale-[1.02] border border-transparent dark:border-amber-500/30' 
+                  : 'text-[#064e3b]/70 dark:text-slate-400 hover:text-[#064e3b] dark:hover:text-amber-50 hover:bg-white/80 dark:hover:bg-slate-800 hover:shadow-sm'
               }`}
             >
               {obs.label}
@@ -275,11 +276,11 @@ function CoordinatorView() {
         </div>
 
         <table className="w-full text-[15px] text-right">
-          <thead className="bg-stone-50/80 dark:bg-slate-950/50 border-b border-stone-100 dark:border-slate-800 transition-colors duration-500"><tr><th className="px-8 py-5 text-slate-500 dark:text-slate-400 font-bold rounded-r-2xl w-40">الراصد</th><th className="px-8 py-5 text-slate-500 dark:text-slate-400 font-bold">اسم الملف</th><th className="px-8 py-5 text-center text-slate-500 dark:text-slate-400 font-bold w-72 rounded-l-2xl">الإجراءات</th></tr></thead>
-          <tbody className="divide-y divide-stone-100/80 dark:divide-slate-800/80">
+          <thead className="bg-[#064e3b]/5 dark:bg-slate-950/50 border-b border-[#064e3b]/10 dark:border-slate-800 transition-colors duration-500"><tr><th className="px-8 py-5 text-[#064e3b] dark:text-slate-400 font-bold rounded-r-2xl w-40">الراصد</th><th className="px-8 py-5 text-[#064e3b] dark:text-slate-400 font-bold">اسم الملف</th><th className="px-8 py-5 text-center text-[#064e3b] dark:text-slate-400 font-bold w-72 rounded-l-2xl">الإجراءات</th></tr></thead>
+          <tbody className="divide-y divide-[#064e3b]/5 dark:divide-slate-800/80">
             {coordinatorFiles.map(item => (
-              <tr key={item.id} className="hover:bg-amber-50/40 dark:hover:bg-slate-800/50 transition-colors duration-200">
-                <td className="px-8 py-6 text-slate-700 dark:text-slate-300 font-bold whitespace-nowrap">{item.uploadedBy}</td>
+              <tr key={item.id} className="hover:bg-[#d4af37]/10 dark:hover:bg-slate-800/50 transition-colors duration-200">
+                <td className="px-8 py-6 text-[#064e3b] dark:text-slate-300 font-bold whitespace-nowrap">{item.uploadedBy}</td>
                 <td className="px-8 py-6 font-bold">
                   <FileLink file={item} />
                 </td>
@@ -325,10 +326,10 @@ function ReviewCommitteeView() {
     <div className="space-y-12">
       <CardLayout title="مساحة عمل لجنة المراجعة">
         <table className="w-full text-[15px] text-right">
-          <thead className="bg-stone-50/80 dark:bg-slate-950/50 border-b border-stone-100 dark:border-slate-800 transition-colors duration-500"><tr><th className="px-8 py-5 text-slate-500 dark:text-slate-400 font-bold rounded-r-2xl">بيان الشاهد</th><th className="px-8 py-5 text-center text-slate-500 dark:text-slate-400 font-bold w-72 rounded-l-2xl">حالة اللجنة</th></tr></thead>
-          <tbody className="divide-y divide-stone-100/80 dark:divide-slate-800/80">
+          <thead className="bg-[#064e3b]/5 dark:bg-slate-950/50 border-b border-[#064e3b]/10 dark:border-slate-800 transition-colors duration-500"><tr><th className="px-8 py-5 text-[#064e3b] dark:text-slate-400 font-bold rounded-r-2xl">بيان الشاهد</th><th className="px-8 py-5 text-center text-[#064e3b] dark:text-slate-400 font-bold w-72 rounded-l-2xl">حالة اللجنة</th></tr></thead>
+          <tbody className="divide-y divide-[#064e3b]/5 dark:divide-slate-800/80">
             {committeeFiles.map(item => (
-              <tr key={item.id} className="hover:bg-amber-50/40 dark:hover:bg-slate-800/50 transition-colors duration-200">
+              <tr key={item.id} className="hover:bg-[#d4af37]/10 dark:hover:bg-slate-800/50 transition-colors duration-200">
                 <td className="px-8 py-6 font-bold">
                   <FileLink file={item} />
                 </td>
@@ -369,10 +370,10 @@ function CorrectionCommitteeView() {
     <div className="space-y-12">
       <CardLayout title="مساحة عمل لجنة الاستدراك">
         <table className="w-full text-[15px] text-right">
-          <thead className="bg-stone-50/80 dark:bg-slate-950/50 border-b border-stone-100 dark:border-slate-800 transition-colors duration-500"><tr><th className="px-8 py-5 text-slate-500 dark:text-slate-400 font-bold rounded-r-2xl">بيان الاستدراك</th><th className="px-8 py-5 text-center text-slate-500 dark:text-slate-400 font-bold w-72 rounded-l-2xl">حالة اللجنة</th></tr></thead>
-          <tbody className="divide-y divide-stone-100/80 dark:divide-slate-800/80">
+          <thead className="bg-[#064e3b]/5 dark:bg-slate-950/50 border-b border-[#064e3b]/10 dark:border-slate-800 transition-colors duration-500"><tr><th className="px-8 py-5 text-[#064e3b] dark:text-slate-400 font-bold rounded-r-2xl">بيان الاستدراك</th><th className="px-8 py-5 text-center text-[#064e3b] dark:text-slate-400 font-bold w-72 rounded-l-2xl">حالة اللجنة</th></tr></thead>
+          <tbody className="divide-y divide-[#064e3b]/5 dark:divide-slate-800/80">
             {l3Files.map(item => (
-              <tr key={item.id} className="hover:bg-amber-50/40 dark:hover:bg-slate-800/50 transition-colors duration-200">
+              <tr key={item.id} className="hover:bg-[#d4af37]/10 dark:hover:bg-slate-800/50 transition-colors duration-200">
                 <td className="px-8 py-6 font-bold">
                   <FileLink file={item} />
                 </td>
@@ -416,15 +417,15 @@ function MainCoordinatorView() {
   return (
     <div className="space-y-12">
       <CardLayout title="إدارة اللجان الموازية (المستوى 3)">
-        <div className="mb-8 flex bg-slate-50/80 dark:bg-slate-950/50 p-2 rounded-2xl border border-stone-100 dark:border-slate-800 shadow-inner w-fit transition-colors duration-500">
-          <button onClick={() => setActiveTab('review')} className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${activeTab === 'review' ? 'bg-slate-900 dark:bg-amber-500/20 text-amber-400 shadow-[0_4px_15px_rgba(245,158,11,0.2)] border border-transparent dark:border-amber-500/30' : 'text-stone-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-amber-50'}`}>لجنة المراجعة</button>
-          <button onClick={() => setActiveTab('correction')} className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${activeTab === 'correction' ? 'bg-slate-900 dark:bg-amber-500/20 text-amber-400 shadow-[0_4px_15px_rgba(245,158,11,0.2)] border border-transparent dark:border-amber-500/30' : 'text-stone-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-amber-50'}`}>لجنة الاستدراك</button>
+        <div className="mb-8 flex bg-[#f8f5ec] dark:bg-slate-950/50 p-2 rounded-2xl border border-[#d4af37]/30 dark:border-slate-800 shadow-inner w-fit transition-colors duration-500">
+          <button onClick={() => setActiveTab('review')} className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${activeTab === 'review' ? 'bg-gradient-to-b from-[#064e3b] to-[#022c22] dark:bg-amber-500/20 text-white dark:text-amber-400 shadow-[0_4px_15px_rgba(6,78,59,0.3)] border border-transparent dark:border-amber-500/30' : 'text-[#064e3b]/70 dark:text-slate-400 hover:text-[#064e3b] dark:hover:text-amber-50'}`}>لجنة المراجعة</button>
+          <button onClick={() => setActiveTab('correction')} className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${activeTab === 'correction' ? 'bg-gradient-to-b from-[#064e3b] to-[#022c22] dark:bg-amber-500/20 text-white dark:text-amber-400 shadow-[0_4px_15px_rgba(6,78,59,0.3)] border border-transparent dark:border-amber-500/30' : 'text-[#064e3b]/70 dark:text-slate-400 hover:text-[#064e3b] dark:hover:text-amber-50'}`}>لجنة الاستدراك</button>
         </div>
         <table className="w-full text-[15px] text-right">
-          <thead className="bg-stone-50/80 dark:bg-slate-950/50 border-b border-stone-100 dark:border-slate-800 transition-colors duration-500"><tr><th className="px-8 py-5 text-slate-500 dark:text-slate-400 font-bold rounded-r-2xl">الملف</th><th className="px-8 py-5 text-center text-slate-500 dark:text-slate-400 font-bold w-72 rounded-l-2xl">الحالة ({activeTab === 'review' ? 'المراجعة' : 'الاستدراك'})</th></tr></thead>
-          <tbody className="divide-y divide-stone-100/80 dark:divide-slate-800/80">
+          <thead className="bg-[#064e3b]/5 dark:bg-slate-950/50 border-b border-[#064e3b]/10 dark:border-slate-800 transition-colors duration-500"><tr><th className="px-8 py-5 text-[#064e3b] dark:text-slate-400 font-bold rounded-r-2xl">الملف</th><th className="px-8 py-5 text-center text-[#064e3b] dark:text-slate-400 font-bold w-72 rounded-l-2xl">الحالة ({activeTab === 'review' ? 'المراجعة' : 'الاستدراك'})</th></tr></thead>
+          <tbody className="divide-y divide-[#064e3b]/5 dark:divide-slate-800/80">
             {l3Files.map(item => (
-              <tr key={item.id} className="hover:bg-amber-50/40 dark:hover:bg-slate-800/50 transition-colors duration-200">
+              <tr key={item.id} className="hover:bg-[#d4af37]/10 dark:hover:bg-slate-800/50 transition-colors duration-200">
                 <td className="px-8 py-6 font-bold">
                   <FileLink file={item} />
                 </td>
