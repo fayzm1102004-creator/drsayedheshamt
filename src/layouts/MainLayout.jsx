@@ -30,8 +30,8 @@ export default function MainLayout() {
 
         <div className="p-8 flex items-center justify-center border-b border-emerald-800/50 relative z-10">
           <div className="text-center">
-            <h1 className="text-4xl font-['Amiri'] font-bold text-amber-500 tracking-tight drop-shadow-md">المعجم التاريخي</h1>
-            <p className="text-xs font-bold text-emerald-300 mt-2 uppercase tracking-widest">إمارة الشارقة</p>
+            <h1 className="text-3xl font-['Amiri'] font-bold text-amber-500 tracking-tight drop-shadow-md">الجامع التاريخى</h1>
+            <p className="text-[10px] font-bold text-emerald-300 mt-2 tracking-wider">لشواهد البحث فى لغه القران الكريم</p>
           </div>
         </div>
         

@@ -24,8 +24,8 @@ export default function Login() {
       <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-2xl border border-stone-200 border-t-4 border-t-emerald-800 relative overflow-hidden">
         
         <div className="text-center">
-          <h2 className="mt-2 text-4xl font-['Amiri'] font-bold text-emerald-950 tracking-tight leading-loose">المعجم التاريخي للغة العربية</h2>
-          <p className="mt-1 text-sm text-stone-500 font-medium tracking-wide uppercase">منصة الشارقة الذكية</p>
+          <h2 className="mt-2 text-3xl md:text-4xl font-['Amiri'] font-bold text-emerald-950 tracking-tight leading-normal">الجامع التاريخى</h2>
+          <p className="mt-2 text-sm text-stone-600 font-bold tracking-wide">لشواهد البحث فى لغه القران الكريم</p>
         </div>
         
         {error && (
