@@ -20,12 +20,12 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#FDFBF7] px-4 py-12 selection:bg-amber-500/30 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23d4af37\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')]">
-      <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-2xl border border-stone-200 border-t-4 border-t-emerald-800 relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center bg-[#FDFBF7] px-4 py-12 selection:bg-amber-500/30 bg-[url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23d4af37\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M50 0L0 50l50 50 50-50L50 0zm0 10l40 40-40 40L10 50 50 10z\'/%3E%3C/g%3E%3C/svg%3E')]">
+      <div className="max-w-md w-full space-y-8 bg-white/95 backdrop-blur-3xl p-12 rounded-3xl shadow-[0_20px_60px_rgba(2,6,23,0.08)] border border-stone-200/60 border-t-[6px] border-t-amber-500 relative overflow-hidden">
         
-        <div className="text-center">
-          <h2 className="mt-2 text-3xl md:text-4xl font-['Amiri'] font-bold text-emerald-950 tracking-tight leading-normal">الجامع التاريخى</h2>
-          <p className="mt-2 text-sm text-stone-600 font-bold tracking-wide">لشواهد البحث فى لغه القران الكريم</p>
+        <div className="text-center pb-4">
+          <h2 className="mt-2 text-[2.5rem] font-['Aref_Ruqaa'] font-bold bg-clip-text text-transparent bg-gradient-to-l from-amber-400 via-amber-500 to-amber-700 drop-shadow-sm tracking-tight leading-normal">الجامع التاريخى</h2>
+          <p className="mt-4 text-sm text-emerald-950/80 font-bold tracking-widest uppercase">لشواهد البحث فى لغة القرآن الكريم</p>
         </div>
         
         {error && (
@@ -64,7 +64,7 @@ export default function Login() {
           <div>
             <button
               type="submit"
-              className="w-full flex justify-center py-3.5 px-4 border border-emerald-800 text-sm font-bold rounded-xl text-white bg-emerald-900 hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-900 hover:-translate-y-0.5 hover:shadow-[0_0_15px_rgba(245,158,11,0.3)] transition-all duration-300 ease-in-out"
+              className="w-full flex justify-center py-4 px-4 border border-emerald-800 text-[15px] font-bold rounded-2xl text-white bg-emerald-950 hover:bg-emerald-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-900 hover:-translate-y-1 hover:shadow-[0_8px_25px_rgba(5,150,105,0.4)] transition-all duration-300 ease-in-out"
             >
               تسجيل الدخول
             </button>

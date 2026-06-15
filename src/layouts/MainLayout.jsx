@@ -23,15 +23,17 @@ export default function MainLayout() {
 
   return (
     <div className="flex h-screen bg-[#FDFBF7] font-sans selection:bg-amber-500/30">
-      {/* Sidebar - Islamic Emerald to Deep Navy Gradient */}
-      <div className="w-72 bg-gradient-to-b from-emerald-950 to-slate-900 text-white flex flex-col shadow-2xl z-20 relative overflow-hidden">
+      {/* Sidebar - Royal Navy & Emerald Glassmorphism */}
+      <div className="w-[22rem] bg-slate-950/95 backdrop-blur-2xl text-white flex flex-col shadow-[15px_0_50px_rgba(2,6,23,0.5)] z-20 relative overflow-hidden border-l border-white/5">
         {/* Subtle geometric overlay for sidebar */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23d4af37\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] pointer-events-none"></div>
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23d4af37\' fill-opacity=\'0.04\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] pointer-events-none mix-blend-overlay"></div>
+        {/* Soft emerald radial gradient behind the text */}
+        <div className="absolute top-0 right-0 w-full h-64 bg-emerald-900/40 blur-[80px] rounded-full pointer-events-none"></div>
 
-        <div className="p-8 flex items-center justify-center border-b border-emerald-800/50 relative z-10">
-          <div className="text-center">
-            <h1 className="text-3xl font-['Amiri'] font-bold text-amber-500 tracking-tight drop-shadow-md">الجامع التاريخى</h1>
-            <p className="text-[10px] font-bold text-emerald-300 mt-2 tracking-wider">لشواهد البحث فى لغه القران الكريم</p>
+        <div className="p-10 flex flex-col items-center justify-center border-b border-amber-900/30 relative z-10 pb-12 pt-14">
+          <div className="text-center w-full">
+            <h1 className="text-[2.5rem] leading-[1.3] font-['Aref_Ruqaa'] font-bold bg-clip-text text-transparent bg-gradient-to-l from-amber-200 via-amber-400 to-amber-600 drop-shadow-[0_2px_15px_rgba(245,158,11,0.25)]">الجامع التاريخى</h1>
+            <p className="text-sm font-bold text-amber-200/80 mt-3 tracking-wider">لشواهد البحث فى لغة القرآن الكريم</p>
           </div>
         </div>
         
@@ -42,10 +44,10 @@ export default function MainLayout() {
               <Link
                 key={item.name}
                 to={item.path}
-                className={`flex items-center space-x-3 space-x-reverse px-5 py-3.5 rounded-xl transition-all duration-300 ease-in-out group ${
+                className={`flex items-center space-x-4 space-x-reverse px-6 py-4 rounded-2xl transition-all duration-300 ease-out group ${
                   isActive 
-                  ? 'bg-emerald-900/80 border-r-4 border-amber-500 text-amber-400 font-bold shadow-[0_0_15px_rgba(245,158,11,0.15)] translate-x-[-4px]' 
-                  : 'hover:bg-emerald-900/30 hover:translate-x-[-4px] text-emerald-100 hover:text-amber-300 border-r-4 border-transparent'
+                  ? 'bg-emerald-950/50 border-r-4 border-amber-400 text-amber-400 font-bold shadow-[inset_0px_0px_20px_rgba(245,158,11,0.05)] translate-x-[-4px]' 
+                  : 'hover:bg-emerald-950/30 hover:translate-x-[-4px] text-stone-300 hover:text-amber-200 border-r-4 border-transparent'
                 }`}
               >
                 <item.icon className={`w-5 h-5 transition-transform duration-300 ${isActive ? 'scale-110 drop-shadow-md' : 'group-hover:scale-110'}`} />
@@ -62,9 +64,9 @@ export default function MainLayout() {
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col overflow-hidden relative">
+      <div className="flex-1 flex flex-col overflow-hidden relative bg-[url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%230f172a\' fill-opacity=\'0.015\'%3E%3Cpath d=\'M50 0L0 50l50 50 50-50L50 0zm0 10l40 40-40 40L10 50 50 10z\'/%3E%3C/g%3E%3C/svg%3E')]">
         {/* Top Navbar - Soft Parchment Glassmorphism */}
-        <header className="h-20 sticky top-0 z-50 backdrop-blur-md bg-[#FDFBF7]/90 border-b border-stone-200 flex items-center justify-between px-8 shadow-sm transition-all">
+        <header className="h-24 sticky top-0 z-40 backdrop-blur-2xl bg-[#FDFBF7]/80 border-b border-amber-900/10 flex items-center justify-between px-12 shadow-[0_4px_30px_rgba(0,0,0,0.02)] transition-all">
           <div className="flex items-center">
             <h2 className="text-2xl font-['Amiri'] font-bold text-emerald-950 capitalize">
               {navItems.find(item => location.pathname.startsWith(item.path))?.name || 'مرحباً بك'}

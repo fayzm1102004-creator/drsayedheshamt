@@ -11,7 +11,7 @@ export default function Dashboard() {
   const { role } = useAuth();
 
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 max-w-7xl mx-auto pb-12">
+    <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-7xl mx-auto pb-20 pt-4">
       {role === 'level1' && <ObserverView />}
       {role === 'level2' && <CoordinatorView />}
       {role === 'review_committee' && <ReviewCommitteeView />}
@@ -44,27 +44,27 @@ function RejectionModal({ isOpen, onClose, onConfirm }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-emerald-950/40 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-[#FDFBF7] rounded-3xl shadow-2xl border-t-4 border-t-rose-600 p-8 max-w-lg w-full relative overflow-hidden animate-in zoom-in-95 duration-200">
-        <h3 className="text-3xl font-['Amiri'] font-bold text-emerald-950 mb-2 relative z-10 flex items-center gap-2">
-          <XCircle className="w-8 h-8 text-rose-500" />
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/60 backdrop-blur-md animate-in fade-in duration-300">
+      <div className="bg-[#FDFBF7] rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.15)] border border-white/50 border-t-[4px] border-t-rose-500 p-10 max-w-lg w-full relative overflow-hidden animate-in zoom-in-95 duration-300">
+        <h3 className="text-[2rem] font-['Aref_Ruqaa'] font-bold text-slate-900 mb-2 relative z-10 flex items-center gap-3">
+          <XCircle className="w-8 h-8 text-rose-500 drop-shadow-sm" />
           طلب تعديل على الملف
         </h3>
-        <p className="text-sm text-stone-500 mb-6 relative z-10 font-medium">يرجى توضيح سبب إرجاع الملف للزميل السابق ليتم تدارك الأخطاء.</p>
+        <p className="text-sm text-stone-500 mb-8 relative z-10 font-bold tracking-wide">يرجى توضيح سبب إرجاع الملف للزميل السابق ليتم تدارك الأخطاء.</p>
         
         <div className="relative z-10 space-y-6">
           <div>
-            <label className="block text-sm font-bold text-emerald-900 mb-2">سبب طلب التعديل أو الملاحظات</label>
+            <label className="block text-sm font-bold text-slate-800 mb-3">سبب طلب التعديل أو الملاحظات</label>
             <textarea 
               value={reason}
               onChange={(e) => setReason(e.target.value)}
-              className="w-full h-32 px-4 py-3 bg-white border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500/50 transition-all text-stone-700 resize-none font-medium"
-              placeholder="يرجى كتابة الملاحظات..."
+              className="w-full h-32 px-5 py-4 bg-white border border-stone-200/80 rounded-2xl focus:outline-none focus:ring-2 focus:ring-amber-400/50 focus:border-amber-400 transition-all text-stone-700 resize-none font-medium shadow-sm"
+              placeholder="يرجى كتابة الملاحظات بدقة..."
             />
           </div>
-          <div className="flex justify-end gap-3 pt-2">
-            <button onClick={onClose} className="px-6 py-2.5 rounded-xl text-sm font-bold bg-stone-200 text-stone-600">إلغاء</button>
-            <button onClick={handleConfirm} disabled={!reason.trim()} className="px-6 py-2.5 rounded-xl text-sm font-bold bg-rose-50 text-rose-700 border border-rose-200 flex items-center gap-2">
+          <div className="flex justify-end gap-4 pt-4">
+            <button onClick={onClose} className="px-8 py-3 rounded-2xl text-sm font-bold bg-stone-100 hover:bg-stone-200 text-stone-600 transition-colors">إلغاء</button>
+            <button onClick={handleConfirm} disabled={!reason.trim()} className="px-8 py-3 rounded-2xl text-sm font-bold bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-600 hover:text-white hover:border-transparent flex items-center gap-2 transition-all duration-300 hover:shadow-[0_0_15px_rgba(225,29,72,0.3)] disabled:opacity-50 disabled:hover:bg-rose-50 disabled:hover:text-rose-700 disabled:hover:border-rose-200 disabled:hover:shadow-none">
               تأكيد وإرجاع <Send className="w-4 h-4 rotate-180" />
             </button>
           </div>
@@ -80,16 +80,16 @@ const RejectReason = ({ history }) => {
   if (lastRejection.action !== 'reject') return null;
   
   return (
-    <p className="text-xs text-rose-600 mt-1.5 font-bold flex flex-col gap-0.5">
-      <span className="text-[10px] text-stone-400 uppercase">ملاحظات التعديل:</span>
-      {lastRejection.reason}
+    <p className="text-xs text-rose-600 mt-2 font-bold flex flex-col gap-1 bg-rose-50/50 p-3 rounded-xl border border-rose-100/50">
+      <span className="text-[10px] text-rose-400/80 uppercase tracking-widest">ملاحظات التعديل:</span>
+      <span className="leading-relaxed">{lastRejection.reason}</span>
     </p>
   );
 };
 
 const ParallelBadge = ({ status }) => {
-  if (status === 'approved') return <span className="px-3 py-1.5 rounded-lg text-xs font-bold border bg-emerald-50 text-emerald-600 border-emerald-200 flex items-center justify-center gap-1 w-full opacity-80"><CheckCircle2 className="w-3.5 h-3.5"/> تم القبول</span>;
-  if (status === 'rejected') return <span className="px-3 py-1.5 rounded-lg text-xs font-bold border bg-rose-50 text-rose-600 border-rose-200 flex items-center justify-center gap-1 w-full opacity-80"><XCircle className="w-3.5 h-3.5"/> محتاج تعديل</span>;
+  if (status === 'approved') return <span className="px-4 py-2 rounded-xl text-xs font-bold border bg-emerald-50 text-emerald-700 border-emerald-200 flex items-center justify-center gap-1.5 w-full shadow-sm"><CheckCircle2 className="w-4 h-4"/> تم القبول</span>;
+  if (status === 'rejected') return <span className="px-4 py-2 rounded-xl text-xs font-bold border bg-rose-50 text-rose-700 border-rose-200 flex items-center justify-center gap-1.5 w-full shadow-sm"><XCircle className="w-4 h-4"/> محتاج تعديل</span>;
   return null;
 };
 
@@ -122,10 +122,10 @@ const FileLink = ({ file }) => {
       const w = window.open();
       if (w) {
         w.document.write(`
-          <div style="display:flex; justify-content:center; align-items:center; height:100vh; font-family:system-ui, sans-serif; background:#FDFBF7; color:#022c22; flex-direction:column; gap:16px;">
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-            <h2 style="font-size: 24px; margin: 0; font-weight: bold;">${file.name}</h2>
-            <p style="color: #64748b; font-size: 16px;">هذا الملف هو بيان تجريبي (Mock Data). يمكنك رفع ملفات حقيقية من حساب الراصد لتجربة فتحها.</p>
+          <div style="display:flex; justify-content:center; align-items:center; height:100vh; font-family:system-ui, sans-serif; background:#FDFBF7; color:#0f172a; flex-direction:column; gap:20px;">
+            <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+            <h2 style="font-size: 28px; margin: 0; font-weight: bold;">${file.name}</h2>
+            <p style="color: #64748b; font-size: 18px;">هذا الملف هو بيان تجريبي (Mock Data). يمكنك رفع ملفات حقيقية من حساب الراصد لتجربة فتحها.</p>
           </div>
         `);
         w.document.title = file.name;
@@ -134,15 +134,15 @@ const FileLink = ({ file }) => {
   };
 
   return (
-    <div className="flex flex-col gap-1">
-      <div className="flex items-center gap-2">
-        <span className="text-emerald-950">{file.name}</span>
-        <div className="flex gap-0.5">
-          <button onClick={handleOpen} title="فتح ومعاينة الملف" className="p-1.5 text-emerald-700 hover:text-emerald-900 bg-emerald-50 hover:bg-emerald-100 rounded border border-emerald-100 transition-colors">
-            <ExternalLink className="w-3.5 h-3.5" />
+    <div className="flex flex-col gap-2">
+      <div className="flex items-center gap-3">
+        <span className="text-slate-800 text-[15px]">{file.name}</span>
+        <div className="flex gap-1.5 opacity-80 hover:opacity-100 transition-opacity">
+          <button onClick={handleOpen} title="فتح ومعاينة الملف" className="p-2 text-emerald-700 hover:text-white bg-emerald-50 hover:bg-emerald-600 rounded-lg border border-emerald-100 transition-all shadow-sm">
+            <ExternalLink className="w-4 h-4" />
           </button>
-          <button onClick={handleDownload} title="تحميل الملف" className="p-1.5 text-amber-600 hover:text-amber-700 bg-amber-50 hover:bg-amber-100 rounded border border-amber-100 transition-colors">
-            <Download className="w-3.5 h-3.5" />
+          <button onClick={handleDownload} title="تحميل الملف" className="p-2 text-amber-600 hover:text-white bg-amber-50 hover:bg-amber-500 rounded-lg border border-amber-100 transition-all shadow-sm">
+            <Download className="w-4 h-4" />
           </button>
         </div>
       </div>
@@ -150,6 +150,16 @@ const FileLink = ({ file }) => {
     </div>
   );
 };
+
+const CardLayout = ({ children, title }) => (
+  <div className="bg-white/95 backdrop-blur-3xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-stone-100 border-t-[3px] border-t-amber-500 p-10 relative overflow-hidden">
+    <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 rounded-full blur-[60px] pointer-events-none"></div>
+    <h3 className="text-3xl font-['Aref_Ruqaa'] font-bold text-slate-900 mb-8 pb-5 border-b border-stone-100 relative z-10">{title}</h3>
+    <div className="relative z-10">
+      {children}
+    </div>
+  </div>
+);
 
 // ----------------------------------------------------
 // OBSERVER
@@ -173,14 +183,14 @@ function ObserverView() {
         uploadFile({
           id: Math.random().toString(36).substr(2, 9),
           name: file.name,
-          type: 'review', // Defaulting to review as requested by removing the dropdown
+          type: 'review',
           date: new Date().toISOString().split('T')[0],
           status: 'تم الرفع للمنسق',
-          color: 'bg-amber-100 text-amber-800 border-amber-200',
+          color: 'bg-amber-50 text-amber-700 border-amber-200',
           currentStage: 'coordinator',
           history: [],
           uploadedBy: user.name,
-          fileData: reader.result // Save base64 data for viewing and downloading
+          fileData: reader.result
         });
       };
       reader.readAsDataURL(file);
@@ -189,33 +199,33 @@ function ObserverView() {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8 flex flex-col items-center">
-        <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-6 w-full text-right">رفع ملف جديد</h3>
-        <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileUpload} />
-        <div onClick={() => fileInputRef.current.click()} className="w-full bg-stone-50/50 rounded-2xl p-12 border-2 border-dashed border-emerald-800/30 hover:border-amber-500 cursor-pointer flex flex-col items-center transition-colors">
-          <UploadCloud className="w-14 h-14 text-emerald-800/40 mb-6" />
-          <p className="text-xl font-['Amiri'] font-bold text-emerald-950">اسحب وأفلت الملف هنا لرفعه للمنسق</p>
-          <p className="text-sm text-stone-400 mt-2">الحد الأقصى للتجربة: 5 ميجابايت</p>
+    <div className="space-y-12">
+      <CardLayout title="رفع ملف جديد">
+        <div className="flex flex-col items-center">
+          <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileUpload} />
+          <div onClick={() => fileInputRef.current.click()} className="w-full bg-slate-50/50 rounded-[2rem] p-16 border-2 border-dashed border-amber-500/30 hover:border-amber-500 hover:bg-amber-50/30 cursor-pointer flex flex-col items-center transition-all duration-300 group">
+            <UploadCloud className="w-16 h-16 text-amber-500/60 mb-6 group-hover:scale-110 group-hover:text-amber-500 transition-all duration-300 drop-shadow-sm" />
+            <p className="text-[1.35rem] font-['Aref_Ruqaa'] font-bold text-slate-800">اسحب وأفلت الملف هنا لرفعه للمنسق</p>
+            <p className="text-sm text-stone-400 mt-3 font-medium">الحد الأقصى للتجربة: 5 ميجابايت</p>
+          </div>
         </div>
-      </div>
+      </CardLayout>
       
-      <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8">
-        <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-6 border-b pb-4">جدول الملفات المرفوعة وحالتها</h3>
-        <table className="w-full text-sm text-right">
-          <thead className="bg-stone-100/80"><tr><th className="px-6 py-4">اسم الملف</th><th className="px-6 py-4 text-center">الحالة الحالية</th></tr></thead>
-          <tbody className="divide-y">
+      <CardLayout title="جدول الملفات المرفوعة وحالتها">
+        <table className="w-full text-[15px] text-right">
+          <thead className="bg-stone-50/80 border-b border-stone-100"><tr><th className="px-8 py-5 text-slate-500 font-bold rounded-r-2xl">اسم الملف</th><th className="px-8 py-5 text-center text-slate-500 font-bold rounded-l-2xl">الحالة الحالية</th></tr></thead>
+          <tbody className="divide-y divide-stone-100/80">
             {myFiles.map(file => (
-              <tr key={file.id}>
-                <td className="px-6 py-5 font-bold">
+              <tr key={file.id} className="hover:bg-amber-50/40 transition-colors duration-200">
+                <td className="px-8 py-6 font-bold">
                   <FileLink file={file} />
                 </td>
-                <td className="px-6 py-5 text-center"><span className={`px-3 py-1.5 rounded-lg text-xs font-bold border ${file.color}`}>{file.status}</span></td>
+                <td className="px-8 py-6 text-center"><span className={`px-4 py-2 rounded-xl text-xs font-bold border ${file.color} shadow-sm inline-block`}>{file.status}</span></td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
+      </CardLayout>
     </div>
   );
 }
@@ -247,19 +257,17 @@ function CoordinatorView() {
   ];
 
   return (
-    <div className="space-y-8">
-      <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8">
-        <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-6 border-b pb-4">مراجعة ملفات الرصاد</h3>
-        
-        <div className="mb-6 flex bg-[#FDFBF7] p-1.5 rounded-2xl border border-stone-200 shadow-inner overflow-x-auto gap-1">
+    <div className="space-y-12">
+      <CardLayout title="مراجعة ملفات الرصاد">
+        <div className="mb-8 flex bg-slate-50/80 p-2 rounded-2xl border border-stone-100 shadow-inner overflow-x-auto gap-2">
           {observersList.map(obs => (
             <button
               key={obs.id}
               onClick={() => setActiveObserver(obs.id)}
-              className={`px-5 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap transition-all ${
+              className={`px-6 py-3 rounded-xl text-sm font-bold whitespace-nowrap transition-all duration-300 ${
                 activeObserver === obs.id 
-                  ? 'bg-gradient-to-r from-emerald-900 to-emerald-800 text-amber-400 shadow-[0_0_10px_rgba(245,158,11,0.2)]' 
-                  : 'text-stone-500 hover:text-emerald-900 hover:bg-stone-100'
+                  ? 'bg-slate-900 text-amber-400 shadow-[0_4px_15px_rgba(245,158,11,0.2)] scale-[1.02]' 
+                  : 'text-stone-500 hover:text-slate-900 hover:bg-white hover:shadow-sm'
               }`}
             >
               {obs.label}
@@ -267,20 +275,20 @@ function CoordinatorView() {
           ))}
         </div>
 
-        <table className="w-full text-sm text-right">
-          <thead className="bg-stone-100/80"><tr><th className="px-6 py-4 rounded-r-xl w-32">الراصد</th><th className="px-6 py-4">اسم الملف</th><th className="px-6 py-4 text-center w-64 rounded-l-xl">الإجراءات</th></tr></thead>
-          <tbody className="divide-y">
+        <table className="w-full text-[15px] text-right">
+          <thead className="bg-stone-50/80 border-b border-stone-100"><tr><th className="px-8 py-5 text-slate-500 font-bold rounded-r-2xl w-40">الراصد</th><th className="px-8 py-5 text-slate-500 font-bold">اسم الملف</th><th className="px-8 py-5 text-center text-slate-500 font-bold w-72 rounded-l-2xl">الإجراءات</th></tr></thead>
+          <tbody className="divide-y divide-stone-100/80">
             {coordinatorFiles.map(item => (
-              <tr key={item.id} className="hover:bg-stone-50 transition-colors">
-                <td className="px-6 py-5 text-emerald-950 font-bold whitespace-nowrap">{item.uploadedBy}</td>
-                <td className="px-6 py-5 font-bold">
+              <tr key={item.id} className="hover:bg-amber-50/40 transition-colors duration-200">
+                <td className="px-8 py-6 text-slate-700 font-bold whitespace-nowrap">{item.uploadedBy}</td>
+                <td className="px-8 py-6 font-bold">
                   <FileLink file={item} />
                 </td>
-                <td className="px-6 py-5 text-center">
+                <td className="px-8 py-6 text-center">
                   {item.level2_status === 'pending' ? (
-                    <div className="flex justify-center gap-2">
-                      <button onClick={() => passFile(item.id, 'l3')} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 w-full"><CheckCircle2 className="w-3.5 h-3.5 inline"/> قبول وتمرير للجان</button>
-                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 w-full"><XCircle className="w-3.5 h-3.5 inline"/> رفض وإرجاع</button>
+                    <div className="flex justify-center gap-3">
+                      <button onClick={() => passFile(item.id, 'l3')} className="px-4 py-2 border border-transparent rounded-xl text-xs font-bold bg-emerald-950 text-white hover:bg-emerald-900 w-full transition-all duration-300 hover:shadow-[0_4px_15px_rgba(245,158,11,0.3)]"><CheckCircle2 className="w-4 h-4 inline ml-1"/> قبول وتمرير</button>
+                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-4 py-2 border border-rose-200 rounded-xl text-xs font-bold bg-white text-rose-600 hover:bg-rose-50 hover:text-rose-700 w-full transition-all duration-300 hover:shadow-sm"><XCircle className="w-4 h-4 inline ml-1"/> إرجاع</button>
                     </div>
                   ) : (
                     <ParallelBadge status={item.level2_status} />
@@ -290,12 +298,12 @@ function CoordinatorView() {
             ))}
             {coordinatorFiles.length === 0 && (
               <tr>
-                <td colSpan="3" className="text-center py-8 text-stone-400 font-medium">لا توجد ملفات لهذا الراصد</td>
+                <td colSpan="3" className="text-center py-12 text-stone-400 font-medium text-lg">لا توجد ملفات لهذا الراصد</td>
               </tr>
             )}
           </tbody>
         </table>
-      </div>
+      </CardLayout>
       <RejectionModal isOpen={rejectModal.isOpen} onClose={() => setRejectModal({ isOpen: false, payload: null })} onConfirm={confirmReject} />
     </div>
   );
@@ -315,22 +323,21 @@ function ReviewCommitteeView() {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8">
-        <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-8 border-b pb-4">مساحة عمل لجنة المراجعة</h3>
-        <table className="w-full text-sm text-right">
-          <thead className="bg-stone-100/80"><tr><th className="px-6 py-4">بيان الشاهد</th><th className="px-6 py-4 text-center w-64">حالة لجنة المراجعة</th></tr></thead>
-          <tbody className="divide-y">
+    <div className="space-y-12">
+      <CardLayout title="مساحة عمل لجنة المراجعة">
+        <table className="w-full text-[15px] text-right">
+          <thead className="bg-stone-50/80 border-b border-stone-100"><tr><th className="px-8 py-5 text-slate-500 font-bold rounded-r-2xl">بيان الشاهد</th><th className="px-8 py-5 text-center text-slate-500 font-bold w-72 rounded-l-2xl">حالة اللجنة</th></tr></thead>
+          <tbody className="divide-y divide-stone-100/80">
             {committeeFiles.map(item => (
-              <tr key={item.id}>
-                <td className="px-6 py-5 font-bold">
+              <tr key={item.id} className="hover:bg-amber-50/40 transition-colors duration-200">
+                <td className="px-8 py-6 font-bold">
                   <FileLink file={item} />
                 </td>
-                <td className="px-6 py-5 text-center">
+                <td className="px-8 py-6 text-center">
                   {item.level3_review_status === 'pending' ? (
-                    <div className="flex justify-center gap-2">
-                      <button onClick={() => passParallelFile(item.id, 'l3', 'review')} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 w-full"><CheckCircle2 className="w-3.5 h-3.5 inline"/> قبول</button>
-                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 w-full"><XCircle className="w-3.5 h-3.5 inline"/> رفض</button>
+                    <div className="flex justify-center gap-3">
+                      <button onClick={() => passParallelFile(item.id, 'l3', 'review')} className="px-4 py-2 border border-transparent rounded-xl text-xs font-bold bg-emerald-950 text-white hover:bg-emerald-900 w-full transition-all duration-300 hover:shadow-[0_4px_15px_rgba(245,158,11,0.3)]"><CheckCircle2 className="w-4 h-4 inline ml-1"/> قبول</button>
+                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-4 py-2 border border-rose-200 rounded-xl text-xs font-bold bg-white text-rose-600 hover:bg-rose-50 hover:text-rose-700 w-full transition-all duration-300 hover:shadow-sm"><XCircle className="w-4 h-4 inline ml-1"/> رفض</button>
                     </div>
                   ) : (
                     <ParallelBadge status={item.level3_review_status} />
@@ -340,7 +347,7 @@ function ReviewCommitteeView() {
             ))}
           </tbody>
         </table>
-      </div>
+      </CardLayout>
       <RejectionModal isOpen={rejectModal.isOpen} onClose={() => setRejectModal({ isOpen: false, payload: null })} onConfirm={confirmReject} />
     </div>
   );
@@ -360,22 +367,21 @@ function CorrectionCommitteeView() {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8">
-        <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-8 border-b pb-4">مساحة عمل لجنة الاستدراك</h3>
-        <table className="w-full text-sm text-right">
-          <thead className="bg-stone-100/80"><tr><th className="px-6 py-4">بيان الاستدراك</th><th className="px-6 py-4 text-center w-64">حالة لجنة الاستدراك</th></tr></thead>
-          <tbody className="divide-y">
+    <div className="space-y-12">
+      <CardLayout title="مساحة عمل لجنة الاستدراك">
+        <table className="w-full text-[15px] text-right">
+          <thead className="bg-stone-50/80 border-b border-stone-100"><tr><th className="px-8 py-5 text-slate-500 font-bold rounded-r-2xl">بيان الاستدراك</th><th className="px-8 py-5 text-center text-slate-500 font-bold w-72 rounded-l-2xl">حالة اللجنة</th></tr></thead>
+          <tbody className="divide-y divide-stone-100/80">
             {l3Files.map(item => (
-              <tr key={item.id}>
-                <td className="px-6 py-5 font-bold">
+              <tr key={item.id} className="hover:bg-amber-50/40 transition-colors duration-200">
+                <td className="px-8 py-6 font-bold">
                   <FileLink file={item} />
                 </td>
-                <td className="px-6 py-5 text-center">
+                <td className="px-8 py-6 text-center">
                   {item.level3_correction_status === 'pending' ? (
-                    <div className="flex justify-center gap-2">
-                      <button onClick={() => passParallelFile(item.id, 'l3', 'correction')} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 w-full"><CheckCircle2 className="w-3.5 h-3.5 inline"/> قبول</button>
-                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 w-full"><XCircle className="w-3.5 h-3.5 inline"/> رفض</button>
+                    <div className="flex justify-center gap-3">
+                      <button onClick={() => passParallelFile(item.id, 'l3', 'correction')} className="px-4 py-2 border border-transparent rounded-xl text-xs font-bold bg-emerald-950 text-white hover:bg-emerald-900 w-full transition-all duration-300 hover:shadow-[0_4px_15px_rgba(245,158,11,0.3)]"><CheckCircle2 className="w-4 h-4 inline ml-1"/> قبول</button>
+                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-4 py-2 border border-rose-200 rounded-xl text-xs font-bold bg-white text-rose-600 hover:bg-rose-50 hover:text-rose-700 w-full transition-all duration-300 hover:shadow-sm"><XCircle className="w-4 h-4 inline ml-1"/> رفض</button>
                     </div>
                   ) : (
                     <ParallelBadge status={item.level3_correction_status} />
@@ -385,7 +391,7 @@ function CorrectionCommitteeView() {
             ))}
           </tbody>
         </table>
-      </div>
+      </CardLayout>
       <RejectionModal isOpen={rejectModal.isOpen} onClose={() => setRejectModal({ isOpen: false, payload: null })} onConfirm={confirmReject} />
     </div>
   );
@@ -409,28 +415,25 @@ function MainCoordinatorView() {
   const currentActionType = activeTab === 'review' ? 'review' : 'correction';
 
   return (
-    <div className="space-y-8">
-      <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8">
-        <div className="mb-8 border-b pb-6 flex flex-col md:flex-row justify-between gap-6">
-           <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950">إدارة اللجان الموازية (المستوى 3)</h3>
-           <div className="flex bg-[#FDFBF7] p-1.5 rounded-2xl border">
-             <button onClick={() => setActiveTab('review')} className={`px-6 py-2.5 rounded-xl text-sm font-bold ${activeTab === 'review' ? 'bg-emerald-900 text-amber-400' : 'text-stone-500'}`}>لجنة المراجعة</button>
-             <button onClick={() => setActiveTab('correction')} className={`px-6 py-2.5 rounded-xl text-sm font-bold ${activeTab === 'correction' ? 'bg-emerald-900 text-amber-400' : 'text-stone-500'}`}>لجنة الاستدراك</button>
-           </div>
+    <div className="space-y-12">
+      <CardLayout title="إدارة اللجان الموازية (المستوى 3)">
+        <div className="mb-8 flex bg-slate-50/80 p-2 rounded-2xl border border-stone-100 shadow-inner w-fit">
+          <button onClick={() => setActiveTab('review')} className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${activeTab === 'review' ? 'bg-slate-900 text-amber-400 shadow-[0_4px_15px_rgba(245,158,11,0.2)]' : 'text-stone-500 hover:text-slate-900'}`}>لجنة المراجعة</button>
+          <button onClick={() => setActiveTab('correction')} className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${activeTab === 'correction' ? 'bg-slate-900 text-amber-400 shadow-[0_4px_15px_rgba(245,158,11,0.2)]' : 'text-stone-500 hover:text-slate-900'}`}>لجنة الاستدراك</button>
         </div>
-        <table className="w-full text-sm text-right">
-          <thead className="bg-stone-100/80"><tr><th className="px-6 py-4">الملف</th><th className="px-6 py-4 text-center w-64">الحالة للجنة ({activeTab === 'review' ? 'المراجعة' : 'الاستدراك'})</th></tr></thead>
-          <tbody className="divide-y">
+        <table className="w-full text-[15px] text-right">
+          <thead className="bg-stone-50/80 border-b border-stone-100"><tr><th className="px-8 py-5 text-slate-500 font-bold rounded-r-2xl">الملف</th><th className="px-8 py-5 text-center text-slate-500 font-bold w-72 rounded-l-2xl">الحالة ({activeTab === 'review' ? 'المراجعة' : 'الاستدراك'})</th></tr></thead>
+          <tbody className="divide-y divide-stone-100/80">
             {l3Files.map(item => (
-              <tr key={item.id}>
-                <td className="px-6 py-5 font-bold">
+              <tr key={item.id} className="hover:bg-amber-50/40 transition-colors duration-200">
+                <td className="px-8 py-6 font-bold">
                   <FileLink file={item} />
                 </td>
-                <td className="px-6 py-5 text-center">
+                <td className="px-8 py-6 text-center">
                   {item[currentStatusProp] === 'pending' ? (
-                    <div className="flex justify-center gap-2">
-                      <button onClick={() => passParallelFile(item.id, 'l3', currentActionType)} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 w-full"><CheckCircle2 className="w-3.5 h-3.5 inline"/> قبول</button>
-                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id, tabType: currentActionType } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 w-full"><XCircle className="w-3.5 h-3.5 inline"/> رفض</button>
+                    <div className="flex justify-center gap-3">
+                      <button onClick={() => passParallelFile(item.id, 'l3', currentActionType)} className="px-4 py-2 border border-transparent rounded-xl text-xs font-bold bg-emerald-950 text-white hover:bg-emerald-900 w-full transition-all duration-300 hover:shadow-[0_4px_15px_rgba(245,158,11,0.3)]"><CheckCircle2 className="w-4 h-4 inline ml-1"/> قبول</button>
+                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id, tabType: currentActionType } })} className="px-4 py-2 border border-rose-200 rounded-xl text-xs font-bold bg-white text-rose-600 hover:bg-rose-50 hover:text-rose-700 w-full transition-all duration-300 hover:shadow-sm"><XCircle className="w-4 h-4 inline ml-1"/> رفض</button>
                     </div>
                   ) : (
                     <ParallelBadge status={item[currentStatusProp]} />
@@ -440,7 +443,7 @@ function MainCoordinatorView() {
             ))}
           </tbody>
         </table>
-      </div>
+      </CardLayout>
       <RejectionModal isOpen={rejectModal.isOpen} onClose={() => setRejectModal({ isOpen: false, payload: null })} onConfirm={confirmReject} />
     </div>
   );
@@ -460,22 +463,21 @@ function AuditorView() {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8">
-         <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-6 border-b pb-4">تدقيق الملفات الواردة (مكتملة الموافقة الموازية)</h3>
-         <table className="w-full text-sm text-right">
-            <thead className="bg-stone-100/80"><tr><th className="px-6 py-4">بيان الملف</th><th className="px-6 py-4 text-center w-64">الإجراءات</th></tr></thead>
-            <tbody className="divide-y">
+    <div className="space-y-12">
+      <CardLayout title="تدقيق الملفات الواردة (مكتملة الموافقة)">
+         <table className="w-full text-[15px] text-right">
+            <thead className="bg-stone-50/80 border-b border-stone-100"><tr><th className="px-8 py-5 text-slate-500 font-bold rounded-r-2xl">بيان الملف</th><th className="px-8 py-5 text-center text-slate-500 font-bold w-72 rounded-l-2xl">الإجراءات</th></tr></thead>
+            <tbody className="divide-y divide-stone-100/80">
               {tasks.map(task => (
-                <tr key={task.id}>
-                  <td className="px-6 py-5 font-bold">
+                <tr key={task.id} className="hover:bg-amber-50/40 transition-colors duration-200">
+                  <td className="px-8 py-6 font-bold">
                     <FileLink file={task} />
                   </td>
-                  <td className="px-6 py-5 text-center">
+                  <td className="px-8 py-6 text-center">
                     {task.level4_status === 'pending' ? (
-                      <div className="flex justify-center gap-2">
-                        <button onClick={() => passFile(task.id, 'l5')} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 w-full"><CheckCircle2 className="w-3.5 h-3.5 inline"/> تمرير للجان العليا</button>
-                        <button onClick={() => setRejectModal({ isOpen: true, payload: { id: task.id } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 w-full"><XCircle className="w-3.5 h-3.5 inline"/> رفض وإرجاع</button>
+                      <div className="flex justify-center gap-3">
+                        <button onClick={() => passFile(task.id, 'l5')} className="px-4 py-2 border border-transparent rounded-xl text-xs font-bold bg-emerald-950 text-white hover:bg-emerald-900 w-full transition-all duration-300 hover:shadow-[0_4px_15px_rgba(245,158,11,0.3)]"><CheckCircle2 className="w-4 h-4 inline ml-1"/> تمرير للجان العليا</button>
+                        <button onClick={() => setRejectModal({ isOpen: true, payload: { id: task.id } })} className="px-4 py-2 border border-rose-200 rounded-xl text-xs font-bold bg-white text-rose-600 hover:bg-rose-50 hover:text-rose-700 w-full transition-all duration-300 hover:shadow-sm"><XCircle className="w-4 h-4 inline ml-1"/> إرجاع</button>
                       </div>
                     ) : (
                       <ParallelBadge status={task.level4_status} />
@@ -485,7 +487,7 @@ function AuditorView() {
               ))}
             </tbody>
           </table>
-      </div>
+      </CardLayout>
       <RejectionModal isOpen={rejectModal.isOpen} onClose={() => setRejectModal({ isOpen: false, payload: null })} onConfirm={confirmReject} />
     </div>
   );
@@ -505,22 +507,21 @@ function ScientificCommitteeView() {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8">
-        <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-8 border-b pb-4">اللجنة العلمية</h3>
-        <table className="w-full text-sm text-right">
-          <thead className="bg-stone-100/80"><tr><th className="px-6 py-4">البيان</th><th className="px-6 py-4 text-center w-64">الاعتماد العلمي</th></tr></thead>
-          <tbody className="divide-y">
+    <div className="space-y-12">
+      <CardLayout title="اللجنة العلمية">
+        <table className="w-full text-[15px] text-right">
+          <thead className="bg-stone-50/80 border-b border-stone-100"><tr><th className="px-8 py-5 text-slate-500 font-bold rounded-r-2xl">البيان</th><th className="px-8 py-5 text-center text-slate-500 font-bold w-72 rounded-l-2xl">الاعتماد</th></tr></thead>
+          <tbody className="divide-y divide-stone-100/80">
             {data.map(item => (
-              <tr key={item.id}>
-                <td className="px-6 py-5 font-bold">
+              <tr key={item.id} className="hover:bg-amber-50/40 transition-colors duration-200">
+                <td className="px-8 py-6 font-bold">
                   <FileLink file={item} />
                 </td>
-                <td className="px-6 py-5 text-center">
+                <td className="px-8 py-6 text-center">
                   {item.level5_scientific_status === 'pending' ? (
-                    <div className="flex justify-center gap-2">
-                      <button onClick={() => passParallelFile(item.id, 'l5', 'scientific')} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 w-full"><CheckCircle2 className="w-3.5 h-3.5 inline"/> إجازة</button>
-                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 w-full"><XCircle className="w-3.5 h-3.5 inline"/> رفض</button>
+                    <div className="flex justify-center gap-3">
+                      <button onClick={() => passParallelFile(item.id, 'l5', 'scientific')} className="px-4 py-2 border border-transparent rounded-xl text-xs font-bold bg-emerald-950 text-white hover:bg-emerald-900 w-full transition-all duration-300 hover:shadow-[0_4px_15px_rgba(245,158,11,0.3)]"><CheckCircle2 className="w-4 h-4 inline ml-1"/> إجازة</button>
+                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-4 py-2 border border-rose-200 rounded-xl text-xs font-bold bg-white text-rose-600 hover:bg-rose-50 hover:text-rose-700 w-full transition-all duration-300 hover:shadow-sm"><XCircle className="w-4 h-4 inline ml-1"/> رفض</button>
                     </div>
                   ) : (
                     <ParallelBadge status={item.level5_scientific_status} />
@@ -530,7 +531,7 @@ function ScientificCommitteeView() {
             ))}
           </tbody>
         </table>
-      </div>
+      </CardLayout>
       <RejectionModal isOpen={rejectModal.isOpen} onClose={() => setRejectModal({ isOpen: false, payload: null })} onConfirm={confirmReject} />
     </div>
   );
@@ -550,22 +551,21 @@ function ApprovalCommitteeView() {
   };
 
   return (
-    <div className="space-y-8">
-      <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8">
-        <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-8 border-b pb-4">لجنة الاعتماد النهائي</h3>
-        <table className="w-full text-sm text-right">
-          <thead className="bg-stone-100/80"><tr><th className="px-6 py-4">البيان</th><th className="px-6 py-4 text-center w-64">الاعتماد النهائي</th></tr></thead>
-          <tbody className="divide-y">
+    <div className="space-y-12">
+      <CardLayout title="لجنة الاعتماد النهائي">
+        <table className="w-full text-[15px] text-right">
+          <thead className="bg-stone-50/80 border-b border-stone-100"><tr><th className="px-8 py-5 text-slate-500 font-bold rounded-r-2xl">البيان</th><th className="px-8 py-5 text-center text-slate-500 font-bold w-72 rounded-l-2xl">الاعتماد</th></tr></thead>
+          <tbody className="divide-y divide-stone-100/80">
             {data.map(item => (
-              <tr key={item.id}>
-                <td className="px-6 py-5 font-bold">
+              <tr key={item.id} className="hover:bg-amber-50/40 transition-colors duration-200">
+                <td className="px-8 py-6 font-bold">
                   <FileLink file={item} />
                 </td>
-                <td className="px-6 py-5 text-center">
+                <td className="px-8 py-6 text-center">
                   {item.level5_final_status === 'pending' ? (
-                    <div className="flex justify-center gap-2">
-                      <button onClick={() => passParallelFile(item.id, 'l5', 'final')} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 w-full"><CheckCircle2 className="w-3.5 h-3.5 inline"/> اعتماد</button>
-                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 w-full"><XCircle className="w-3.5 h-3.5 inline"/> رفض</button>
+                    <div className="flex justify-center gap-3">
+                      <button onClick={() => passParallelFile(item.id, 'l5', 'final')} className="px-4 py-2 border border-transparent rounded-xl text-xs font-bold bg-emerald-950 text-white hover:bg-emerald-900 w-full transition-all duration-300 hover:shadow-[0_4px_15px_rgba(245,158,11,0.3)]"><CheckCircle2 className="w-4 h-4 inline ml-1"/> اعتماد</button>
+                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id } })} className="px-4 py-2 border border-rose-200 rounded-xl text-xs font-bold bg-white text-rose-600 hover:bg-rose-50 hover:text-rose-700 w-full transition-all duration-300 hover:shadow-sm"><XCircle className="w-4 h-4 inline ml-1"/> رفض</button>
                     </div>
                   ) : (
                     <ParallelBadge status={item.level5_final_status} />
@@ -575,7 +575,7 @@ function ApprovalCommitteeView() {
             ))}
           </tbody>
         </table>
-      </div>
+      </CardLayout>
       <RejectionModal isOpen={rejectModal.isOpen} onClose={() => setRejectModal({ isOpen: false, payload: null })} onConfirm={confirmReject} />
     </div>
   );
@@ -599,28 +599,25 @@ function AssistantSupervisorView() {
   const currentActionType = activeTab === 'scientific' ? 'scientific' : 'final';
 
   return (
-    <div className="space-y-8">
-      <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8">
-        <div className="mb-8 border-b pb-6 flex flex-col md:flex-row justify-between gap-6">
-           <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950">إدارة اللجان الموازية العليا (المستوى 5)</h3>
-           <div className="flex bg-[#FDFBF7] p-1.5 rounded-2xl border">
-             <button onClick={() => setActiveTab('scientific')} className={`px-6 py-2.5 rounded-xl text-sm font-bold ${activeTab === 'scientific' ? 'bg-emerald-900 text-amber-400' : 'text-stone-500'}`}>اللجنة العلمية</button>
-             <button onClick={() => setActiveTab('final')} className={`px-6 py-2.5 rounded-xl text-sm font-bold ${activeTab === 'final' ? 'bg-emerald-900 text-amber-400' : 'text-stone-500'}`}>لجنة الاعتماد النهائي</button>
-           </div>
+    <div className="space-y-12">
+      <CardLayout title="إدارة اللجان الموازية العليا (المستوى 5)">
+        <div className="mb-8 flex bg-slate-50/80 p-2 rounded-2xl border border-stone-100 shadow-inner w-fit">
+          <button onClick={() => setActiveTab('scientific')} className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${activeTab === 'scientific' ? 'bg-slate-900 text-amber-400 shadow-[0_4px_15px_rgba(245,158,11,0.2)]' : 'text-stone-500 hover:text-slate-900'}`}>اللجنة العلمية</button>
+          <button onClick={() => setActiveTab('final')} className={`px-8 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${activeTab === 'final' ? 'bg-slate-900 text-amber-400 shadow-[0_4px_15px_rgba(245,158,11,0.2)]' : 'text-stone-500 hover:text-slate-900'}`}>لجنة الاعتماد النهائي</button>
         </div>
-        <table className="w-full text-sm text-right">
-          <thead className="bg-stone-100/80"><tr><th className="px-6 py-4">البيان</th><th className="px-6 py-4 text-center w-64">الحالة</th></tr></thead>
-          <tbody className="divide-y">
+        <table className="w-full text-[15px] text-right">
+          <thead className="bg-stone-50/80 border-b border-stone-100"><tr><th className="px-8 py-5 text-slate-500 font-bold rounded-r-2xl">البيان</th><th className="px-8 py-5 text-center text-slate-500 font-bold w-72 rounded-l-2xl">الحالة</th></tr></thead>
+          <tbody className="divide-y divide-stone-100/80">
             {l5Files.map(item => (
-              <tr key={item.id}>
-                <td className="px-6 py-5 font-bold">
+              <tr key={item.id} className="hover:bg-amber-50/40 transition-colors duration-200">
+                <td className="px-8 py-6 font-bold">
                   <FileLink file={item} />
                 </td>
-                <td className="px-6 py-5 text-center">
+                <td className="px-8 py-6 text-center">
                   {item[currentStatusProp] === 'pending' ? (
-                    <div className="flex justify-center gap-2">
-                      <button onClick={() => passParallelFile(item.id, 'l5', currentActionType)} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 w-full"><CheckCircle2 className="w-3.5 h-3.5 inline"/> قبول</button>
-                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id, tabType: currentActionType } })} className="px-3 py-1.5 border rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 w-full"><XCircle className="w-3.5 h-3.5 inline"/> رفض</button>
+                    <div className="flex justify-center gap-3">
+                      <button onClick={() => passParallelFile(item.id, 'l5', currentActionType)} className="px-4 py-2 border border-transparent rounded-xl text-xs font-bold bg-emerald-950 text-white hover:bg-emerald-900 w-full transition-all duration-300 hover:shadow-[0_4px_15px_rgba(245,158,11,0.3)]"><CheckCircle2 className="w-4 h-4 inline ml-1"/> قبول</button>
+                      <button onClick={() => setRejectModal({ isOpen: true, payload: { id: item.id, tabType: currentActionType } })} className="px-4 py-2 border border-rose-200 rounded-xl text-xs font-bold bg-white text-rose-600 hover:bg-rose-50 hover:text-rose-700 w-full transition-all duration-300 hover:shadow-sm"><XCircle className="w-4 h-4 inline ml-1"/> رفض</button>
                     </div>
                   ) : (
                     <ParallelBadge status={item[currentStatusProp]} />
@@ -630,7 +627,7 @@ function AssistantSupervisorView() {
             ))}
           </tbody>
         </table>
-      </div>
+      </CardLayout>
       <RejectionModal isOpen={rejectModal.isOpen} onClose={() => setRejectModal({ isOpen: false, payload: null })} onConfirm={confirmReject} />
     </div>
   );
@@ -644,22 +641,24 @@ function GeneralSupervisorView() {
   const finalFiles = files.filter(f => f.currentStage === 'general_supervisor');
 
   return (
-    <div className="space-y-8">
-      <div className="bg-gradient-to-br from-emerald-950 to-emerald-800 rounded-2xl shadow-2xl border border-emerald-700 p-12 relative overflow-hidden text-center text-white border-t-4 border-t-amber-500">
-         <h2 className="text-4xl font-['Amiri'] font-extrabold mb-4 text-amber-400 drop-shadow-md">لوحة المشرف العام</h2>
-         <p className="text-emerald-100 font-medium text-lg max-w-2xl mx-auto leading-relaxed">النسخ المعتمدة نهائياً من جميع اللجان المختصة.</p>
+    <div className="space-y-12">
+      <div className="bg-slate-950 rounded-[2.5rem] shadow-[0_20px_60px_rgba(2,6,23,0.3)] border border-amber-900/30 p-16 relative overflow-hidden text-center text-white border-t-[4px] border-t-amber-500">
+         <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23d4af37\' fill-opacity=\'0.04\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] pointer-events-none mix-blend-overlay"></div>
+         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-full bg-emerald-900/30 blur-[100px] rounded-full pointer-events-none"></div>
+         <h2 className="text-[3rem] font-['Aref_Ruqaa'] font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-l from-amber-200 via-amber-400 to-amber-600 drop-shadow-[0_2px_15px_rgba(245,158,11,0.25)] relative z-10 leading-normal">لوحة المشرف العام</h2>
+         <p className="text-amber-100/80 font-bold text-lg max-w-2xl mx-auto tracking-wide relative z-10">النسخ المعتمدة نهائياً من جميع اللجان المختصة، جاهزة للإصدار.</p>
       </div>
-      <div className="bg-white rounded-2xl shadow-lg border-t-4 border-t-emerald-800 p-8">
-        <h3 className="text-2xl font-['Amiri'] font-bold text-emerald-950 mb-8 border-b pb-4">الملفات المعتمدة الجاهزة للإصدار</h3>
-        <table className="w-full text-sm text-right">
-          <thead className="bg-stone-100/80"><tr><th className="px-6 py-5">اسم المجلد / الملف النهائي</th><th className="px-6 py-5 text-center">الإصدار</th></tr></thead>
-          <tbody className="divide-y">
+      
+      <CardLayout title="الملفات المعتمدة الجاهزة للإصدار">
+        <table className="w-full text-[15px] text-right">
+          <thead className="bg-stone-50/80 border-b border-stone-100"><tr><th className="px-8 py-5 text-slate-500 font-bold rounded-r-2xl">اسم المجلد / الملف النهائي</th><th className="px-8 py-5 text-center text-slate-500 font-bold w-72 rounded-l-2xl">الإصدار</th></tr></thead>
+          <tbody className="divide-y divide-stone-100/80">
             {finalFiles.map(file => (
-              <tr key={file.id}>
-                <td className="px-6 py-6 font-bold">
+              <tr key={file.id} className="hover:bg-amber-50/40 transition-colors duration-200">
+                <td className="px-8 py-8 font-bold">
                   <FileLink file={file} />
                 </td>
-                <td className="px-6 py-6 text-center">
+                <td className="px-8 py-8 text-center">
                   <button onClick={() => {
                     if(file.fileData) {
                       const a = document.createElement('a');
@@ -675,16 +674,16 @@ function GeneralSupervisorView() {
                       a.click();
                       URL.revokeObjectURL(url);
                     }
-                  }} className="text-amber-500 hover:text-amber-600 bg-stone-50 px-6 py-3 rounded-xl font-bold border border-stone-200">
-                    تحميل للنشر <Download className="w-4 h-4 inline" />
+                  }} className="text-slate-900 hover:text-white bg-amber-400 hover:bg-amber-500 px-8 py-3.5 rounded-2xl font-bold transition-all duration-300 hover:shadow-[0_4px_20px_rgba(245,158,11,0.4)] flex items-center justify-center gap-2 mx-auto w-full">
+                    تحميل للنشر <Download className="w-4 h-4" />
                   </button>
                 </td>
               </tr>
             ))}
-            {finalFiles.length === 0 && <tr><td colSpan="2" className="text-center py-8 text-stone-400">لا يوجد</td></tr>}
+            {finalFiles.length === 0 && <tr><td colSpan="2" className="text-center py-12 text-stone-400 font-medium">لا يوجد ملفات مكتملة حتى الآن</td></tr>}
           </tbody>
         </table>
-      </div>
+      </CardLayout>
     </div>
   );
 }
