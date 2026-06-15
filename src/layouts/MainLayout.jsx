@@ -84,13 +84,6 @@ export default function MainLayout() {
             >
               {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
             </button>
-            <button className="p-3 text-stone-400 hover:text-emerald-700 dark:text-amber-200/60 dark:hover:text-emerald-400 hover:bg-white dark:hover:bg-slate-800/50 rounded-full transition-all shadow-sm">
-              <Search className="w-5 h-5" />
-            </button>
-            <button className="p-3 text-stone-400 hover:text-emerald-700 dark:text-amber-200/60 dark:hover:text-emerald-400 hover:bg-white dark:hover:bg-slate-800/50 rounded-full relative transition-all shadow-sm">
-              <Bell className="w-5 h-5" />
-              <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-rose-500 border-2 border-white dark:border-[#064e3b] rounded-full animate-pulse"></span>
-            </button>
             
             <div className="h-8 w-px bg-stone-200 dark:bg-slate-700/50 mx-2"></div>
             
