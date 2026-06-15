@@ -4,7 +4,7 @@ import { BookOpen } from 'lucide-react';
 
 export default function Landing() {
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col relative overflow-hidden font-sans selection:bg-amber-500/30">
+    <div className="h-screen w-full bg-slate-950 flex flex-col relative overflow-hidden font-sans selection:bg-amber-500/30">
       
       {/* 1. Immersive Deep Gradient Background (Dark Teal/Emerald) */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#020617] via-[#064e3b] to-[#022c22] z-0"></div>
@@ -20,15 +20,15 @@ export default function Landing() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[50vw] md:h-[50vw] bg-teal-500/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
 
       {/* 4. Top Header */}
-      <header className="relative z-20 flex justify-end items-center px-8 md:px-16 py-10 w-full animate-in fade-in slide-in-from-top-8 duration-1000">
+      <header className="relative z-20 flex justify-end items-center px-8 md:px-16 py-6 w-full animate-in fade-in slide-in-from-top-8 duration-1000">
         <h2 className="text-amber-400/90 font-['Aref_Ruqaa'] text-xl md:text-2xl tracking-wide drop-shadow-md">الجامع التاريخي لشواهد البحث في لغة القرآن الكريم</h2>
       </header>
 
       {/* 5. Main Content */}
-      <main className="flex-1 relative z-10 flex flex-col items-center justify-center px-4 text-center pb-20">
+      <main className="flex-1 relative z-10 flex flex-col items-center justify-center px-4 text-center">
         
         {/* Massive Gold Title (3D embossed effect) */}
-        <h1 className="text-[3.5rem] md:text-[6rem] lg:text-[7.5rem] leading-[1.2] md:leading-[1.1] font-['Aref_Ruqaa'] font-bold mb-8 animate-in zoom-in-95 duration-1000 delay-150">
+        <h1 className="text-[3rem] md:text-[5.5rem] lg:text-[7rem] leading-[1.2] md:leading-[1.1] font-['Aref_Ruqaa'] font-bold mb-6 animate-in zoom-in-95 duration-1000 delay-150">
           <span className="bg-clip-text text-transparent bg-gradient-to-b from-[#fef08a] via-[#d97706] to-[#78350f] drop-shadow-[0_15px_30px_rgba(0,0,0,0.6)]" style={{ WebkitTextStroke: '2px rgba(252, 211, 77, 0.2)' }}>
             الجامع التاريخى لشواهد
             <br />
@@ -37,7 +37,7 @@ export default function Landing() {
         </h1>
 
         {/* Subtitle */}
-        <p className="text-lg md:text-[1.4rem] text-teal-50/90 max-w-4xl leading-relaxed font-bold mb-16 drop-shadow-lg animate-in slide-in-from-bottom-6 duration-1000 delay-300">
+        <p className="text-base md:text-xl text-teal-50/90 max-w-4xl leading-relaxed font-bold mb-10 drop-shadow-lg animate-in slide-in-from-bottom-6 duration-1000 delay-300">
           أهلاً بكم في الصرح الجامع للأدلة البحثية في لغة القرآن الكريم، جسر بين التراث والبحث الحديث للطلاب والباحثين.
         </p>
 
@@ -45,12 +45,12 @@ export default function Landing() {
         <div className="animate-in slide-in-from-bottom-10 duration-1000 delay-500">
           <Link 
             to="/login" 
-            className="relative group px-16 py-4 md:py-6 bg-gradient-to-b from-[#065f46] to-[#022c22] rounded-full border-[3px] border-[#fbbf24] shadow-[0_0_50px_rgba(5,150,105,0.6),inset_0_0_20px_rgba(252,211,77,0.3)] transition-all duration-500 hover:scale-110 hover:shadow-[0_0_80px_rgba(252,211,77,0.6),inset_0_0_40px_rgba(252,211,77,0.6)] overflow-hidden flex items-center justify-center cursor-pointer"
+            className="relative group px-14 py-4 md:py-5 bg-gradient-to-b from-[#065f46] to-[#022c22] rounded-full border-[3px] border-[#fbbf24] shadow-[0_0_50px_rgba(5,150,105,0.6),inset_0_0_20px_rgba(252,211,77,0.3)] transition-all duration-500 hover:scale-110 hover:shadow-[0_0_80px_rgba(252,211,77,0.6),inset_0_0_40px_rgba(252,211,77,0.6)] overflow-hidden flex items-center justify-center cursor-pointer"
           >
             {/* Button inner shine animation */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]"></div>
             
-            <span className="text-[2rem] md:text-[3rem] font-['Aref_Ruqaa'] font-bold text-amber-50 relative z-10 drop-shadow-[0_3px_5px_rgba(0,0,0,0.8)] tracking-wide">
+            <span className="text-[1.8rem] md:text-[2.5rem] font-['Aref_Ruqaa'] font-bold text-amber-50 relative z-10 drop-shadow-[0_3px_5px_rgba(0,0,0,0.8)] tracking-wide">
               دُخُولُ المِنَصَّةِ
             </span>
           </Link>
@@ -58,13 +58,13 @@ export default function Landing() {
       </main>
 
       {/* 6. Decorative Quran/Book Icon on Bottom Left (replaces illustration gracefully) */}
-      <div className="absolute bottom-16 left-8 md:bottom-24 md:left-24 z-10 opacity-40 mix-blend-screen drop-shadow-[0_0_30px_rgba(251,191,36,0.6)] animate-pulse duration-3000 pointer-events-none">
-        <BookOpen className="w-32 h-32 md:w-56 md:h-56 text-[#fbbf24]" strokeWidth={0.5} />
+      <div className="absolute bottom-8 left-6 md:bottom-12 md:left-12 z-10 opacity-40 mix-blend-screen drop-shadow-[0_0_30px_rgba(251,191,36,0.6)] animate-pulse duration-3000 pointer-events-none">
+        <BookOpen className="w-24 h-24 md:w-40 md:h-40 text-[#fbbf24]" strokeWidth={0.5} />
       </div>
 
       {/* 7. Footer */}
-      <footer className="relative z-20 py-6 text-center animate-in fade-in duration-1000 delay-700">
-        <p className="text-xs md:text-sm font-bold text-amber-400/60 tracking-widest">
+      <footer className="relative z-20 py-4 text-center animate-in fade-in duration-1000 delay-700">
+        <p className="text-[10px] md:text-xs font-bold text-amber-400/60 tracking-widest">
           جميع الحقوق محفوظة - جامع الشارقة التاريخي
         </p>
       </footer>
