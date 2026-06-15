@@ -1,109 +1,79 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, ShieldCheck, Users, ArrowLeft, Library, Sparkles } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 
 export default function Landing() {
   return (
-    <div className="min-h-screen bg-[#FDFBF7] font-sans selection:bg-amber-500/30 overflow-hidden relative">
-      {/* Immersive Islamic Background Pattern */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'100\' height=\'100\' viewBox=\'0 0 100 100\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23d4af37\' fill-opacity=\'0.04\'%3E%3Cpath d=\'M50 0L0 50l50 50 50-50L50 0zm0 10l40 40-40 40L10 50 50 10z\'/%3E%3C/g%3E%3C/svg%3E')] mix-blend-multiply pointer-events-none z-0"></div>
+    <div className="min-h-screen bg-slate-950 flex flex-col relative overflow-hidden font-sans selection:bg-amber-500/30">
       
-      {/* Decorative Gradients */}
-      <div className="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] bg-emerald-900/20 rounded-full blur-[120px] pointer-events-none z-0"></div>
-      <div className="absolute bottom-[-20%] right-[-10%] w-[50vw] h-[50vw] bg-amber-500/15 rounded-full blur-[120px] pointer-events-none z-0"></div>
+      {/* 1. Immersive Deep Gradient Background (Dark Teal/Emerald) */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#020617] via-[#064e3b] to-[#022c22] z-0"></div>
 
-      {/* Navbar */}
-      <nav className="relative z-20 flex justify-between items-center px-10 py-6 max-w-7xl mx-auto backdrop-blur-sm border-b border-amber-900/10 mb-10">
-        <div className="flex items-center gap-3">
-          <BookOpen className="w-8 h-8 text-amber-500" />
-          <span className="text-xl font-['Aref_Ruqaa'] font-bold text-emerald-950">الجامع التاريخي</span>
-        </div>
-        <div>
-          <Link to="/login" className="px-6 py-2.5 bg-white border border-emerald-900/20 text-emerald-950 hover:bg-emerald-50 rounded-xl font-bold transition-all shadow-sm hover:shadow-md flex items-center gap-2">
-            تسجيل الدخول
-            <ArrowLeft className="w-4 h-4" />
-          </Link>
-        </div>
-      </nav>
+      {/* 2. Ornate Islamic Side Mandalas (using an intricate SVG pattern) */}
+      {/* Left side pattern */}
+      <div className="absolute top-0 left-0 w-full md:w-[45vw] h-full bg-[url('data:image/svg+xml,%3Csvg width=\'120\' height=\'120\' viewBox=\'0 0 120 120\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23fbbf24\' fill-opacity=\'0.08\'%3E%3Cpath d=\'M60 0L0 60l60 60 60-60L60 0zm0 10l40 40-40 40L20 50 60 10zm0 15l25 25-25 25-25-25 25-25zm0 10l15 15-15 15-15-15 15-15z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] mix-blend-color-dodge opacity-60 z-0 pointer-events-none mask-image:linear-gradient(to_right,black,transparent)]" style={{ WebkitMaskImage: 'linear-gradient(to right, black 20%, transparent 100%)' }}></div>
+      
+      {/* Right side pattern */}
+      <div className="absolute top-0 right-0 w-full md:w-[45vw] h-full bg-[url('data:image/svg+xml,%3Csvg width=\'120\' height=\'120\' viewBox=\'0 0 120 120\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23fbbf24\' fill-opacity=\'0.08\'%3E%3Cpath d=\'M60 0L0 60l60 60 60-60L60 0zm0 10l40 40-40 40L20 50 60 10zm0 15l25 25-25 25-25-25 25-25zm0 10l15 15-15 15-15-15 15-15z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] mix-blend-color-dodge opacity-60 z-0 pointer-events-none transform scale-x-[-1]" style={{ WebkitMaskImage: 'linear-gradient(to right, black 20%, transparent 100%)' }}></div>
+      
+      {/* 3. Glowing center highlight to make text pop */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] md:w-[50vw] md:h-[50vw] bg-teal-500/10 rounded-full blur-[120px] pointer-events-none z-0"></div>
 
-      {/* Hero Section */}
-      <main className="relative z-10 max-w-7xl mx-auto px-6 py-12 lg:py-20 flex flex-col items-center text-center">
+      {/* 4. Top Header */}
+      <header className="relative z-20 flex justify-end items-center px-8 md:px-16 py-10 w-full animate-in fade-in slide-in-from-top-8 duration-1000">
+        <h2 className="text-amber-400/90 font-['Aref_Ruqaa'] text-xl md:text-2xl tracking-wide drop-shadow-md">الجامع التاريخي لشواهد البحث في لغة القرآن الكريم</h2>
+      </header>
+
+      {/* 5. Main Content */}
+      <main className="flex-1 relative z-10 flex flex-col items-center justify-center px-4 text-center pb-20">
         
-        {/* Ornate Quranic Page Container */}
-        <div className="relative p-10 md:p-16 bg-[#FDFBF7] rounded-3xl border-[6px] border-double border-amber-600/40 shadow-[inset_0_0_60px_rgba(212,175,55,0.15),0_20px_50px_rgba(0,0,0,0.05)] w-full max-w-5xl mb-12 flex flex-col items-center overflow-hidden animate-in zoom-in-95 duration-1000">
-          
-          {/* Detailed Islamic Pattern Background inside the container */}
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23064e3b\' fill-opacity=\'0.03\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-80 mix-blend-multiply pointer-events-none z-0"></div>
-
-          {/* Corner Decorations */}
-          <div className="absolute top-4 left-4 w-12 h-12 border-t-[3px] border-l-[3px] border-amber-500 rounded-tl-2xl opacity-60"></div>
-          <div className="absolute top-4 right-4 w-12 h-12 border-t-[3px] border-r-[3px] border-amber-500 rounded-tr-2xl opacity-60"></div>
-          <div className="absolute bottom-4 left-4 w-12 h-12 border-b-[3px] border-l-[3px] border-amber-500 rounded-bl-2xl opacity-60"></div>
-          <div className="absolute bottom-4 right-4 w-12 h-12 border-b-[3px] border-r-[3px] border-amber-500 rounded-br-2xl opacity-60"></div>
-          
-          {/* Header Ornament */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-40 h-8 bg-amber-600/10 rounded-b-[100%] border-b border-amber-600/30"></div>
-
-          <h1 className="text-[3.2rem] md:text-[4.5rem] leading-[1.3] font-['Aref_Ruqaa'] font-bold mb-6 max-w-4xl relative z-10 mt-4 text-center">
-            <span className="bg-clip-text text-transparent bg-gradient-to-l from-amber-500 via-amber-600 to-amber-700 drop-shadow-sm">الجامع التاريخى</span>
+        {/* Massive Gold Title (3D embossed effect) */}
+        <h1 className="text-[3.5rem] md:text-[6rem] lg:text-[7.5rem] leading-[1.2] md:leading-[1.1] font-['Aref_Ruqaa'] font-bold mb-8 animate-in zoom-in-95 duration-1000 delay-150">
+          <span className="bg-clip-text text-transparent bg-gradient-to-b from-[#fef08a] via-[#d97706] to-[#78350f] drop-shadow-[0_15px_30px_rgba(0,0,0,0.6)]" style={{ WebkitTextStroke: '2px rgba(252, 211, 77, 0.2)' }}>
+            الجامع التاريخى لشواهد
             <br />
-            <span className="text-emerald-950 text-[2.2rem] md:text-[3rem] mt-4 inline-block">لشواهد البحث فى لغة القرآن الكريم</span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-emerald-950/80 max-w-3xl leading-relaxed font-semibold relative z-10 text-center px-4">
-            المنصة الرقمية المتكاملة المخصصة لجمع وتوثيق وتدقيق الشواهد التاريخية لألفاظ القرآن الكريم، لخدمة الباحثين واللجان العلمية في بيئة عمل مؤسسية ومترابطة.
-          </p>
+            البحث فى لغة القرآن الكريم
+          </span>
+        </h1>
 
-          {/* Footer Ornament */}
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-40 h-8 bg-amber-600/10 rounded-t-[100%] border-t border-amber-600/30"></div>
-        </div>
+        {/* Subtitle */}
+        <p className="text-lg md:text-[1.4rem] text-teal-50/90 max-w-4xl leading-relaxed font-bold mb-16 drop-shadow-lg animate-in slide-in-from-bottom-6 duration-1000 delay-300">
+          أهلاً بكم في الصرح الجامع للأدلة البحثية في لغة القرآن الكريم، جسر بين التراث والبحث الحديث للطلاب والباحثين.
+        </p>
 
-        <div className="flex flex-col sm:flex-row gap-5 mb-24 animate-in slide-in-from-bottom-8 duration-1000 delay-300">
-          <Link to="/login" className="px-10 py-4 bg-emerald-950 hover:bg-emerald-900 text-white rounded-2xl font-bold text-lg transition-all duration-300 hover:shadow-[0_8px_25px_rgba(5,150,105,0.4)] hover:-translate-y-1 flex items-center justify-center gap-3">
-            الدخول لمساحة العمل
-            <ArrowLeft className="w-5 h-5" />
+        {/* Grand Button */}
+        <div className="animate-in slide-in-from-bottom-10 duration-1000 delay-500">
+          <Link 
+            to="/login" 
+            className="relative group px-16 py-4 md:py-6 bg-gradient-to-b from-[#065f46] to-[#022c22] rounded-full border-[3px] border-[#fbbf24] shadow-[0_0_50px_rgba(5,150,105,0.6),inset_0_0_20px_rgba(252,211,77,0.3)] transition-all duration-500 hover:scale-110 hover:shadow-[0_0_80px_rgba(252,211,77,0.6),inset_0_0_40px_rgba(252,211,77,0.6)] overflow-hidden flex items-center justify-center cursor-pointer"
+          >
+            {/* Button inner shine animation */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]"></div>
+            
+            <span className="text-[2rem] md:text-[3rem] font-['Aref_Ruqaa'] font-bold text-amber-50 relative z-10 drop-shadow-[0_3px_5px_rgba(0,0,0,0.8)] tracking-wide">
+              دُخُولُ المِنَصَّةِ
+            </span>
           </Link>
         </div>
-
-        {/* Feature Cards */}
-        <div className="grid md:grid-cols-3 gap-8 w-full max-w-6xl animate-in slide-in-from-bottom-10 duration-1000 delay-500">
-          <div className="bg-white/80 backdrop-blur-xl p-10 rounded-3xl shadow-[0_20px_40px_rgba(0,0,0,0.03)] border border-white border-t-[4px] border-t-amber-500 text-right group hover:-translate-y-2 transition-transform duration-300">
-            <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mb-6 text-emerald-700 group-hover:scale-110 group-hover:bg-emerald-100 transition-all">
-              <Users className="w-8 h-8" />
-            </div>
-            <h3 className="text-2xl font-['Aref_Ruqaa'] font-bold text-emerald-950 mb-4">مسارات عمل موازية</h3>
-            <p className="text-stone-500 font-medium leading-relaxed">
-              هيكلية إدارية متطورة تدعم اللجان المتوازية لضمان سرعة الإنجاز ودقة المراجعة في نفس الوقت.
-            </p>
-          </div>
-
-          <div className="bg-white/80 backdrop-blur-xl p-10 rounded-3xl shadow-[0_20px_40px_rgba(0,0,0,0.03)] border border-white border-t-[4px] border-t-emerald-600 text-right group hover:-translate-y-2 transition-transform duration-300">
-            <div className="w-16 h-16 bg-amber-50 rounded-2xl flex items-center justify-center mb-6 text-amber-600 group-hover:scale-110 group-hover:bg-amber-100 transition-all">
-              <ShieldCheck className="w-8 h-8" />
-            </div>
-            <h3 className="text-2xl font-['Aref_Ruqaa'] font-bold text-emerald-950 mb-4">اعتماد علمي دقيق</h3>
-            <p className="text-stone-500 font-medium leading-relaxed">
-              سلسلة من الاعتمادات العلمية والتدقيق الشامل لضمان خلو الشواهد من أي شوائب أو أخطاء تاريخية.
-            </p>
-          </div>
-
-          <div className="bg-white/80 backdrop-blur-xl p-10 rounded-3xl shadow-[0_20px_40px_rgba(0,0,0,0.03)] border border-white border-t-[4px] border-t-amber-500 text-right group hover:-translate-y-2 transition-transform duration-300">
-            <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center mb-6 text-emerald-700 group-hover:scale-110 group-hover:bg-emerald-100 transition-all">
-              <Library className="w-8 h-8" />
-            </div>
-            <h3 className="text-2xl font-['Aref_Ruqaa'] font-bold text-emerald-950 mb-4">مكتبة تاريخية شاملة</h3>
-            <p className="text-stone-500 font-medium leading-relaxed">
-              قاعدة بيانات مركزية تجمع ملايين الشواهد والكتب في مكان واحد، جاهزة للعرض والبحث والتحقيق.
-            </p>
-          </div>
-        </div>
-
       </main>
-      
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-amber-900/10 mt-20 py-8 text-center bg-white/50 backdrop-blur-md">
-        <p className="text-sm font-bold text-emerald-950/60 uppercase tracking-widest">جميع الحقوق محفوظة © مجمع الشارقة 2026</p>
+
+      {/* 6. Decorative Quran/Book Icon on Bottom Left (replaces illustration gracefully) */}
+      <div className="absolute bottom-16 left-8 md:bottom-24 md:left-24 z-10 opacity-40 mix-blend-screen drop-shadow-[0_0_30px_rgba(251,191,36,0.6)] animate-pulse duration-3000 pointer-events-none">
+        <BookOpen className="w-32 h-32 md:w-56 md:h-56 text-[#fbbf24]" strokeWidth={0.5} />
+      </div>
+
+      {/* 7. Footer */}
+      <footer className="relative z-20 py-6 text-center animate-in fade-in duration-1000 delay-700">
+        <p className="text-xs md:text-sm font-bold text-amber-400/60 tracking-widest">
+          جميع الحقوق محفوظة - جامع الشارقة التاريخي
+        </p>
       </footer>
+
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes shimmer {
+          100% { transform: translateX(100%); }
+        }
+      `}} />
     </div>
   );
 }
