@@ -16,7 +16,7 @@ const CardLayout = ({ children, title }) => (
 const userTasks = [
   { id: 1, title: 'مراجعة شواهد الراصد الأول', description: 'يرجى تدقيق الشواهد المرفوعة في قسم العصر العباسي', deadline: '2026-07-01', priority: 'عالي', status: 'جديدة' },
   { id: 2, title: 'تدقيق نحوي لكتاب العقد الفريد', description: 'مراجعة الباب الأول والثاني من الكتاب', deadline: '2026-07-05', priority: 'متوسط', status: 'قيد التنفيذ' },
-  { id: 3, title: 'اعتماد الملاحظات من لجنة المراجعة', description: 'مراجعة ردود لجنة التدقيق والتحرير', deadline: '2026-06-30', priority: 'عالي', status: 'متأخرة' },
+  { id: 3, title: 'اعتماد الملاحظات من لجنة المراجعة', description: 'مراجعة ردود لجنة التدقيق والتحرير', deadline: '2026-06-30', priority: 'عالي', status: 'قيد التنفيذ' },
   { id: 4, title: 'استكمال رفع شواهد العصر الأموي', description: 'رفع باقي الملفات المتبقية', deadline: '2026-06-25', priority: 'منخفض', status: 'منجزة' },
   { id: 5, title: 'التواصل مع المنسق الرئيسي', description: 'لمناقشة خطة العمل للأسبوع القادم', deadline: '2026-07-03', priority: 'متوسط', status: 'جديدة' },
 ];
@@ -33,8 +33,6 @@ export default function Tasks() {
         return <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800"><AlertCircle className="w-3 h-3 ml-1" /> {status}</span>;
       case 'قيد التنفيذ':
         return <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-amber-50 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800"><Clock className="w-3 h-3 ml-1" /> {status}</span>;
-      case 'متأخرة':
-        return <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-rose-50 dark:bg-rose-900/30 text-rose-700 dark:text-rose-400 border border-rose-200 dark:border-rose-800"><AlertCircle className="w-3 h-3 ml-1" /> {status}</span>;
       case 'منجزة':
         return <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800"><CheckCircle2 className="w-3 h-3 ml-1" /> {status}</span>;
       default:
@@ -57,8 +55,8 @@ export default function Tasks() {
 
   const stats = [
     { label: 'إجمالي المهام', value: userTasks.length, icon: FileText, color: 'text-[#064e3b] dark:text-amber-400', bg: 'bg-[#064e3b]/5 dark:bg-amber-500/10' },
+    { label: 'جديدة', value: userTasks.filter(t => t.status === 'جديدة').length, icon: AlertCircle, color: 'text-indigo-600 dark:text-indigo-400', bg: 'bg-indigo-50 dark:bg-indigo-900/20' },
     { label: 'قيد التنفيذ', value: userTasks.filter(t => t.status === 'قيد التنفيذ').length, icon: Clock, color: 'text-amber-600 dark:text-amber-400', bg: 'bg-amber-50 dark:bg-amber-900/20' },
-    { label: 'متأخرة', value: userTasks.filter(t => t.status === 'متأخرة').length, icon: AlertCircle, color: 'text-rose-600 dark:text-rose-400', bg: 'bg-rose-50 dark:bg-rose-900/20' },
     { label: 'منجزة', value: userTasks.filter(t => t.status === 'منجزة').length, icon: CheckCircle2, color: 'text-emerald-600 dark:text-emerald-400', bg: 'bg-emerald-50 dark:bg-emerald-900/20' },
   ];
 
@@ -84,7 +82,7 @@ export default function Tasks() {
         {/* Filters */}
         <div className="mb-8 flex items-center gap-4">
           <div className="flex bg-[#f8f5ec] dark:bg-slate-950/50 p-2 rounded-2xl border border-[#d4af37]/30 dark:border-slate-800 shadow-inner overflow-x-auto transition-colors duration-500">
-            {['الكل', 'جديدة', 'قيد التنفيذ', 'متأخرة', 'منجزة'].map(f => (
+            {['الكل', 'جديدة', 'قيد التنفيذ', 'منجزة'].map(f => (
               <button
                 key={f}
                 onClick={() => setFilter(f)}
