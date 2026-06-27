@@ -1,14 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { Outlet, Navigate, Link, useLocation, useNavigate } from 'react-router-dom';
-import { BookOpen, LayoutDashboard, MessageSquare, LogOut, UserCircle, Moon, Sun, CheckSquare, Search, X, ExternalLink } from 'lucide-react';
+import { BookOpen, LayoutDashboard, MessageSquare, LogOut, UserCircle, Moon, Sun, CheckSquare } from 'lucide-react';
 
 export default function MainLayout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isShamelaOpen, setIsShamelaOpen] = useState(false);
-  const [shamelaQuery, setShamelaQuery] = useState('');
-  const shamelaInputRef = useRef(null);
   const { isAuthenticated, user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
@@ -27,24 +24,6 @@ export default function MainLayout() {
   const navItems = user?.role === 'developer' 
     ? allNavItems.filter(item => item.path === '/suggestions')
     : allNavItems;
-
-  // Focus input when modal opens
-  useEffect(() => {
-    if (isShamelaOpen && shamelaInputRef.current) {
-      setTimeout(() => shamelaInputRef.current?.focus(), 100);
-    }
-  }, [isShamelaOpen]);
-
-  // Close modal on Escape key
-  useEffect(() => {
-    const handleEsc = (e) => {
-      if (e.key === 'Escape') setIsShamelaOpen(false);
-    };
-    if (isShamelaOpen) {
-      document.addEventListener('keydown', handleEsc);
-      return () => document.removeEventListener('keydown', handleEsc);
-    }
-  }, [isShamelaOpen]);
 
   return (
     <div className="flex h-screen bg-[#FDFBF7] dark:bg-[#020617] transition-colors duration-500 font-sans selection:bg-amber-500/30">
@@ -102,16 +81,18 @@ export default function MainLayout() {
           </div>
 
           <div className="flex items-center space-x-6 space-x-reverse">
-            {/* Shamela Search Icon */}
+            {/* Shamela Direct Link */}
             {user?.role !== 'developer' && (
-              <button 
-                onClick={() => setIsShamelaOpen(true)}
+              <a 
+                href="https://shamela.ws"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-3 text-[#064e3b] hover:text-amber-600 dark:text-amber-200/60 dark:hover:text-amber-400 hover:bg-amber-50 dark:hover:bg-slate-800/50 rounded-full transition-all duration-300 shadow-sm relative group"
-                title="البحث في المكتبة الشاملة"
+                title="المكتبة الشاملة"
               >
                 <BookOpen className="w-5 h-5" />
                 <span className="absolute -bottom-8 right-1/2 translate-x-1/2 bg-slate-900 dark:bg-amber-500 text-white dark:text-slate-900 text-[10px] font-bold px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none">المكتبة الشاملة</span>
-              </button>
+              </a>
             )}
 
             <button 
@@ -150,87 +131,6 @@ export default function MainLayout() {
           </div>
         </main>
       </div>
-
-      {/* Shamela Search Modal */}
-      {isShamelaOpen && (
-        <div className="fixed inset-0 z-[999] flex items-start justify-center pt-[15vh]">
-          {/* Backdrop */}
-          <div 
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
-            onClick={() => setIsShamelaOpen(false)}
-          ></div>
-          
-          {/* Modal */}
-          <div className="relative w-full max-w-2xl mx-4 animate-in fade-in slide-in-from-top-4 duration-300">
-            {/* Glow effect */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-[#d4af37]/30 via-[#064e3b]/20 to-[#d4af37]/30 rounded-[2rem] blur-xl pointer-events-none"></div>
-            
-            <div className="relative bg-white dark:bg-slate-900 rounded-2xl shadow-[0_25px_60px_rgba(0,0,0,0.3)] border border-[#d4af37]/30 dark:border-amber-500/20 overflow-hidden">
-              {/* Header */}
-              <div className="bg-gradient-to-l from-[#064e3b] to-[#022c22] dark:from-slate-800 dark:to-slate-900 px-8 py-6 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
-                    <BookOpen className="w-5 h-5 text-amber-400" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-['Aref_Ruqaa'] font-bold text-amber-400">المكتبة الشاملة</h3>
-                    <p className="text-[11px] text-emerald-200/60 font-bold">البحث في أكثر من 6000 كتاب</p>
-                  </div>
-                </div>
-                <button 
-                  onClick={() => setIsShamelaOpen(false)}
-                  className="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/70 hover:text-white transition-all duration-200"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </div>
-
-              {/* Search Input */}
-              <div className="p-8">
-                <div className="relative">
-                  <Search className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#064e3b]/40 dark:text-slate-500" />
-                  <input
-                    ref={shamelaInputRef}
-                    type="text"
-                    value={shamelaQuery}
-                    onChange={(e) => setShamelaQuery(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' && shamelaQuery.trim()) {
-                        window.open(`https://www.google.com/search?q=${encodeURIComponent('site:shamela.ws ' + shamelaQuery)}`, '_blank');
-                      }
-                    }}
-                    placeholder="اكتب اسم كتاب، مؤلف، أو كلمة مفتاحية..."
-                    className="w-full pr-12 pl-4 py-4 rounded-xl text-[#064e3b] dark:text-amber-50 bg-[#f8f5ec] dark:bg-slate-950 border-2 border-[#d4af37]/30 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-[#064e3b]/30 focus:border-[#064e3b] dark:focus:border-amber-500 transition-all text-base placeholder-stone-400 dark:placeholder-slate-500 font-bold"
-                  />
-                </div>
-                
-                {/* Search Button */}
-                <a
-                  href={shamelaQuery.trim() ? `https://www.google.com/search?q=${encodeURIComponent('site:shamela.ws ' + shamelaQuery)}` : '#'}
-                  target={shamelaQuery.trim() ? '_blank' : '_self'}
-                  rel="noopener noreferrer"
-                  onClick={(e) => {
-                    if (!shamelaQuery.trim()) e.preventDefault();
-                  }}
-                  className={`mt-4 w-full py-4 rounded-xl font-bold text-[15px] flex items-center justify-center gap-2 transition-all duration-300 ${
-                    shamelaQuery.trim()
-                      ? 'bg-gradient-to-l from-[#064e3b] to-[#022c22] dark:from-amber-500 dark:to-amber-600 text-white dark:text-slate-900 hover:shadow-[0_8px_25px_rgba(6,78,59,0.4)] dark:hover:shadow-[0_8px_25px_rgba(245,158,11,0.3)] hover:-translate-y-0.5 cursor-pointer'
-                      : 'bg-stone-100 dark:bg-slate-800 text-stone-400 dark:text-slate-500 cursor-not-allowed'
-                  }`}
-                >
-                  <ExternalLink className="w-5 h-5" />
-                  بحث في المكتبة الشاملة
-                </a>
-
-                {/* Hint */}
-                <p className="text-center text-[11px] text-stone-400 dark:text-slate-500 mt-4 font-bold">
-                  اضغط Enter أو زر البحث — سيتم فتح النتائج من موقع المكتبة الشاملة الرسمي
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
