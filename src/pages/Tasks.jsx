@@ -14,11 +14,11 @@ const CardLayout = ({ children, title }) => (
 );
 
 const userTasks = [
-  { id: 1, title: 'مراجعة شواهد الراصد الأول', description: 'يرجى تدقيق الشواهد المرفوعة في قسم العصر العباسي', deadline: '2026-07-01', priority: 'عالي', status: 'جديدة' },
-  { id: 2, title: 'تدقيق نحوي لكتاب العقد الفريد', description: 'مراجعة الباب الأول والثاني من الكتاب', deadline: '2026-07-05', priority: 'متوسط', status: 'قيد التنفيذ' },
-  { id: 3, title: 'اعتماد الملاحظات من لجنة المراجعة', description: 'مراجعة ردود لجنة التدقيق والتحرير', deadline: '2026-06-30', priority: 'عالي', status: 'قيد التنفيذ' },
-  { id: 4, title: 'استكمال رفع شواهد العصر الأموي', description: 'رفع باقي الملفات المتبقية', deadline: '2026-06-25', priority: 'منخفض', status: 'منجزة' },
-  { id: 5, title: 'التواصل مع المنسق الرئيسي', description: 'لمناقشة خطة العمل للأسبوع القادم', deadline: '2026-07-03', priority: 'متوسط', status: 'جديدة' },
+  { id: 1, title: 'مراجعة شواهد الراصد الأول', description: 'يرجى تدقيق الشواهد المرفوعة في قسم العصر العباسي', deadline: '2026-07-01', status: 'جديدة' },
+  { id: 2, title: 'تدقيق نحوي لكتاب العقد الفريد', description: 'مراجعة الباب الأول والثاني من الكتاب', deadline: '2026-07-05', status: 'قيد التنفيذ' },
+  { id: 3, title: 'اعتماد الملاحظات من لجنة المراجعة', description: 'مراجعة ردود لجنة التدقيق والتحرير', deadline: '2026-06-30', status: 'قيد التنفيذ' },
+  { id: 4, title: 'استكمال رفع شواهد العصر الأموي', description: 'رفع باقي الملفات المتبقية', deadline: '2026-06-25', status: 'منجزة' },
+  { id: 5, title: 'التواصل مع المنسق الرئيسي', description: 'لمناقشة خطة العمل للأسبوع القادم', deadline: '2026-07-03', status: 'جديدة' },
 ];
 
 export default function Tasks() {
@@ -40,18 +40,7 @@ export default function Tasks() {
     }
   };
 
-  const getPriorityBadge = (priority) => {
-    switch (priority) {
-      case 'عالي':
-        return <span className="text-rose-600 dark:text-rose-400 font-bold bg-rose-50 dark:bg-rose-900/20 px-2 py-0.5 rounded-md text-xs">{priority}</span>;
-      case 'متوسط':
-        return <span className="text-amber-600 dark:text-amber-400 font-bold bg-amber-50 dark:bg-amber-900/20 px-2 py-0.5 rounded-md text-xs">{priority}</span>;
-      case 'منخفض':
-        return <span className="text-slate-600 dark:text-slate-400 font-bold bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md text-xs">{priority}</span>;
-      default:
-        return <span>{priority}</span>;
-    }
-  };
+  // Removed getPriorityBadge
 
   const stats = [
     { label: 'إجمالي المهام', value: userTasks.length, icon: FileText, color: 'text-[#064e3b] dark:text-amber-400', bg: 'bg-[#064e3b]/5 dark:bg-amber-500/10' },
@@ -103,9 +92,8 @@ export default function Tasks() {
           <table className="w-full text-[15px] text-right">
             <thead className="bg-[#064e3b]/5 dark:bg-slate-950/50 border-b border-[#064e3b]/10 dark:border-slate-800 transition-colors duration-500">
               <tr>
-                <th className="px-8 py-5 text-[#064e3b] dark:text-slate-400 font-bold rounded-r-2xl w-1/3">تفاصيل المهمة</th>
+                <th className="px-8 py-5 text-[#064e3b] dark:text-slate-400 font-bold rounded-r-2xl w-1/2">تفاصيل المهمة</th>
                 <th className="px-8 py-5 text-[#064e3b] dark:text-slate-400 font-bold">تاريخ الاستحقاق</th>
-                <th className="px-8 py-5 text-[#064e3b] dark:text-slate-400 font-bold">الأهمية</th>
                 <th className="px-8 py-5 text-center text-[#064e3b] dark:text-slate-400 font-bold rounded-l-2xl">الحالة</th>
               </tr>
             </thead>
@@ -122,9 +110,6 @@ export default function Tasks() {
                         <Calendar className="w-4 h-4 ml-2 opacity-70" />
                         <span dir="ltr">{task.deadline}</span>
                       </div>
-                    </td>
-                    <td className="px-8 py-6">
-                      {getPriorityBadge(task.priority)}
                     </td>
                     <td className="px-8 py-6 text-center">
                       {getStatusBadge(task.status)}

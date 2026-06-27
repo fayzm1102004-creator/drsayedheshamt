@@ -8,6 +8,15 @@ export default function Suggestions() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Create mailto link
+    const email = 'fayzm1102004@gmail.com';
+    const subject = encodeURIComponent(`اقتراح/شكوى: ${formData.title} (${formData.category})`);
+    const body = encodeURIComponent(`التصنيف: ${formData.category}\n\nالتفاصيل:\n${formData.description}`);
+    
+    // Trigger email client
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+
     setOpen(false); 
     setTimeout(() => {
       setOpen(true);
