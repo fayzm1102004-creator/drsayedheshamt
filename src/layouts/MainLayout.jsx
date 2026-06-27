@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { Outlet, Navigate, Link, useLocation, useNavigate } from 'react-router-dom';
-import { BookOpen, LayoutDashboard, MessageSquare, LogOut, UserCircle, Bell, Search, Moon, Sun } from 'lucide-react';
+import { BookOpen, LayoutDashboard, MessageSquare, LogOut, UserCircle, Bell, Search, Moon, Sun, CheckSquare } from 'lucide-react';
 
 export default function MainLayout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -17,6 +17,7 @@ export default function MainLayout() {
 
   const navItems = [
     { name: 'لوحة التحكم', path: '/dashboard', icon: LayoutDashboard },
+    { name: 'المهام', path: '/tasks', icon: CheckSquare },
     { name: 'المكتبة الشاملة', path: '/library', icon: BookOpen },
     { name: 'الاقتراحات', path: '/suggestions', icon: MessageSquare },
   ];
