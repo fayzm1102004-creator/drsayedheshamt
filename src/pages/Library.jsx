@@ -15,18 +15,7 @@ export default function Library() {
     category: categories[(i % (categories.length - 1)) + 1],
   }));
 
-  const handleShamelaSearch = () => {
-    if (!searchQuery.trim()) return;
-    // We use Google Site Search to guarantee perfect results directly inside Shamela
-    const query = encodeURIComponent(`site:shamela.ws ${searchQuery}`);
-    window.open(`https://www.google.com/search?q=${query}`, '_blank');
-  };
-
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      handleShamelaSearch();
-    }
-  };
+  // Search logic is handled natively by the form now
 
   return (
     <div className="flex flex-col h-full space-y-8 animate-in fade-in duration-500 max-w-7xl mx-auto">
@@ -38,26 +27,36 @@ export default function Library() {
         <h2 className="text-4xl font-extrabold mb-4 text-[#064e3b] dark:text-amber-400 font-['Aref_Ruqaa'] relative z-10">المكتبة الشاملة</h2>
         <p className="text-[#064e3b]/70 dark:text-slate-400 font-bold mb-8 relative z-10">ابحث واستكشف في آلاف المصادر والمراجع التاريخية</p>
         
-        <div className="relative max-w-3xl mx-auto flex gap-3 z-10">
+        <form 
+          action="https://www.google.com/search" 
+          target="_blank" 
+          method="GET"
+          onSubmit={(e) => {
+            if (!searchQuery.trim()) e.preventDefault();
+          }}
+          className="relative max-w-3xl mx-auto flex gap-3 z-10"
+        >
+          {/* Hidden input to prepend site:shamela.ws to the query */}
+          <input type="hidden" name="q" value={`site:shamela.ws ${searchQuery}`} />
+          
           <div className="relative flex-1">
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyDown={handleKeyDown}
               placeholder="ابحث عن كتاب، مؤلف، أو كلمة مفتاحية..."
               className="w-full pl-6 pr-14 py-4 rounded-xl text-[#064e3b] dark:text-amber-50 bg-white/50 dark:bg-slate-950 border border-[#d4af37]/40 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-[#064e3b]/50 focus:border-[#064e3b] dark:focus:border-amber-500 focus:bg-white dark:focus:bg-slate-900 shadow-sm transition-all text-base placeholder-slate-400 dark:placeholder-slate-500"
             />
             <Search className="absolute right-5 top-4.5 text-[#064e3b]/50 dark:text-slate-500 w-6 h-6" strokeWidth={1.5} />
           </div>
           <button 
-            onClick={handleShamelaSearch}
+            type="submit"
             className="flex-shrink-0 bg-gradient-to-l from-[#064e3b] to-[#022c22] dark:from-amber-500 dark:to-amber-700 text-white dark:text-slate-900 px-6 py-4 rounded-xl font-bold hover:shadow-[0_8px_25px_rgba(6,78,59,0.4)] dark:hover:shadow-[0_8px_25px_rgba(245,158,11,0.3)] transition-all duration-300 hover:-translate-y-0.5 flex items-center gap-2"
           >
             <ExternalLink className="w-5 h-5" />
             بحث في الشاملة
           </button>
-        </div>
+        </form>
       </div>
 
       <div className="flex flex-1 gap-8">
