@@ -14,7 +14,8 @@ const MOCK_USERS = [
   { email: "scientific@sharjah.com", password: "123456", role: "scientific_committee", name: "عضو اللجنة العلمية" },
   { email: "approval@sharjah.com", password: "123456", role: "approval_committee", name: "عضو لجنة الاعتماد النهائي" },
   { email: "assistant@sharjah.com", password: "123456", role: "level5", name: "د. سلطان (المشرف المساعد - لجان الاعتماد والعلمية)" },
-  { email: "admin@sharjah.com", password: "123456", role: "level6", name: "فضيلة المشرف العام" }
+  { email: "admin@sharjah.com", password: "123456", role: "level6", name: "فضيلة المشرف العام" },
+  { email: "developer@sharjah.com", password: "123456", role: "developer", name: "المبرمج (مطور النظام)" }
 ];
 
 export const AuthProvider = ({ children }) => {

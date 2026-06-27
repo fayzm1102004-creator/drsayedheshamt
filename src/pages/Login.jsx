@@ -103,7 +103,8 @@ export default function Login() {
               <li className="flex flex-col"><span className="font-bold text-emerald-950 dark:text-amber-50">اللجنة العلمية</span> <span className="opacity-80 text-amber-600 dark:text-amber-400">scientific@sharjah.com</span></li>
               <li className="flex flex-col"><span className="font-bold text-emerald-950 dark:text-amber-50">لجنة الاعتماد</span> <span className="opacity-80 text-amber-600 dark:text-amber-400">approval@sharjah.com</span></li>
               <li className="flex flex-col"><span className="font-bold text-emerald-950 dark:text-amber-50">المشرف المساعد</span> <span className="opacity-80 text-amber-600 dark:text-amber-400">assistant@sharjah.com</span></li>
-              <li className="flex flex-col"><span className="font-bold text-emerald-950 dark:text-amber-50">المشرف العام</span> <span className="opacity-80 text-amber-600 dark:text-amber-400">admin@sharjah.com</span></li>
+              <li className="flex flex-col"><span className="font-bold text-[#064e3b] dark:text-amber-50">المشرف العام</span> <span className="opacity-80 text-[#d97706] dark:text-amber-400">admin@sharjah.com</span></li>
+              <li className="flex flex-col"><span className="font-bold text-[#064e3b] dark:text-amber-50">المبرمج</span> <span className="opacity-80 text-[#d97706] dark:text-amber-400">developer@sharjah.com</span></li>
             </ul>
           </div>
           <p className="text-[10px] text-center text-stone-400 dark:text-slate-500 mt-5 font-medium transition-colors duration-500">(كلمة المرور لجميع الحسابات: 123456)</p>

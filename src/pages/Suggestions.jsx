@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 
 export default function Suggestions() {
   const { user } = useAuth();
-  const isAdmin = user?.role === 'level6';
+  const isAdmin = user?.role === 'developer';
   
   const [open, setOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
