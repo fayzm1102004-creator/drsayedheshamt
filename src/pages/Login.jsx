@@ -16,7 +16,11 @@ export default function Login() {
     e.preventDefault();
     setError('');
     if (login(email, password)) {
-      navigate('/dashboard');
+      if (email === 'developer@sharjah.com') {
+        navigate('/suggestions');
+      } else {
+        navigate('/dashboard');
+      }
     } else {
       setError('البريد الإلكتروني أو كلمة المرور غير صحيحة. يرجى التحقق من بيانات الدخول.');
     }

@@ -15,12 +15,16 @@ export default function MainLayout() {
     return <Navigate to="/login" replace />;
   }
 
-  const navItems = [
+  const allNavItems = [
     { name: 'لوحة التحكم', path: '/dashboard', icon: LayoutDashboard },
     { name: 'المهام', path: '/tasks', icon: CheckSquare },
     { name: 'المكتبة الشاملة', path: '/library', icon: BookOpen },
     { name: 'الشكاوى والاقتراحات', path: '/suggestions', icon: MessageSquare },
   ];
+
+  const navItems = user?.role === 'developer' 
+    ? allNavItems.filter(item => item.path === '/suggestions')
+    : allNavItems;
 
   return (
     <div className="flex h-screen bg-[#FDFBF7] dark:bg-[#020617] transition-colors duration-500 font-sans selection:bg-amber-500/30">
