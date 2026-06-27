@@ -7,7 +7,6 @@ import Login from './pages/Login';
 import MainLayout from './layouts/MainLayout';
 import Dashboard from './pages/Dashboard';
 import Tasks from './pages/Tasks';
-import Library from './pages/Library';
 import Suggestions from './pages/Suggestions';
 
 function App() {
@@ -22,7 +21,6 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/tasks" element={<Tasks />} />
-            <Route path="/library" element={<Library />} />
             <Route path="/suggestions" element={<Suggestions />} />
           </Route>
           
