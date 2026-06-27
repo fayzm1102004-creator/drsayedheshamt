@@ -19,7 +19,7 @@ export default function MainLayout() {
     { name: 'لوحة التحكم', path: '/dashboard', icon: LayoutDashboard },
     { name: 'المهام', path: '/tasks', icon: CheckSquare },
     { name: 'المكتبة الشاملة', path: '/library', icon: BookOpen },
-    { name: 'الاقتراحات', path: '/suggestions', icon: MessageSquare },
+    { name: 'الشكاوى والاقتراحات', path: '/suggestions', icon: MessageSquare },
   ];
 
   return (

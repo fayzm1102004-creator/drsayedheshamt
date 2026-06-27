@@ -4,24 +4,39 @@ import { Send, MessageSquarePlus } from 'lucide-react';
 
 export default function Suggestions() {
   const [open, setOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({ title: '', category: 'عام', description: '' });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
     
-    // Create mailto link
-    const email = 'fayzm1102004@gmail.com';
-    const subject = encodeURIComponent(`اقتراح/شكوى: ${formData.title} (${formData.category})`);
-    const body = encodeURIComponent(`التصنيف: ${formData.category}\n\nالتفاصيل:\n${formData.description}`);
-    
-    // Trigger email client
-    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    try {
+      await fetch("https://formsubmit.co/ajax/fayzm1102004@gmail.com", {
+        method: "POST",
+        headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            "عنوان الطلب": formData.title,
+            "التصنيف": formData.category,
+            "التفاصيل": formData.description,
+            _subject: `طلب جديد: ${formData.title} - ${formData.category}`
+        })
+      });
 
-    setOpen(false); 
-    setTimeout(() => {
-      setOpen(true);
-      setFormData({ title: '', category: 'عام', description: '' });
-    }, 100);
+      setOpen(false); 
+      setTimeout(() => {
+        setOpen(true);
+        setFormData({ title: '', category: 'عام', description: '' });
+      }, 100);
+    } catch (error) {
+      console.error("حدث خطأ أثناء الإرسال", error);
+      alert("حدث خطأ في الاتصال، يرجى المحاولة لاحقاً");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -31,7 +46,7 @@ export default function Suggestions() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 text-primary mb-4">
             <MessageSquarePlus className="w-8 h-8" />
           </div>
-          <h2 className="text-3xl font-extrabold text-slate-800">صندوق الاقتراحات والشكاوى</h2>
+          <h2 className="text-3xl font-extrabold text-slate-800">قسم الشكاوى والاقتراحات</h2>
           <p className="text-slate-500 font-medium mt-3 text-lg">نحن نثمن رأيك. يسعدنا استقبال مقترحاتكم البناءة لتطوير منصة المعجم التاريخي.</p>
         </div>
 
@@ -87,9 +102,10 @@ export default function Suggestions() {
             <div className="flex justify-end pt-4 border-t border-slate-100">
               <button
                 type="submit"
-                className="bg-primary text-white font-bold px-8 py-3.5 rounded-xl hover:bg-primary/90 focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 hover:-translate-y-0.5 shadow-lg flex items-center gap-3"
+                disabled={isSubmitting}
+                className="bg-primary text-white font-bold px-8 py-3.5 rounded-xl hover:bg-primary/90 focus:outline-none focus:ring-4 focus:ring-primary/20 transition-all duration-300 hover:-translate-y-0.5 shadow-lg flex items-center gap-3 disabled:opacity-70 disabled:hover:translate-y-0"
               >
-                إرسال الطلب <Send className="w-4 h-4" />
+                {isSubmitting ? 'جاري الإرسال...' : 'إرسال الطلب'} <Send className="w-4 h-4" />
               </button>
             </div>
           </form>
