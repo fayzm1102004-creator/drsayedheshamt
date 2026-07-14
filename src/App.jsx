@@ -8,6 +8,7 @@ import MainLayout from './layouts/MainLayout';
 import Dashboard from './pages/Dashboard';
 import Tasks from './pages/Tasks';
 import Suggestions from './pages/Suggestions';
+import ObserverView from './pages/ObserverView';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/tasks" element={<Tasks />} />
             <Route path="/suggestions" element={<Suggestions />} />
+            <Route path="/observer" element={<ObserverView />} />
           </Route>
           
           <Route path="*" element={<Navigate to="/" replace />} />

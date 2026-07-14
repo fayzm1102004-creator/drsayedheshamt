@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { Outlet, Navigate, Link, useLocation, useNavigate } from 'react-router-dom';
-import { BookOpen, LayoutDashboard, MessageSquare, LogOut, UserCircle, Moon, Sun, CheckSquare } from 'lucide-react';
+import { BookOpen, LayoutDashboard, MessageSquare, LogOut, UserCircle, Moon, Sun, CheckSquare, ClipboardList } from 'lucide-react';
+import ShamelaWidget from '../components/ShamelaWidget';
 
 export default function MainLayout() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -17,6 +18,7 @@ export default function MainLayout() {
 
   const allNavItems = [
     { name: 'لوحة التحكم', path: '/dashboard', icon: LayoutDashboard },
+    { name: 'إرساليات الرصد', path: '/observer', icon: ClipboardList },
     { name: 'المهام', path: '/tasks', icon: CheckSquare },
     { name: 'الشكاوى والاقتراحات', path: '/suggestions', icon: MessageSquare },
   ];
@@ -81,20 +83,6 @@ export default function MainLayout() {
           </div>
 
           <div className="flex items-center space-x-6 space-x-reverse">
-            {/* Shamela Direct Link */}
-            {user?.role !== 'developer' && (
-              <a 
-                href="https://shamela.ws"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3 text-[#064e3b] hover:text-amber-600 dark:text-amber-200/60 dark:hover:text-amber-400 hover:bg-amber-50 dark:hover:bg-slate-800/50 rounded-full transition-all duration-300 shadow-sm relative group"
-                title="المكتبة الشاملة"
-              >
-                <BookOpen className="w-5 h-5" />
-                <span className="absolute -bottom-8 right-1/2 translate-x-1/2 bg-slate-900 dark:bg-amber-500 text-white dark:text-slate-900 text-[10px] font-bold px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap pointer-events-none">المكتبة الشاملة</span>
-              </a>
-            )}
-
             <button 
               onClick={toggleTheme}
               className="p-3 text-stone-400 hover:text-amber-500 dark:text-amber-200/60 dark:hover:text-amber-400 hover:bg-white dark:hover:bg-slate-800/50 rounded-full transition-all duration-300 shadow-sm"
@@ -131,6 +119,9 @@ export default function MainLayout() {
           </div>
         </main>
       </div>
+
+      {/* Global Shamela Widget */}
+      <ShamelaWidget />
     </div>
   );
 }
