@@ -3,10 +3,10 @@ import { CheckCircle2, Clock, AlertCircle, FileText, Calendar, Filter } from 'lu
 import { useAuth } from '../context/AuthContext';
 
 const CardLayout = ({ children, title }) => (
-  <div className="bg-gradient-to-br from-white/95 to-[#f8f5ec]/95 dark:bg-slate-900/90 backdrop-blur-3xl rounded-[2rem] shadow-[0_15px_40px_rgba(6,78,59,0.08)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.4)] border border-[#d4af37]/40 dark:border-slate-800 border-t-[4px] border-t-[#064e3b] dark:border-t-amber-500 p-10 relative overflow-hidden transition-colors duration-500">
-    <div className="absolute top-0 right-0 w-64 h-64 bg-[#d4af37]/10 dark:bg-amber-500/10 rounded-full blur-[60px] pointer-events-none"></div>
-    <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#064e3b]/5 dark:bg-emerald-500/5 rounded-full blur-[80px] pointer-events-none"></div>
-    <h3 className="text-3xl font-['Aref_Ruqaa'] font-bold text-[#064e3b] dark:text-amber-400 mb-8 pb-5 border-b border-[#064e3b]/10 dark:border-slate-800 relative z-10 transition-colors duration-500">{title}</h3>
+  <div className="bg-gradient-to-br from-white/95 to-[#f8f5ec]/95 dark:bg-slate-900/90 backdrop-blur-3xl rounded-2xl sm:rounded-3xl lg:rounded-[2rem] shadow-[0_15px_40px_rgba(6,78,59,0.08)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.4)] border border-[#d4af37]/40 dark:border-slate-800 border-t-[4px] border-t-[#064e3b] dark:border-t-amber-500 p-4 sm:p-6 lg:p-10 relative overflow-hidden transition-colors duration-500">
+    <div className="absolute top-0 right-0 w-40 sm:w-64 h-40 sm:h-64 bg-[#d4af37]/10 dark:bg-amber-500/10 rounded-full blur-[60px] pointer-events-none"></div>
+    <div className="absolute bottom-0 left-0 w-48 sm:w-80 h-48 sm:h-80 bg-[#064e3b]/5 dark:bg-emerald-500/5 rounded-full blur-[80px] pointer-events-none"></div>
+    <h3 className="text-xl sm:text-2xl lg:text-3xl font-['Aref_Ruqaa'] font-bold text-[#064e3b] dark:text-amber-400 mb-4 sm:mb-6 lg:mb-8 pb-3 sm:pb-5 border-b border-[#064e3b]/10 dark:border-slate-800 relative z-10 transition-colors duration-500">{title}</h3>
     <div className="relative z-10">
       {children}
     </div>
@@ -53,15 +53,15 @@ export default function Tasks() {
     <div className="space-y-12">
       
       {/* User Greeting & Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
         {stats.map((stat, i) => (
-          <div key={i} className="bg-gradient-to-br from-white/95 to-[#f8f5ec]/95 dark:bg-slate-900/90 backdrop-blur-3xl rounded-[2rem] p-6 flex items-center justify-between border border-[#d4af37]/30 dark:border-slate-800 shadow-[0_10px_30px_rgba(6,78,59,0.05)] dark:shadow-none transition-transform hover:scale-105 duration-300">
+          <div key={i} className="bg-gradient-to-br from-white/95 to-[#f8f5ec]/95 dark:bg-slate-900/90 backdrop-blur-3xl rounded-xl sm:rounded-2xl lg:rounded-[2rem] p-4 sm:p-6 flex items-center justify-between border border-[#d4af37]/30 dark:border-slate-800 shadow-[0_10px_30px_rgba(6,78,59,0.05)] dark:shadow-none transition-transform hover:scale-105 duration-300">
             <div>
-              <p className="text-[#064e3b]/70 dark:text-slate-400 text-sm font-bold mb-1">{stat.label}</p>
-              <h4 className="text-3xl font-bold text-[#064e3b] dark:text-amber-50">{stat.value}</h4>
+              <p className="text-[#064e3b]/70 dark:text-slate-400 text-xs sm:text-sm font-bold mb-1">{stat.label}</p>
+              <h4 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#064e3b] dark:text-amber-50">{stat.value}</h4>
             </div>
-            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${stat.bg} ${stat.color} shadow-sm`}>
-              <stat.icon className="w-7 h-7" />
+            <div className={`w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center ${stat.bg} ${stat.color} shadow-sm`}>
+              <stat.icon className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7" />
             </div>
           </div>
         ))}
@@ -69,13 +69,13 @@ export default function Tasks() {
 
       <CardLayout title="جدول المهام الموكلة إليك">
         {/* Filters */}
-        <div className="mb-8 flex items-center gap-4">
-          <div className="flex bg-[#f8f5ec] dark:bg-slate-950/50 p-2 rounded-2xl border border-[#d4af37]/30 dark:border-slate-800 shadow-inner overflow-x-auto transition-colors duration-500">
+        <div className="mb-4 sm:mb-6 lg:mb-8 flex items-center gap-4">
+          <div className="flex bg-[#f8f5ec] dark:bg-slate-950/50 p-1.5 sm:p-2 rounded-xl sm:rounded-2xl border border-[#d4af37]/30 dark:border-slate-800 shadow-inner overflow-x-auto transition-colors duration-500 gap-1">
             {['الكل', 'جديدة', 'قيد التنفيذ', 'منجزة'].map(f => (
               <button
                 key={f}
                 onClick={() => setFilter(f)}
-                className={`px-6 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap transition-all duration-300 ${
+                className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all duration-300 ${
                   filter === f 
                     ? 'bg-gradient-to-b from-[#064e3b] to-[#022c22] dark:bg-amber-500/20 text-white dark:text-amber-400 shadow-[0_4px_15px_rgba(6,78,59,0.3)] scale-[1.02] border border-transparent dark:border-amber-500/30' 
                     : 'text-[#064e3b]/70 dark:text-slate-400 hover:text-[#064e3b] dark:hover:text-amber-50 hover:bg-white/80 dark:hover:bg-slate-800 hover:shadow-sm'
@@ -92,26 +92,26 @@ export default function Tasks() {
           <table className="w-full text-[15px] text-right">
             <thead className="bg-[#064e3b]/5 dark:bg-slate-950/50 border-b border-[#064e3b]/10 dark:border-slate-800 transition-colors duration-500">
               <tr>
-                <th className="px-8 py-5 text-[#064e3b] dark:text-slate-400 font-bold rounded-r-2xl w-1/2">تفاصيل المهمة</th>
-                <th className="px-8 py-5 text-[#064e3b] dark:text-slate-400 font-bold">تاريخ الاستحقاق</th>
-                <th className="px-8 py-5 text-center text-[#064e3b] dark:text-slate-400 font-bold rounded-l-2xl">الحالة</th>
+                <th className="px-4 sm:px-8 py-3 sm:py-5 text-[#064e3b] dark:text-slate-400 font-bold rounded-r-2xl w-1/2">تفاصيل المهمة</th>
+                <th className="px-4 sm:px-8 py-3 sm:py-5 text-[#064e3b] dark:text-slate-400 font-bold">تاريخ الاستحقاق</th>
+                <th className="px-4 sm:px-8 py-3 sm:py-5 text-center text-[#064e3b] dark:text-slate-400 font-bold rounded-l-2xl">الحالة</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#064e3b]/5 dark:divide-slate-800/80">
               {filteredTasks.length > 0 ? (
                 filteredTasks.map(task => (
                   <tr key={task.id} className="hover:bg-[#d4af37]/10 dark:hover:bg-slate-800/50 transition-colors duration-200">
-                    <td className="px-8 py-6">
-                      <p className="font-bold text-[#064e3b] dark:text-amber-50 text-base mb-1">{task.title}</p>
-                      <p className="text-sm text-[#064e3b]/60 dark:text-slate-400">{task.description}</p>
+                    <td className="px-4 sm:px-8 py-4 sm:py-6">
+                      <p className="font-bold text-[#064e3b] dark:text-amber-50 text-sm sm:text-base mb-1">{task.title}</p>
+                      <p className="text-xs sm:text-sm text-[#064e3b]/60 dark:text-slate-400">{task.description}</p>
                     </td>
-                    <td className="px-8 py-6 whitespace-nowrap">
+                    <td className="px-4 sm:px-8 py-4 sm:py-6 whitespace-nowrap">
                       <div className="flex items-center text-[#064e3b]/80 dark:text-slate-300 font-medium">
                         <Calendar className="w-4 h-4 ml-2 opacity-70" />
                         <span dir="ltr">{task.deadline}</span>
                       </div>
                     </td>
-                    <td className="px-8 py-6 text-center">
+                    <td className="px-4 sm:px-8 py-4 sm:py-6 text-center">
                       {getStatusBadge(task.status)}
                     </td>
                   </tr>

@@ -151,9 +151,9 @@ const FileLink = ({ file }) => {
 };
 
 const CardLayout = ({ children, title }) => (
-  <div className="bg-white/95 dark:bg-slate-900/90 backdrop-blur-3xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.4)] border border-stone-100 dark:border-slate-800 border-t-[3px] border-t-amber-500 p-10 relative overflow-hidden transition-colors duration-500">
-    <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 dark:bg-amber-500/10 rounded-full blur-[60px] pointer-events-none"></div>
-    <h3 className="text-3xl font-['Aref_Ruqaa'] font-bold text-slate-900 dark:text-amber-400 mb-8 pb-5 border-b border-stone-100 dark:border-slate-800 relative z-10 transition-colors duration-500">{title}</h3>
+  <div className="bg-white/95 dark:bg-slate-900/90 backdrop-blur-3xl rounded-2xl sm:rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.4)] border border-stone-100 dark:border-slate-800 border-t-[3px] border-t-amber-500 p-4 sm:p-6 lg:p-10 relative overflow-hidden transition-colors duration-500">
+    <div className="absolute top-0 right-0 w-40 sm:w-64 h-40 sm:h-64 bg-amber-500/5 dark:bg-amber-500/10 rounded-full blur-[60px] pointer-events-none"></div>
+    <h3 className="text-xl sm:text-2xl lg:text-3xl font-['Aref_Ruqaa'] font-bold text-slate-900 dark:text-amber-400 mb-4 sm:mb-6 lg:mb-8 pb-3 sm:pb-5 border-b border-stone-100 dark:border-slate-800 relative z-10 transition-colors duration-500">{title}</h3>
     <div className="relative z-10">
       {children}
     </div>
@@ -202,28 +202,30 @@ function ObserverView() {
       <CardLayout title="رفع ملف جديد">
         <div className="flex flex-col items-center">
           <input type="file" ref={fileInputRef} className="hidden" onChange={handleFileUpload} />
-          <div onClick={() => fileInputRef.current.click()} className="w-full bg-slate-50/50 dark:bg-slate-950/50 rounded-[2rem] p-16 border-2 border-dashed border-amber-500/30 dark:border-amber-500/20 hover:border-amber-500 dark:hover:border-amber-400 hover:bg-amber-50/30 dark:hover:bg-amber-900/10 cursor-pointer flex flex-col items-center transition-all duration-300 group">
-            <UploadCloud className="w-16 h-16 text-amber-500/60 dark:text-amber-500/40 mb-6 group-hover:scale-110 group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-all duration-300 drop-shadow-sm" />
-            <p className="text-[1.35rem] font-['Aref_Ruqaa'] font-bold text-slate-800 dark:text-amber-50">اسحب وأفلت الملف هنا لرفعه للمنسق</p>
-            <p className="text-sm text-stone-400 dark:text-slate-500 mt-3 font-medium">الحد الأقصى للتجربة: 5 ميجابايت</p>
+          <div onClick={() => fileInputRef.current.click()} className="w-full bg-slate-50/50 dark:bg-slate-950/50 rounded-2xl sm:rounded-[2rem] p-8 sm:p-12 lg:p-16 border-2 border-dashed border-amber-500/30 dark:border-amber-500/20 hover:border-amber-500 dark:hover:border-amber-400 hover:bg-amber-50/30 dark:hover:bg-amber-900/10 cursor-pointer flex flex-col items-center transition-all duration-300 group">
+            <UploadCloud className="w-10 h-10 sm:w-14 sm:h-14 lg:w-16 lg:h-16 text-amber-500/60 dark:text-amber-500/40 mb-4 sm:mb-6 group-hover:scale-110 group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-all duration-300 drop-shadow-sm" />
+            <p className="text-base sm:text-lg lg:text-[1.35rem] font-['Aref_Ruqaa'] font-bold text-slate-800 dark:text-amber-50 text-center">اسحب وأفلت الملف هنا لرفعه للمنسق</p>
+            <p className="text-xs sm:text-sm text-stone-400 dark:text-slate-500 mt-2 sm:mt-3 font-medium">الحد الأقصى للتجربة: 5 ميجابايت</p>
           </div>
         </div>
       </CardLayout>
       
       <CardLayout title="جدول الملفات المرفوعة وحالتها">
-        <table className="w-full text-[15px] text-right">
-          <thead className="bg-stone-50/80 dark:bg-slate-950/50 border-b border-stone-100 dark:border-slate-800 transition-colors duration-500"><tr><th className="px-8 py-5 text-slate-500 dark:text-slate-400 font-bold rounded-r-2xl">اسم الملف</th><th className="px-8 py-5 text-center text-slate-500 dark:text-slate-400 font-bold rounded-l-2xl">الحالة الحالية</th></tr></thead>
+        <div className="overflow-x-auto -mx-4 sm:mx-0">
+        <table className="w-full text-sm sm:text-[15px] text-right min-w-[400px]">
+          <thead className="bg-stone-50/80 dark:bg-slate-950/50 border-b border-stone-100 dark:border-slate-800 transition-colors duration-500"><tr><th className="px-4 sm:px-8 py-3 sm:py-5 text-slate-500 dark:text-slate-400 font-bold rounded-r-2xl">اسم الملف</th><th className="px-4 sm:px-8 py-3 sm:py-5 text-center text-slate-500 dark:text-slate-400 font-bold rounded-l-2xl">الحالة الحالية</th></tr></thead>
           <tbody className="divide-y divide-stone-100/80 dark:divide-slate-800/80">
             {myFiles.map(file => (
               <tr key={file.id} className="hover:bg-amber-50/40 dark:hover:bg-slate-800/50 transition-colors duration-200">
-                <td className="px-8 py-6 font-bold">
+                <td className="px-4 sm:px-8 py-4 sm:py-6 font-bold">
                   <FileLink file={file} />
                 </td>
-                <td className="px-8 py-6 text-center"><span className={`px-4 py-2 rounded-xl text-xs font-bold border ${file.color} shadow-sm inline-block`}>{file.status}</span></td>
+                <td className="px-4 sm:px-8 py-4 sm:py-6 text-center"><span className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold border ${file.color} shadow-sm inline-block`}>{file.status}</span></td>
               </tr>
             ))}
           </tbody>
         </table>
+        </div>
       </CardLayout>
     </div>
   );
