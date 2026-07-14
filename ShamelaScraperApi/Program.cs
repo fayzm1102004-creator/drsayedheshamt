@@ -21,11 +21,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("ReactFrontend", policy =>
     {
-        policy.WithOrigins(
-                "http://localhost:5173",   // Vite dev server default
-                "http://localhost:3000",   // Common React dev port
-                "http://127.0.0.1:5173"
-            )
+        policy.AllowAnyOrigin()
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -77,7 +73,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("ReactFrontend");
+
 app.MapControllers();
+
+// Add a simple root endpoint to verify the API is running
+app.MapGet("/", () => "Shamela Scraper API is running successfully! 🚀");
 
 app.Logger.LogInformation(
     "ShamelaScraperApi is starting on {Urls}",
