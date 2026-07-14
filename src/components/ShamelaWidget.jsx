@@ -78,14 +78,15 @@ export default function ShamelaWidget({ onExtract }) {
       {/* Widget Panel */}
       {isOpen && (
         <>
-          {/* Mobile: Full-screen overlay */}
+          {/* Floating popup for both mobile and desktop */}
           <div className="
-            fixed inset-0 sm:absolute sm:inset-auto sm:bottom-16 sm:left-0
-            w-full h-full sm:w-[380px] sm:h-[550px]
+            absolute bottom-16 left-0
+            w-[calc(100vw-2rem)] sm:w-[380px] 
+            h-[450px] sm:h-[550px]
             bg-white dark:bg-slate-900 
-            sm:rounded-3xl 
-            shadow-none sm:shadow-[0_20px_60px_rgba(6,78,59,0.2)] dark:sm:shadow-[0_20px_60px_rgba(0,0,0,0.6)] 
-            border-0 sm:border border-[#d4af37]/30 dark:border-slate-800 
+            rounded-2xl sm:rounded-3xl 
+            shadow-[0_20px_60px_rgba(6,78,59,0.2)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.6)] 
+            border border-[#d4af37]/30 dark:border-slate-800 
             flex flex-col overflow-hidden 
             animate-widget-in origin-bottom-left
             z-[110]

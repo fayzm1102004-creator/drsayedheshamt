@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { Outlet, Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, MessageSquare, LogOut, UserCircle, Moon, Sun, CheckSquare, ClipboardList, Menu, X } from 'lucide-react';
+import { LayoutDashboard, MessageSquare, LogOut, UserCircle, Moon, Sun, CheckSquare, ClipboardList, Menu, X, Library } from 'lucide-react';
 import ShamelaWidget from '../components/ShamelaWidget';
 
 export default function MainLayout() {
@@ -20,6 +20,7 @@ export default function MainLayout() {
     { name: 'لوحة التحكم', path: '/dashboard', icon: LayoutDashboard },
     { name: 'إرساليات الرصد', path: '/observer', icon: ClipboardList },
     { name: 'المهام', path: '/tasks', icon: CheckSquare },
+    { name: 'المكتبة الشاملة', action: 'open_library', icon: Library },
     { name: 'الشكاوى والاقتراحات', path: '/suggestions', icon: MessageSquare },
   ];
 
@@ -27,8 +28,12 @@ export default function MainLayout() {
     ? allNavItems.filter(item => item.path === '/suggestions')
     : allNavItems;
 
-  const handleNavClick = (path) => {
-    navigate(path);
+  const handleNavClick = (item) => {
+    if (item.action === 'open_library') {
+      window.dispatchEvent(new CustomEvent('open_shamela'));
+    } else if (item.path) {
+      navigate(item.path);
+    }
     setIsMobileMenuOpen(false);
   };
 
@@ -44,11 +49,11 @@ export default function MainLayout() {
       
       <nav className="flex-1 px-3 lg:px-4 py-6 lg:py-8 space-y-1.5 relative z-10 overflow-y-auto">
         {navItems.map((item) => {
-          const isActive = location.pathname.startsWith(item.path);
+          const isActive = item.path && location.pathname.startsWith(item.path);
           return (
             <button
               key={item.name}
-              onClick={() => handleNavClick(item.path)}
+              onClick={() => handleNavClick(item)}
               className={`w-full flex items-center space-x-3 space-x-reverse px-4 lg:px-6 py-3 lg:py-4 rounded-xl lg:rounded-2xl transition-all duration-300 ease-out group text-right ${
                 isActive 
                 ? 'bg-emerald-950/50 border-r-4 border-amber-400 text-amber-400 font-bold shadow-[inset_0px_0px_20px_rgba(245,158,11,0.05)]' 
